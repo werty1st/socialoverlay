@@ -1,0 +1,14 @@
+{
+    "name": "tweetrenderdb",
+    "version": "0.0.1",
+    "description": "The simplest possible app",
+    "load": "lib/app",
+    "modules": ["lib"],
+    "attachments": ["templates"],
+    "modules_attachment": false,
+    "dependencies": {
+        "attachments": null,
+        "modules": null,
+        "properties": null
+    }
+}
