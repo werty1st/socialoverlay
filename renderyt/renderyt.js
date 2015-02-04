@@ -73,9 +73,20 @@ function captureScreen(driver, imagedimensions, posttarget, onCompleted) {
 
 	function convertImage(image)
 	{
+		var deltax = 18;
+		var deltay = 10;
+
+		//todo 
+		if (imagedimensions.width < 800){
+			deltax = 0;
+		}
+		if (imagedimensions.height < 600){
+			deltax = 0;
+		}
+
 		gm(image, "temp.png")
 			.options({imageMagick: true})
-			.crop(imagedimensions.width-18, imagedimensions.height, imagedimensions.x, imagedimensions.y)
+			.crop(imagedimensions.width-deltax, imagedimensions.height-deltay, imagedimensions.x, imagedimensions.y)
 			.toBuffer('PNG',function (err, buffer) {
 				saveImage(buffer, {"width":imagedimensions.width, "height": imagedimensions.height}, posttarget, onCompleted);
 			});
