@@ -5,36 +5,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
-        <style type="text/css">
-
-            .main-wrapper{
-                overflow:auto;
-                /* other styles here */
-                /*float: left;*/
-                display: inline-block;
-            }        
-
-            .main-wrapper:before,
-            .main-wrapper:after {
-                content : "";
-                display : table;
-            }
-            .main-wrapper:after {
-                clear : both;
-            }
-
-
-        </style>
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     </head>    
-    <body>
-        <!-- Add your site or application content here -->
-        <div id="maincontainer" class="main-wrapper">
-		{{{code}}}
-        </div>
+    <body>        
+    <!-- 
+    width="{{x}}" height="{{y}}" 
+                onload="this.width=screen.width;this.height=screen.height;"
+    -->
+        <iframe id="maincontainer" src="{{rendersource}}" 
+                style="background-image:url({{bgimageurl}})"
+                frameborder="0" scrolling="auto"  marginheight="0px" marginwidth="0px"                
+                width="1080" height="630" 
+                ></iframe>        
     </body>
 
 

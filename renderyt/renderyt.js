@@ -156,7 +156,7 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 			// 			captureScreen(imagedimensions, posttarget, onCompleted);
 			// 		})
 			// 	});			
-		},3000);	
+		},4000);	
 }
 
 

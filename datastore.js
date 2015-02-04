@@ -84,7 +84,7 @@ function Datastore(config)
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/rendersource.html", function(err, repl){
 			if (!err){
 				var template_html = repl.body.toString('utf8');
-				var target_html = renderTemplate(template_html, {code:RenderRequest.code});
+				var target_html = renderTemplate(template_html, {code:RenderRequest.code, bgimageurl: RenderRequest.bgimageurl});
 
 				db.saveAttachment( self.doc , 	//doc.id
 				{ name : 'rendersource.html',
@@ -95,6 +95,27 @@ function Datastore(config)
 			}
 		});
 	})
+
+
+	this.on("datastore.saveIframeRequest", function(){
+		console.log("datastore.saveIframeRequest");
+
+		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/iframe.html", function(err, repl){
+			if (!err){
+				var template_html = repl.body.toString('utf8');
+				var renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
+				var target_html = renderTemplate(template_html, { rendersource: renderSource , bgimageurl: RenderRequest.bgimageurl});
+
+				db.saveAttachment( self.doc , 	//doc.id
+				{ name : 'iframe.html',
+				  'Content-Type' : 'text/html;charset=utf-8',
+				  body : target_html
+				},
+				uploadComplete("datastore.saveIframeComplete"));
+			}
+		});
+	})
+
 
 	this.on("datastore.saveImageRequest", function (){
 		//gucke im speicher/cache nach sonst render neu

@@ -64,31 +64,6 @@ function extractscript2 (src)
     delete result.inline;
     return result;
 
-
-    //script common
-    /*
-        
-        document.write('\x3Cscript type="text/javascript" src="foo.js">\x3C/script>');
-
-
-        <blockquote class="zdf-bdsg-embed" id="b56027f4bb3f48ab60ae0731d6ccf958dfa490a3" lang="de">
-        </blockquote>
-        <script async src="/twr/b56027f4bb3f48ab60ae0731d6ccf958dfa490a3/script.js" charset="utf-8"></script>
-
-
-    */
-    // jsdom.env(
-    //   src,
-    //   function (errors, window) {
-    //     var s = window.document.getElementsByTagName("script");
-    //     console.log("find all script tags", s);
-
-    //     for (var i = s.length - 1; i >= 0; i--) {
-    //         s[i].
-    //     };
-    //   }
-    // );
-
 }
 
 function Applogic ( rasterrizer )
@@ -114,14 +89,17 @@ function Applogic ( rasterrizer )
 
     /*
      RenderRequest.code       => html embedcode
-     RenderRequest.hostname   => nicht implementiert
+     RenderRequest.hostname   => zur erknnung von prod oder int
      RenderRequest.overwrite  => bei erkanntem hash trotzdem neu anlegen
      RenderRequest.screensize => 1:360x400,2:800x600
      RenderRequest.version    => nicht implementiert
+     RenderRequest.bgimageurl => bg image for iframe rendering
     */
 
     this.on("applogic.renderImageRequest", function (myRenderRequest) {
         console.log('applogic.renderImageRequest');  
+        console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        //console.log(myRenderRequest);
 
         if (running){
             console.log("waiting for open request");
@@ -135,7 +113,7 @@ function Applogic ( rasterrizer )
         Embeddcode             = extractscript2( RenderRequest.code );
         Embeddcode.hash        = gethash( RenderRequest.code );//berechne hash und suche in db danach        
         //Embeddcode.original  = RenderRequest.code;
-        Embeddcode.hostname    = hostname; //wird überschrieben
+        Embeddcode.hostname    = RenderRequest.hostname; //hostname; //wird überschrieben
         
         RenderRequest.version  = version; //wird überschrieben
 
@@ -156,6 +134,7 @@ function Applogic ( rasterrizer )
     datastore.on("datastore.docFound", function(){
         console.log('datastore.docFound');
         self.emit("applogic.CodeComplete", Embeddcode.hash);
+        running = false;
     });    
 
     datastore.on("datastore.newDocCreated", function (){
@@ -166,13 +145,34 @@ function Applogic ( rasterrizer )
     datastore.on("datastore.saveRendersourceComplete", function(){
         console.log('applogic.datastore.saveRendersourceComplete');
         datastore.emit("datastore.renderImageRequest");
+        
+        // if (RenderRequest.bgimageurl){
+        //     datastore.emit("datastore.saveIframeRequest");
+        // } else {
+        //     datastore.emit("datastore.renderImageRequest");
+        // }
     });
+
+
+    datastore.on("datastore.saveIframeComplete", function(){
+        console.log('applogic.datastore.saveIframeComplete');
+        datastore.emit("datastore.renderImageRequest");
+    });
+
 
     datastore.on("datastore.renderImageRequest", function(){
         console.log('applogic.datastore.renderImageRequest');
 
+        var renderSource = "";
+            renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
+
+        // if (RenderRequest.bgimageurl){
+        //     renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/iframe.html";
+        // } else {
+        //     renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
+        // }
+
         //renderSource
-        var renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
         console.log(renderSource);
         //bilder rendern und hochlade
 
@@ -232,7 +232,7 @@ function Applogic ( rasterrizer )
 
 
     datastore.on("datastore.saveXmlComplete", function(){
-        console.log('applogic.datastore.saveXmlComplete');
+        console.log('applogic.datastore.saveXmlComplete');        
         self.emit("applogic.CodeComplete", Embeddcode.hash);
         running = false;
     });

@@ -4,8 +4,10 @@
 
 
 	angular.module("tapp").config( function($provide, $compileProvider, $filterProvider){
-		$provide.value('db_host', 'sofa01.zdf.de');
+		//$provide.value('db_host', 'sofa01.zdf.de');
 		//$provide.value('db_host', 'wmaiz-v-sofa02.dbc.zdf.de');
+		
+		$provide.value('db_host', location.host);
 	});
 
 
@@ -92,9 +94,9 @@
 		$scope.screensizeopt = [{label:"klein", value:1},{label:"groß", value:2}];
 		$scope.screensize = $scope.screensizeopt[0];
 
-
 		$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 		$scope.version = $scope.versionopt[1];
+
 		var self = this;
 
 
@@ -154,7 +156,8 @@
 				hostname: location.origin,
 				overwrite: $scope.overwrite.value,
 				screensize: $scope.screensize.value,
-				version: $scope.version.value
+				version: $scope.version.value,
+				bgimageurl: $scope.bgimageurl
 			});			
 		};
 

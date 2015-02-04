@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zdfembed>
-	<id>f4a7e6e2567107a950d86d74af9eea8b41904090</id>
-	<preview>http://sofa01.zdf.de/c/twr/f4a7e6e2567107a950d86d74af9eea8b41904090/preview</preview>
-	<htmlsrc>http://sofa01.zdf.de/c/twr/f4a7e6e2567107a950d86d74af9eea8b41904090/embed.html</htmlsrc>
-	<js>http://sofa01.zdf.de/c/twr/f4a7e6e2567107a950d86d74af9eea8b41904090/script.js</js>
+	<id>{{hash}}</id>
+	<preview>http://sofa01.zdf.de/c/twr/{{hash}}/preview</preview>
+	<htmlsrc>http://sofa01.zdf.de/c/twr/{{hash}}/embed.html</htmlsrc>
+	<js>http://sofa01.zdf.de/c/twr/{{hash}}/script.js</js>
 </zdfembed>
