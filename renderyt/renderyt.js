@@ -75,7 +75,7 @@ function captureScreen(driver, imagedimensions, posttarget, onCompleted) {
 	{
 		gm(image, "temp.png")
 			.options({imageMagick: true})
-			.crop(imagedimensions.width-10, imagedimensions.height, imagedimensions.x, imagedimensions.y)
+			.crop(imagedimensions.width-18, imagedimensions.height, imagedimensions.x, imagedimensions.y)
 			.toBuffer('PNG',function (err, buffer) {
 				saveImage(buffer, {"width":imagedimensions.width, "height": imagedimensions.height}, posttarget, onCompleted);
 			});
