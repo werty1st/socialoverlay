@@ -5,8 +5,3 @@ exports.env = {
     }
 };
 
-
-
-git filter-branch --force --index-filter \
-'git rm --cached --ignore-unmatch default.kansorc' \
---prune-empty --tag-name-filter cat -- --all
