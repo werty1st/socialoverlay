@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="de">
+<html class="{{size}}" lang="de">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,33 +7,38 @@
         <meta name="description" content="">
         <style type="text/css">
 
-            .main-wrapper{
+            .main-wrapper.klein{
                 overflow:auto;
                 /* other styles here */
                 float: left;
-                /*display: inline-block;*/
-
             }        
-
-            body{
-                background-image:url({{bgimageurl}});                
-            }
-
-            .main-wrapper:before,
-            .main-wrapper:after {
+            .main-wrapper.klein:before,
+            .main-wrapper.klein:after {
                 content : "";
                 display : table;
             }
-            .main-wrapper:after {
+            .main-wrapper.klein:after {
                 clear : both;
             }
+
+            html.gross, body.gross, #maincontainer.gross {
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                overflow: hidden;
+            }
+
+            body.gross{
+                background-image:url({{bgimageurl}});
+            }
+
 
 
         </style>
     </head>    
-    <body>
+    <body class="{{size}}">
         <!-- Add your site or application content here -->
-        <div id="maincontainer" class="main-wrapper">
+        <div id="maincontainer" class="main-wrapper {{size}}">
 		{{{code}}}
         </div>
     </body>

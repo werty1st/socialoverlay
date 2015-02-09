@@ -47,6 +47,10 @@ YT
 NEO
 <iframe src="http://zdf.massrel.io/neo-magazin-royale" width="1050" height="630" style="background-image:url(http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png)" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
 
+NEO2
+http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png
+<div class="mr-space" id="mr-space_neo-magazin-royale_int" data-space-id="zdf/neo-magazin-royale_int" style="min-height: 680px;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_neo-magazin-royale_int");</script>
 
 noscript link finden
 ====================

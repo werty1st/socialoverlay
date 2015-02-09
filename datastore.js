@@ -84,7 +84,10 @@ function Datastore(config)
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/rendersource.html", function(err, repl){
 			if (!err){
 				var template_html = repl.body.toString('utf8');
-				var target_html = renderTemplate(template_html, {code:RenderRequest.code, bgimageurl: RenderRequest.bgimageurl});
+				var target_html = renderTemplate(template_html, { code:RenderRequest.code,
+																  bgimageurl: RenderRequest.bgimageurl,
+																  size: (RenderRequest.screensize==1)?"klein":"gross"
+																});
 
 				db.saveAttachment( self.doc , 	//doc.id
 				{ name : 'rendersource.html',
@@ -151,6 +154,33 @@ function Datastore(config)
 		})
 	});
 
+
+
+	this.on("datastore.saveCssRequest", function (){
+		console.log("datastore.saveCssRequest");
+
+		//template laden
+		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style.css", function(err, repl){
+			if (!err){
+				var template_script = repl.body.toString('utf8');
+				var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
+																  		imagedimensions : Embeddcode.imagedimensions,
+																  		size: (RenderRequest.screensize==1)?"klein":"gross",
+																  		bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
+																   });
+
+				db.saveAttachment( self.doc , 	//doc.id
+					{ name : 'style.css',
+					  'Content-Type' : 'text/css;charset=utf-8',
+					  body : targetscript
+					},
+					uploadComplete("datastore.saveCssComplete")
+				);
+			}
+		})
+	});
+
+
 	this.on("datastore.saveHtmlRequest", function(){
 		console.log("datastore.saveHtmlRequest");
 
@@ -160,7 +190,9 @@ function Datastore(config)
 				var template_html = repl.body.toString('utf8');
 				var target_html = renderTemplate(template_html, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname,
-																  imagedimensions : Embeddcode.imagedimensions
+																  imagedimensions : Embeddcode.imagedimensions,
+																  // bgimageurl: RenderRequest.bgimageurl
+																  bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
 																});
 
 				db.saveAttachment( self.doc , 	//doc.id

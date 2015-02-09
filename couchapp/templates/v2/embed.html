@@ -1,28 +1,30 @@
-<style>
-#{{hash}} {
-    height: {{imagedimensions.height}}px;
-    width: {{imagedimensions.width}}px;  	
-}
-</style>
-<div class="zdfembed" id="{{hash}}" style="height: {{imagedimensions.height}}px; width: {{imagedimensions.width}}px;" >
+<script>
+	if (window.self == window.top){
+		var css = document.createElement("style");
+		css.type = "text/css";
+		css.innerHTML = "body { overflow: hidden ; background-image:url({{bgimageurl}}); } ";
+		document.getElementsByTagName('script')[0].parentNode.appendChild(css);		
+	}
+</script>
+
+<div class="zdfembed" id="_{{hash}}"  > <!-- style="height: {{imagedimensions.height}}px; width: {{imagedimensions.width}}px;" -->
+
 	<script type="text/x-template" id="script{{hash}}">
 		<div class="socialbox" >
 			<img src="{{clienthostname}}/c/twr/{{hash}}/preview" alt="Vorschaubild" />
 			<span class="caption fade-caption"  >
 				<div class="relative_wrapper_social">
-		        	<b class="caption2">Ihr Klick f&uuml;r den Datenschutz</b>  
+		        	<h3>Ihr Klick f&uuml;r den Datenschutz</h3>  
 		        	<p style="padding-right: 0px;">Erst wenn Sie hier klicken, werden Bilder und andere Daten von Drittanbietern nachgeladen. Ihre IP-Adresse wird dabei an externe Server (Facebook, Google, Twitter etc.) &uuml;bertragen. &Uuml;ber den Datenschutz dieser Anbieter k&ouml;nnen Sie sich auf den jeweiligen Seiten informieren.
 		        	</p>
-		        	<button class="button_example" onclick="activateSocial()">Einverstanden</button>			
-					<br>
-					<br>
-
+		        	<button class="button" onclick="activateSocial()">Einverstanden</button>			
+	
 					<div class="socialbottom">
 						<span class="fa-stack">
 						  <!--<i class="fa fa-square fa-stack-2x"></i>-->
 						  <i class="fa fa-cog fa-stack-1x fa-inverse"></i>
 						</span>
-						<a class="button_example" href="http://www.zdf.de/social-media-optin-37013018.html">Datenschutz Einstellung &auml;ndern</a>
+						<a class="button" href="http://www.zdf.de/social-media-optin-37013018.html">Datenschutz Einstellung &auml;ndern</a>
 					</div>
 				</div>
 			</span>  				

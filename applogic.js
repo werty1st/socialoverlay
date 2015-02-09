@@ -60,8 +60,7 @@ function extractscript2 (src)
     //result.html = doc.getElementsByTagName("body")[0].innerHTML;
     result.html64 = new Buffer( doc.getElementsByTagName("body")[0].innerHTML ).toString('base64');
     result.inline = result.inline;
-
-    delete result.inline;
+    
     return result;
 
 }
@@ -221,8 +220,13 @@ function Applogic ( rasterrizer )
 
     datastore.on("datastore.saveScriptComplete", function(){
         console.log('applogic.datastore.saveScriptComplete');
-        datastore.emit("datastore.saveHtmlRequest");
+        datastore.emit("datastore.saveCssRequest");
     });
+
+    datastore.on("datastore.saveCssComplete", function(){
+        console.log('applogic.datastore.saveCssComplete');
+        datastore.emit("datastore.saveHtmlRequest");
+    });    
 
     datastore.on("datastore.saveHtmlComplete", function(){
         console.log('applogic.datastore.saveHtmlComplete');
