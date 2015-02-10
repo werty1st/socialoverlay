@@ -31,6 +31,6 @@
     "open": "*"
   },
   "scripts" : {
-    "debug" : "node-debug --web-host 0000 --debug-port 5888 app.js"
+    "debug" : "node-debug --web-host 0.0.0.0 --debug-port 5888 app.js"
   }  
 }

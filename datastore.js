@@ -184,14 +184,16 @@ function Datastore(config)
 	this.on("datastore.saveHtmlRequest", function(){
 		console.log("datastore.saveHtmlRequest");
 
+		var template_name = (RenderRequest.screensize==1)?"embed_klein.html":"embed_gross.html";
 		
-		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/embed.html", function(err, repl){
+		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/"+template_name, function(err, repl){
 			if (!err){
 				var template_html = repl.body.toString('utf8');
 				var target_html = renderTemplate(template_html, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname,
 																  imagedimensions : Embeddcode.imagedimensions,
 																  // bgimageurl: RenderRequest.bgimageurl
+																  size: (RenderRequest.screensize==1)?"klein":"gross",
 																  bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
 																});
 

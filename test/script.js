@@ -5,7 +5,7 @@
 		var csslink = document.createElement('link');
 		csslink.setAttribute("rel","stylesheet")
 		csslink.setAttribute("type","text/css")
-		csslink.setAttribute("href","{{hostname}}/c/twr/{{hash}}/style.css");
+		csslink.setAttribute("href","style.css");
 		document.getElementsByTagName('head')[0].appendChild(csslink);
 		socialcss = true;
 	}
@@ -18,15 +18,12 @@ if (typeof socialcontentbdsg == 'undefined') {
 	socialcontentbdsg = [];
 }
 
-socialcontentbdsg.push( function bdsg{{hash}}() {
+socialcontentbdsg.push( function bdsg5de9984fe867b1180ef6326f54d11e0f955d78fa() {
 
-	var htmlsrc64 = '{{{html64}}}';
-	var script = '{{{inline}}}';
+	var htmlsrc64 = 'PGRpdiBjbGFzcz0ibXItc3BhY2UiIGlkPSJtci1zcGFjZV9uZW8tbWFnYXppbi1yb3lhbGVfaW50IiBkYXRhLXNwYWNlLWlkPSJ6ZGYvbmVvLW1hZ2F6aW4tcm95YWxlX2ludCIgc3R5bGU9Im1pbi1oZWlnaHQ6IDY4MHB4OyI+PC9kaXY+Cg==';
+	var script = 'console.log("inline code");!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_neo-magazin-royale_int");;';
 	var scripts = [];
 
-	{{#each scriptlinks}}
-	scripts.push("{{this}}");
-	{{/each}}	
 
 	/*private*/
 	function insertScript(url, evaluate) {
@@ -69,7 +66,7 @@ socialcontentbdsg.push( function bdsg{{hash}}() {
 			    return r;			
 			}
 		}
-		document.getElementById('_{{hash}}').innerHTML = atobforIE(htmlsrc64);
+		document.getElementById('5de9984fe867b1180ef6326f54d11e0f955d78fa').innerHTML = atobforIE(htmlsrc64);
 
 		if (scripts.length > 0){
 			for(var i1=0; i1 < scripts.length; i1++)
@@ -204,8 +201,8 @@ if (typeof activateSocial !== "function"){
 
 // function SocialElementBdsg()
 // {
-// 	var id = "{{hash}}";
-// 	var htmlsrc64 = '{{{html64}}}';
+// 	var id = "5de9984fe867b1180ef6326f54d11e0f955d78fa";
+// 	var htmlsrc64 = 'PGRpdiBjbGFzcz0ibXItc3BhY2UiIGlkPSJtci1zcGFjZV9uZW8tbWFnYXppbi1yb3lhbGVfaW50IiBkYXRhLXNwYWNlLWlkPSJ6ZGYvbmVvLW1hZ2F6aW4tcm95YWxlX2ludCIgc3R5bGU9Im1pbi1oZWlnaHQ6IDY4MHB4OyI+PC9kaXY+Cg==';
 
 // 	this.getID = function getID()
 // 	{
