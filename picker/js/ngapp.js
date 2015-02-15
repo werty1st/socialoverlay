@@ -4,10 +4,11 @@
 
 
 	angular.module("tapp").config( function($provide, $compileProvider, $filterProvider){
-		//$provide.value('db_host', 'sofa01.zdf.de');
+		$provide.value('db_host', 'sofa01.zdf.de');
 		//$provide.value('db_host', 'wmaiz-v-sofa02.dbc.zdf.de');
 		
-		$provide.value('db_host', location.host);
+		// ändern wenn webmaster editor angepasst
+		//$provide.value('db_host', location.host);
 	});
 
 
