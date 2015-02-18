@@ -165,7 +165,6 @@ function Datastore(config)
 				var template_script = repl.body.toString('utf8');
 				var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
 																  		imagedimensions : Embeddcode.imagedimensions,
-																  		size: (RenderRequest.screensize==1)?"klein":"gross",
 																  		bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
 																   });
 
@@ -184,7 +183,7 @@ function Datastore(config)
 	this.on("datastore.saveHtmlRequest", function(){
 		console.log("datastore.saveHtmlRequest");
 
-		var template_name = (RenderRequest.screensize==1)?"embed_klein.html":"embed_gross.html";
+		var template_name = "embed.html";
 		
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/"+template_name, function(err, repl){
 			if (!err){
@@ -192,8 +191,6 @@ function Datastore(config)
 				var target_html = renderTemplate(template_html, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname,
 																  imagedimensions : Embeddcode.imagedimensions,
-																  // bgimageurl: RenderRequest.bgimageurl
-																  size: (RenderRequest.screensize==1)?"klein":"gross",
 																  bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
 																});
 

@@ -4,11 +4,20 @@
 
 
 	angular.module("tapp").config( function($provide, $compileProvider, $filterProvider){
-		$provide.value('db_host', 'sofa01.zdf.de');
+
+		//switch hostnames
+		if ("wmaiz-v-sofa02.dbc.zdf.de" == location.hostname) {
+			$provide.value('db_host', 'wmaiz-v-sofa02.dbc.zdf.de');	
+
+		} else if ("wmaiz-v-sofa01.dbc.zdf.de" == location.hostname) {
+			$provide.value('db_host', 'sofa01.zdf.de');
+		} else {
+			alert("Hostname unsupported");
+		}
 		//$provide.value('db_host', 'wmaiz-v-sofa02.dbc.zdf.de');
 		
 		// ändern wenn webmaster editor angepasst
-		//$provide.value('db_host', location.host);
+		//$provide.value('db_host', location.hostname);
 	});
 
 
@@ -89,6 +98,10 @@
 		$scope.code = window.unescape(atob(default_code));
 		$scope.image = "";
 		$scope.holder = true;
+		
+		$scope.autorefresh = {freq:1,duration:1};
+		
+
 		$scope.overwriteopt = [{label:"Ja", value:true},{label:"Nein", value:false}];
 		$scope.overwrite = $scope.overwriteopt[1];
 
@@ -97,6 +110,18 @@
 
 		$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 		$scope.version = $scope.versionopt[1];
+
+
+
+		$scope.durationopt = [
+								{label:"", value:1},
+								{label:"v2", value:2},
+								{label:"v2", value:2},
+								{label:"v2", value:2},
+							 ];
+		$scope.duration = $scope.durationopt[1];
+
+
 
 		var self = this;
 

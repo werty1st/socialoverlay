@@ -112,8 +112,8 @@ function Applogic ( rasterrizer )
         Embeddcode             = extractscript2( RenderRequest.code );
         Embeddcode.hash        = gethash( RenderRequest.code );//berechne hash und suche in db danach        
         //Embeddcode.original  = RenderRequest.code;
-        //Embeddcode.hostname    = RenderRequest.hostname; //hostname; //wird überschrieben
-        Embeddcode.hostname    = hostname; //wird überschrieben im webmaster editor anpassen auf sofa01.zdf.de
+        Embeddcode.hostname    = RenderRequest.hostname; //hostname; //wird überschrieben
+        //Embeddcode.hostname    = hostname; //wird überschrieben im webmaster editor anpassen auf sofa01.zdf.de
         
 
         RenderRequest.version  = version; //wird überschrieben
