@@ -177,45 +177,77 @@ function Applogic ( rasterrizer )
         console.log(renderSource);
         //bilder rendern und hochlade
 
-        function sendImagebuffer(imagebuffer, imagedimensions, onCompleted)
+        // erstelle bilder mit 3*4 4*3 16*9 9*16 mit (800*600, 1280*800, 1920*1080)
+        var screensizes = [
+            {w:  800, h:  600, name:"1l"},
+            {w:  600, h:  800, name:"1p"},
+            {w: 1280, h:  800, name:"2l"},
+            {w:  800, h: 1280, name:"2p"},
+            {w: 1080, h: 1920, name:"3l"},
+            {w: 1920, h: 1080, name:"3p"}
+        ];
+
+        var counter = 0;
+
+        //bleibt für ein doc gleich
+        Embeddcode.imagedimensions = screensizes;
+
+        datastore.on("datastore.saveImageComplete", function(){
+            console.log('applogic.datastore.saveImageComplete');
+            
+        });
+
+        //ein screenshot wurde erstellt
+        function saveImagebuffer(imagebuffer, imagedimensions, nextRender)
         {
+
+            var name = screensizes[counter].name;
 
             if (typeof imagebuffer === "function"){
                 //error
                 console.log( imagebuffer() );
                 running = false;
-                onCompleted();
+                nextRender();
+                //fehler beim rendern an browser durchleiten
                 self.emit("applogic.error", imagebuffer() );
                 return;
             }
 
             //console.log("save image with size:", imagedimensions);
-            Embeddcode.imagedimensions = imagedimensions;
-            Embeddcode.imagebuffer     = imagebuffer;
+            // Embeddcode.imagebuffer     = imagebuffer;
 
-            self.emit("applogic.renderImageComplete");
-            onCompleted();
+            datastore.emit("datastore.saveImageRequest",name,imagedimensions,imagebuffer);
+            nextRender();
+
+
+            //letztes bild erzeugt
+            if (++counter==screensizes.length){
+                //fertig mit allen bildern
+                self.emit("applogic.renderImagesComplete")
+            }
         }
 
-        try {            
-            rasterrizer.renderUrl(
-                renderSource,
-                sendImagebuffer,
-                RenderRequest.screensize
-                /*url, sendImagebuffer(imagebuffer, onCompleted)*/
-            );
-        } catch (err){
-            running = false;
+
+        //erzeuge 6 render tasks
+        for(var i = 0; i<screensizes.length; i++)
+        {
+            try {            
+                rasterrizer.renderUrl(
+                    renderSource,
+                    saveImagebuffer,
+                    screensizes[i]
+                    /*url, saveImagebuffer(imagebuffer, nextRender)*/
+                );
+            } catch (err){
+                running = false;
+            }
+
         }
+
     });
 
-    this.on("applogic.renderImageComplete", function () {
-        console.log('applogic.renderImageComplete');        
-        datastore.emit("datastore.saveImageRequest");
-    });
-
-    datastore.on("datastore.saveImageComplete", function(){
-        console.log('applogic.datastore.saveImageComplete');
+    this.on("applogic.renderImagesComplete", function () {
+        console.log('applogic.renderImagesComplete');        
         datastore.emit("datastore.saveScriptRequest");
     });
 

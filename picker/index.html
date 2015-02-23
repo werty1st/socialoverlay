@@ -65,7 +65,7 @@
 						breite/auto
 						auto/höhe
 						breite/höhe
-						<select ng-model="screensize"
+						<select ng-model="screensize" ng-disabled="'true'"
 							ng-options="opt.label for opt in screensizeopt">
 						</select>
 						<br/>
@@ -73,7 +73,7 @@
 		        </div>
 		        <div class="tab-pane">
 		            	<label for="autorefresh.enabled">aktivieren</label>
-						<input id="autorefresh.enabled" type="checkbox" ng-model="autorefresh.enabled"/>
+						<input id="autorefresh.enabled" type="checkbox" ng-model="autorefresh.enabled" ng-disabled="'true'"/>
 						<br>
 
 						<table class="table">

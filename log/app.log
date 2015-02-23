@@ -4,51 +4,7 @@ Selenium: true
 Selenium: true
 Xvfb: true
 Xvfb: Dimensions { width: 350, height: 350, depth: 24 }
-display at: 99
+display at: 154
 Xvfb: true
 Xvfb: Dimensions { width: 1600, height: 1200, depth: 24 }
-display at: 100
-Server has disconnected
-Server has disconnected
-app.socket.renderImageRequest
-applogic.renderImageRequest
-XXXXXXXXXXXXXXXXXXXXXXXXXXX
-datastore.getDocRequest
-datastore.docFound
-app.applogic.CodeComplete
-app.socket.renderImageRequest
-applogic.renderImageRequest
-XXXXXXXXXXXXXXXXXXXXXXXXXXX
-datastore.getDocRequest
-overwrite by request
-applogic.datastore.newDocCreated
-datastore.saveRendersourceRequest
-rev: 30-18775948a6c77a843ddc0cb2c4e4e95f
-next: datastore.saveRendersourceComplete
-applogic.datastore.saveRendersourceComplete
-applogic.datastore.renderImageRequest
-http://wmaiz-v-sofa02.dbc.zdf.de/c/twr/79211c8c7cf8282809224c7598d7b172d31a3c3d/rendersource.html
-poolsize_add: 1
-running session http://wmaiz-v-sofa02.dbc.zdf.de/c/twr/79211c8c7cf8282809224c7598d7b172d31a3c3d/rendersource.html
-pagestate complete
-session loaded
-applogic.renderImageComplete
-datastore.saveImageRequest
-next rw
-poolsize_com: 0
-rev: 31-2747b1782b1051eef3a500ec4029967f
-next: datastore.saveImageComplete
-applogic.datastore.saveImageComplete
-datastore.saveScriptRequest
-rev: 32-3ce7e26064eaee73a8cc463e28d53241
-next: datastore.saveScriptComplete
-applogic.datastore.saveScriptComplete
-datastore.saveHtmlRequest
-rev: 33-57eee3f4d158297cdc974a06fc9a2140
-next: datastore.saveHtmlComplete
-applogic.datastore.saveHtmlComplete
-datastore.saveXmlRequest
-rev: 34-ba97282b191448909e3adec2201bc8dc
-next: datastore.saveXmlComplete
-applogic.datastore.saveXmlComplete
-app.applogic.CodeComplete
+display at: 155

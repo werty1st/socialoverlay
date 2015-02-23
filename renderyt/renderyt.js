@@ -58,6 +58,8 @@ var webdriver = require('selenium-webdriver'),
     until = webdriver.until,
     firefox = require('selenium-webdriver/firefox');
 
+
+
 var runHeadless = require('./headless');
 
 
@@ -161,65 +163,61 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 
 
 
-function renderRequestTask(driver, url, posttarget, onCompleted){
+function renderRequestTask(driver, url, posttarget, screensize, onCompleted){
 
 	console.log("running session",url);
 
-	//todo
-	//laufenden process/timeout abfragen wenn vorhandn dann push nach waitingCalls
-	//alternativ einen pool aus new firefox.Driver(); //bringt keinen performane vorteil lieber eins nach dem anderen
 
-	//todo fehler einbauen kein default
-	//var url = url || 'http://merlin.intern.zdf.de:5984/twr/c0cb0d515756ec82976722085fa7d904257eb5de/rendersource.html';
+	driver.manage().window().setSize(screensize.w, screensize.h).then(function (val1){
+		console.log("windows set size complete");	
+		driver.manage().window().getSize().then(function (val1){
+			console.log("windows size:",val1);
 
-	var timeout1 = 0;
-	driver.get(url);	
+			//todo
+			//laufenden process/timeout abfragen wenn vorhandn dann push nach waitingCalls
+			//alternativ einen pool aus new firefox.Driver(); //bringt keinen performane vorteil lieber eins nach dem anderen
 
-	var pagestate = driver.executeScript('return document.readyState;')
+			//todo fehler einbauen kein default
+			//var url = url || 'http://merlin.intern.zdf.de:5984/twr/c0cb0d515756ec82976722085fa7d904257eb5de/rendersource.html';
 
-	timeout1 = setTimeout(function ()
-	{
-		console.log("session took to much time to load");
-	},15000)
+			var timeout1 = 0;
+			driver.get(url);	
 
-	pagestate.then(function(readyState){
-		console.log("pagestate",readyState);
-		if (readyState === "complete"){
-			pageloaded(driver, posttarget, timeout1, onCompleted);
-		}
+			var pagestate = driver.executeScript('return document.readyState;')
+
+			timeout1 = setTimeout(function ()
+			{
+				console.log("session took to much time to load");
+			},15000)
+
+			pagestate.then(function(readyState){
+				console.log("pagestate",readyState);
+				if (readyState === "complete"){
+					pageloaded(driver, posttarget, timeout1, onCompleted);
+				}
+			});
+
+
+		});			
 	});
+
+
 }
 
 var options = {};
-var headless = {};
-var driver = {};
-var rw = {};
+var headless;
+var driver;
+var rw;
 
-	headless.klein = new runHeadless({ display: {width: 350, height: 350, depth: 24}},
-	function(err, childProcess, servernum) {
-		//xvfb ready
-		if(!err){
-			console.log("display at:",servernum);
-			process.env.DISPLAY = ":" + servernum;
-			driver.klein = new firefox.Driver();
-			rw.klein = new RenderWorker();
-			rw.klein.init();
-		} else {
-			//error
-			throw new Error("X or Selenium not running.");
-		}
-	});
-
-
-	headless.gross = runHeadless({ display: {width: 1600, height: 1200, depth: 24}},
+	headless = runHeadless({ display: {width: 1920, height: 1080, depth: 24}},
 	function(err, childProcess, servernum){
 		//xvfb ready
 		if(!err){
 			console.log("display at:",servernum);
 			process.env.DISPLAY = ":" + servernum;
-			driver.gross = new firefox.Driver();
-			rw.gross = new RenderWorker();
-			rw.gross.init();
+			driver = new firefox.Driver();
+			rw = new RenderWorker();
+			rw.init();
 		} else {
 			//error
 			throw new Error("X or Selenium not running.");
@@ -230,22 +228,42 @@ module.exports.renderUrl = function renderUrl(url, posttarget, screensize){
 
 	//console.log("screensize",screensize);
 
-	if(screensize==1){
-		//klein
-		rw.klein.add(function(onCompleted){
-			var _url = url;
-			var _posttarget = posttarget;
-			renderRequestTask(driver.klein, _url, _posttarget, onCompleted);		
-		});
-	} else if (screensize==2){
-		//groß
 
-		rw.gross.add(function(onCompleted){
-			var _url = url;
-			var _posttarget = posttarget;
-			renderRequestTask(driver.gross, _url, _posttarget, onCompleted);		
-		});		
-	}
+
+	rw.add(function(onCompleted){
+		var _url = url;
+		var _posttarget = posttarget;
+		renderRequestTask(driver, _url, _posttarget, screensize, onCompleted);		
+	});
+
+
+
+
+
+
+	// driver.manage().window().setSize(800,800).then(function (val1){
+	// 	console.log("windows set size complete");	
+
+	// 	driver.manage().window().getSize().then(function (val1){
+	// 		console.log("windows size",val1);		
+	// 	});			
+	// });
+
+
+	//http://www.w3schools.com/browsers/browsers_display.asp
+
+	//screensize 0=auto 
+	// erstelle bilder mit 3*4 4*3 16*9 9*16 mit (800*600, 1280*800, 1920*1080)
+
+	//breit fest
+	// erstelle bilder mit 3*4 4*3 16*9 9*16 mit (800*600, 1280*800, 1920*1080) bei fester breite des divs
+
+	//beides fest
+	// container div size definiert nur iframes zb. youtube wird nur ein bild gerendet
+
+
+
+
 
 
 

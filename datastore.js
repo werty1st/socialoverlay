@@ -100,35 +100,38 @@ function Datastore(config)
 	})
 
 
-	this.on("datastore.saveIframeRequest", function(){
-		console.log("datastore.saveIframeRequest");
+	// this.on("datastore.saveIframeRequest", function(){
+	// 	console.log("datastore.saveIframeRequest");
 
-		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/iframe.html", function(err, repl){
-			if (!err){
-				var template_html = repl.body.toString('utf8');
-				var renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
-				var target_html = renderTemplate(template_html, { rendersource: renderSource , bgimageurl: RenderRequest.bgimageurl});
+	// 	db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/iframe.html", function(err, repl){
+	// 		if (!err){
+	// 			var template_html = repl.body.toString('utf8');
+	// 			var renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
+	// 			var target_html = renderTemplate(template_html, { rendersource: renderSource , bgimageurl: RenderRequest.bgimageurl});
 
-				db.saveAttachment( self.doc , 	//doc.id
-				{ name : 'iframe.html',
-				  'Content-Type' : 'text/html;charset=utf-8',
-				  body : target_html
-				},
-				uploadComplete("datastore.saveIframeComplete"));
-			}
-		});
-	})
+	// 			db.saveAttachment( self.doc , 	//doc.id
+	// 			{ name : 'iframe.html',
+	// 			  'Content-Type' : 'text/html;charset=utf-8',
+	// 			  body : target_html
+	// 			},
+	// 			uploadComplete("datastore.saveIframeComplete"));
+	// 		}
+	// 	});
+	// })
 
 
-	this.on("datastore.saveImageRequest", function (){
+
+	this.on("datastore.saveImageRequest", function (name,imagedimensions,imagebuffer){
+	//this.on("datastore.saveImageRequest", function (){
 		//gucke im speicher/cache nach sonst render neu
-		console.log("datastore.saveImageRequest");
+		console.log("datastore.saveImageRequest as",name);
 
 		//speichere bild in db
 		db.saveAttachment( self.doc , 	//doc.id
-							  { name : 'preview',
+							  { 
+							  	name : name,
 							  	'Content-Type' : 'image/png',
-							  	body : Embeddcode.imagebuffer  
+							  	body : imagebuffer  
 							  },
 							  uploadComplete("datastore.saveImageComplete") );
 	});
