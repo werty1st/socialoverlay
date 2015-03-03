@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="{{size}}" lang="de">
+<html lang="de">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,28 +7,28 @@
         <meta name="description" content="">
         <style type="text/css">
 
-            .main-wrapper.klein{
+            .main-wrapper{
                 overflow:auto;
                 /* other styles here */
                 float: left;
             }        
-            .main-wrapper.klein:before,
-            .main-wrapper.klein:after {
+            .main-wrapper:before,
+            .main-wrapper:after {
                 content : "";
                 display : table;
             }
-            .main-wrapper.klein:after {
+            .main-wrapper:after {
                 clear : both;
             }
 
-            html.gross, body.gross, #maincontainer.gross {
+            html, body {
                 width: 100%;
                 height: 100%;
                 margin: 0px;
                 overflow: hidden;
             }
 
-            body.gross{
+            body{
                 background-image:url({{bgimageurl}});
             }
 
@@ -36,9 +36,9 @@
 
         </style>
     </head>    
-    <body class="{{size}}">
+    <body >
         <!-- Add your site or application content here -->
-        <div id="maincontainer" class="main-wrapper {{size}}">
+        <div id="maincontainer" class="main-wrapper ">
 		{{{code}}}
         </div>
     </body>

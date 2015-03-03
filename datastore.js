@@ -85,8 +85,7 @@ function Datastore(config)
 			if (!err){
 				var template_html = repl.body.toString('utf8');
 				var target_html = renderTemplate(template_html, { code:RenderRequest.code,
-																  bgimageurl: RenderRequest.bgimageurl,
-																  size: (RenderRequest.screensize==1)?"klein":"gross"
+																  bgimageurl: RenderRequest.bgimageurl
 																});
 
 				db.saveAttachment( self.doc , 	//doc.id
@@ -168,7 +167,7 @@ function Datastore(config)
 				var template_script = repl.body.toString('utf8');
 				var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
 																  		imagedimensions : Embeddcode.imagedimensions,
-																  		bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
+																  		bgimageurl: RenderRequest.bgimageurl
 																   });
 
 				db.saveAttachment( self.doc , 	//doc.id
@@ -194,7 +193,7 @@ function Datastore(config)
 				var target_html = renderTemplate(template_html, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname,
 																  imagedimensions : Embeddcode.imagedimensions,
-																  bgimageurl: (RenderRequest.screensize==2)?RenderRequest.bgimageurl:""
+																  bgimageurl: RenderRequest.bgimageurl
 																});
 
 				db.saveAttachment( self.doc , 	//doc.id
