@@ -34,7 +34,7 @@ function Datastore(config)
 	  });
 
 
-	function uploadComplete ( emitNext ){
+	function uploadComplete ( emitNext, payload ){
 		return function(err, doc)
 		{
 			if (!err)
@@ -42,7 +42,7 @@ function Datastore(config)
 				console.log("rev:",doc.rev);
 				console.log("next:",emitNext);
 				self.doc = doc;
-				self.emit(emitNext);
+				self.emit(emitNext, payload);
 			} else 
 			{
 				console.log(err);
@@ -132,7 +132,7 @@ function Datastore(config)
 							  	'Content-Type' : 'image/png',
 							  	body : imagebuffer  
 							  },
-							  uploadComplete("datastore.saveImageComplete") );
+							  uploadComplete("datastore.saveImageComplete", {name: name} ) );
 	});
 
 	// --> saveOrigEmbedCodeRequest

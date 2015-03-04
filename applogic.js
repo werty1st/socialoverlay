@@ -179,25 +179,27 @@ function Applogic ( rasterrizer )
 
         // erstelle bilder mit 3*4 4*3 16*9 9*16 mit (800*600, 1280*800, 1920*1080)
         var screensizes = [
-            // {w:  800, h:  600, name:"1l"},
-            // {w:  600, h:  800, name:"1p"},
-            {w: 1280, h:  800, name:"default"} //2l
-            // {w:  800, h: 1280, name:"2p"},
-            // {w: 1080, h: 1920, name:"3l"},
-            // {w: 1920, h: 1080, name:"3p"}
+            {w:  800, h:  600, name:"1l"},
+            {w:  600, h:  800, name:"1p"},
+            {w: 1280, h:  800, name:"2l"}, //pflicht da default
+            {w:  800, h: 1280, name:"2p"},
+            {w: 1080, h: 1920, name:"3l"},
+            {w: 1920, h: 1080, name:"3p"}
         ];
 
 
         //todo
+        /*
         default bild prüfen
         browser ansicht anpassen progressbar bild 1 von x usw
+        */
 
         var counter = 0;
 
         //bleibt für ein doc gleich
         Embeddcode.imagedimensions = screensizes;
 
-        datastore.on("datastore.saveImageComplete", function(){
+        datastore.on("datastore.saveImageComplete", function( payload ){
             console.log('applogic.datastore.saveImageComplete');
             open--;
             console.log("open",open);
@@ -205,44 +207,51 @@ function Applogic ( rasterrizer )
                 //letztes bild erzeugt                
                 self.emit("applogic.renderImagesComplete");
             }
+            self.emit("applogic.progress",{msg: "gepspeichert", name: payload.name});
         });
 
         //ein screenshot wurde erstellt
-        function saveImagebuffer(imagebuffer, imagedimensions, nextRender)
+        function saveImagebuffer(name)
         {
+            var imagename = name;
 
-            var name = screensizes[counter].name;
+            return function (imagebuffer, imagedimensions, nextRender){
+                var name = screensizes[counter].name;
 
-            if (typeof imagebuffer === "function"){
-                //error
-                console.log( imagebuffer() );
-                running = false;
-                nextRender();
-                //fehler beim rendern an browser durchleiten
-                self.emit("applogic.error", imagebuffer() );
-                return;
+                if (typeof imagebuffer === "function"){
+                    //error
+                    console.log( imagebuffer() );
+                    running = false;
+                    nextRender();
+                    //fehler beim rendern an browser durchleiten
+                    self.emit("applogic.error", imagebuffer() );
+                    return;
+                }
+
+                //console.log("save image with size:", imagedimensions);
+                // Embeddcode.imagebuffer     = imagebuffer;
+
+                datastore.emit("datastore.saveImageRequest", imagename, imagedimensions, imagebuffer);
+                nextRender();                
+                self.emit("applogic.progress",{msg: "speichern", name: imagename});
             }
-
-            //console.log("save image with size:", imagedimensions);
-            // Embeddcode.imagebuffer     = imagebuffer;
-
-            datastore.emit("datastore.saveImageRequest",name,imagedimensions,imagebuffer);
-            nextRender();
         }
 
-        var open = 0;
+        var open = 0;        
         //erzeuge 6 render tasks
+        self.emit("applogic.progress",{msg: "start", max: screensizes.length, screensizes: screensizes});
+
         for(var i = 0; i<screensizes.length; i++)
         {
             try {
                 rasterrizer.renderUrl(
                     renderSource,
-                    saveImagebuffer, /*posttarget*/
+                    saveImagebuffer( screensizes[i].name ), /*ist posttarget in renderyt*/
                     screensizes[i]
                     /*url, saveImagebuffer(imagebuffer, nextRender)*/
                 );
                 open++;
-                console.log("open",open);
+                console.log("open",open);                
             } catch (err){
                 running = false;
             }

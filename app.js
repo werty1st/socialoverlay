@@ -38,18 +38,17 @@ var rasterrizer = require('./renderyt/renderyt');
 function socketfunction (socket) {
 
     var applogic = new Applogic(rasterrizer);
-    var ping = 0;
 
     //von applogic aufgerufen
     applogic.on("applogic.CodeComplete", function(id){
         console.log("app.applogic.CodeComplete");
+        socket.emit('progress',{msg:"finished"});
         socket.emit('CodeComplete', id);
     });
 
 
-    applogic.on("applogic.ping", function () {        
-        ping++;
-        socket.emit('ping');
+    applogic.on("applogic.progress", function (data) {        
+        socket.emit('progress',data);
     });
 
     applogic.on("applogic.error", function (err) {        
@@ -76,6 +75,7 @@ function socketfunction (socket) {
     });
     socket.on('disconnect',function(){
         console.log('Server has disconnected');
+        console.log('Todo handle running rendering');
     });
 
     io.sockets.on('connection', function (socket) {

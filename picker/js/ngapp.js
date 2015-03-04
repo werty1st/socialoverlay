@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module("tapp",['angularSpinner']);
+	var app = angular.module("tapp",['eu.wrty.ui', 'ui.bootstrap']);
 
 
 	angular.module("tapp").config( function($provide, $compileProvider, $filterProvider){
@@ -94,7 +94,7 @@
 
 
 	//form
-	app.controller("EmbeddcodeController", function($http, socket, $scope, usSpinnerService, db_host){
+	app.controller("EmbeddcodeController", function($http, socket, $scope, /*usSpinnerService,*/ db_host, $compile){
 		$scope.code = window.unescape(atob(default_code));
 		$scope.image = "";
 		$scope.holder = true;
@@ -131,14 +131,31 @@
 		//todo timeout einbauen mit meldung bei ablauf
 		$scope.startSpin = function(){
 			$scope.holder = true;
-		    usSpinnerService.spin('spinner-1');
+		    //usSpinnerService.spin('spinner-1');
 		}
 		$scope.stopSpin = function(){
 			$scope.holder = false;
-		    usSpinnerService.stop('spinner-1');
+		    //usSpinnerService.stop('spinner-1');
 		}
-		socket.on("ping", function(){
-			console.log("ping");
+
+		socket.on("progress", function(data){
+			
+			if (data.msg == "start"){
+				console.log("start",data.max); // mal 3 plus start und ende event
+
+				$scope.progressSetup(data.max*2+2);
+				$scope.progressProgress();
+			} else if (data.msg == "speichern") {
+				console.log("speichern",data.name);
+				$scope.progressProgress();
+			} else if (data.msg == "gepspeichert") {
+				console.log("gepspeichert",data.name);
+				$scope.progressProgress();
+			} else if (data.msg == "finished") {
+				console.log("finished");
+				//progress 100%
+				$scope.progressFinish();
+			}
 		})
 
 		socket.on("applogic.error", function(err){
@@ -154,11 +171,11 @@
 
 		    //todo auf event umschreiben
 		    var previewO = {};
-		    	previewO.imageurl = "/c/twr/"+ id +"/preview";
+		    	//previewO.imageurl = "/c/twr/"+ id +"/2l";
 		    	previewO.htmlcode = "/c/twr/"+ id +"/embed.html";
 		    	previewO.xmlcode = "/c/twr/"+ id +"/embed.xml";
 
-		    $scope.image = previewO.imageurl+"?"+ new Date().getTime();
+		    //$scope.image = previewO.imageurl+"?"+ new Date().getTime();
 
 		    //selfPower
    			$scope.tapp.playoutUrl = location.protocol + "//" + db_host + previewO.htmlcode;
@@ -175,7 +192,7 @@
 
 		$scope.renderCode = function renderCode(){
 			//absenden
-			$scope.image = "holder.js/300x300/sky/text:Tweet";
+			//$scope.image = "holder.js/300x300/sky/text:Tweet";
 			$scope.startSpin();
 			socket.emit('socket.renderImageRequest', {
 				code: $scope.code,

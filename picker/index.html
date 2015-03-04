@@ -9,13 +9,17 @@
 <body ng-controller="TweecodeController as tapp">
 
 	<script src="js/libs/angular.js"></script>
-	<script src="js/libs/angular-spinner.min.js"></script>
-	<script src="js/libs/spin.min.js"></script>
-	<script src="js/libs/holder.js"></script>
+	<!--
+		<script src="js/libs/angular-spinner.min.js"></script>
+		<script src="js/libs/spin.min.js"></script>
+		<script src="js/libs/holder.js"></script>
+	-->
 	<script src="js/libs/socket.io.js"></script>
 	<script src="js/libs/socket.js"></script>
-	<script src="js/ngapp.js"></script>
 	<script src="js/tabs/tabs.js"></script>
+	<script src="js/progressbar/ui-bootstrap-custom-tpls-0.12.1.js"></script>
+	<script src="js/progressbar/progressbar.js"></script>
+	<script src="js/ngapp.js"></script>
   	<script src="http://cm2-prod-pre.zdf.de/studio/pickerResultInterface.js" type="text/javascript"></script>
 
 
@@ -136,6 +140,7 @@
 
 		<input type="submit" ng-class="{'btn-primary': embcodeForm.$valid, 'btn-default': !embcodeForm.$valid}" class="btn btn-group-justified" value="Code umwandeln"/>
 		
+		<!-- 
 		<preview>
 			<span id="spinner-1" us-spinner="{radius:30, width:8, length: 16, top:'50%', left:'50%', color:'#fff'}" spinner-key="spinner-1"
 			style="">
@@ -145,6 +150,7 @@
 			</span>
 
 		</preview>
+		-->
 		<!-- 
 		<input name="breite" value="" type="text" list="breite_source">
 		<datalist id="breite_source">
@@ -158,8 +164,9 @@
 
 	<!-- <button ng-click="tapp.power()" class="btn btn-success btn-group-justified">empower me</button> -->
 
-	<result class="image">
-	</result>
+	<result my-progress="true" progress-forward="progressProgress" finish="progressFinish" setup="progressSetup"></result>
+
+
 	<br>
 	<div class="text-center">
 		<lable for="linkurl">HTML Fragment URL:</lable>

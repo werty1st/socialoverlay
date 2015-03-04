@@ -1,4 +1,4 @@
-angular.module("tapp")
+angular.module("ui.tabs", [])
 .directive('showTab', function() {
         return {
             link: function (scope, element, attrs) {
