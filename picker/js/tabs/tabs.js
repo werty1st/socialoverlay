@@ -1,4 +1,4 @@
-angular.module("ui.tabs", [])
+angular.module("wrtyuitab", [] )
 .directive('showTab', function() {
         return {
             link: function (scope, element, attrs) {

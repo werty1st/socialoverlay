@@ -99,7 +99,7 @@
         };
   })*/
 
-angular.module("eu.wrty.ui", [])
+angular.module("wrtyuiprogressbar", [])
 .directive('myProgress', function() {
 
 

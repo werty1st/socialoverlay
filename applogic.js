@@ -179,12 +179,12 @@ function Applogic ( rasterrizer )
 
         // erstelle bilder mit 3*4 4*3 16*9 9*16 mit (800*600, 1280*800, 1920*1080)
         var screensizes = [
-            {w:  800, h:  600, name:"1l"},
-            {w:  600, h:  800, name:"1p"},
-            {w: 1280, h:  800, name:"2l"}, //pflicht da default
-            {w:  800, h: 1280, name:"2p"},
-            {w: 1080, h: 1920, name:"3l"},
-            {w: 1920, h: 1080, name:"3p"}
+            // {w:  800, h:  600, name:"1l"},
+            // {w:  600, h:  800, name:"1p"},
+            {w: 1280, h:  800, name:"2l"} //pflicht da default
+            // {w:  800, h: 1280, name:"2p"},
+            // {w: 1080, h: 1920, name:"3l"},
+            // {w: 1920, h: 1080, name:"3p"}
         ];
 
 

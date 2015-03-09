@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module("tapp",['eu.wrty.ui', 'ui.bootstrap']);
+	var app = angular.module("tapp",['wrtyuitab', 'wrtyuiprogressbar', 'ui.bootstrap']);
 
 
 	angular.module("tapp").config( function($provide, $compileProvider, $filterProvider){
@@ -154,6 +154,7 @@
 			} else if (data.msg == "finished") {
 				console.log("finished");
 				//progress 100%
+				$scope.progressSetup(10);
 				$scope.progressFinish();
 			}
 		})
@@ -193,7 +194,7 @@
 		$scope.renderCode = function renderCode(){
 			//absenden
 			//$scope.image = "holder.js/300x300/sky/text:Tweet";
-			$scope.startSpin();
+			//$scope.startSpin();
 			socket.emit('socket.renderImageRequest', {
 				code: $scope.code,
 				hostname: location.origin,

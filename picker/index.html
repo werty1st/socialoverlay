@@ -52,8 +52,9 @@
 		        <li ><a href="" data-toggle="tab">Größe</a></li>
 		        <li ><a href="" data-toggle="tab">Aktualisieren</a></li>
 		        <li ><a href="" data-toggle="tab">Mobil</a></li>
+		        <li ><a href="" data-toggle="tab">History</a></li>
 		    </ul>
-		    <div id="my-tab-content" class="tab-content">
+		    <div id="my-tab-content" class="tab-content vertical-center">
 		        <div class="tab-pane active">
 		            <p>
 						Überschreiben
@@ -122,6 +123,11 @@
 		        <div class="tab-pane">
 		            <p>unterschiedliche angaben für mobil</p>
 		        </div>
+		        <div class="tab-pane">
+		            <p>
+						History						
+		            </p>
+		        </div>		        
 		    </div>
 		</div>
 		<hr>
@@ -138,6 +144,7 @@
 			<textarea ng-model="code" required class="form-control" id="twicode" 
 				placeholder='<blockquote class="twitter-tweet" lang="de"><p>...'></textarea>
 
+		<br>
 		<input type="submit" ng-class="{'btn-primary': embcodeForm.$valid, 'btn-default': !embcodeForm.$valid}" class="btn btn-group-justified" value="Code umwandeln"/>
 		
 		<!-- 

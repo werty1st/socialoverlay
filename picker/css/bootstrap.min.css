@@ -32,3 +32,21 @@ preview {
 	width: 100%;
 	
 }
+
+.tab-pane{
+  display: flex;
+  align-items: center;
+}
+
+
+.vertical-center {
+  height: 148px;
+
+  /* Fallback for browsers do NOT support vh unit */
+  /* min-height: 100%;  */
+  /* These two lines are counted as one :-) */
+  /* min-height: 100vh; */
+  
+  display: flex;
+  align-items: center;
+}

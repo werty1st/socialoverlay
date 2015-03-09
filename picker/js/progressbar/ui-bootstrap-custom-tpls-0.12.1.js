@@ -10,7 +10,7 @@ angular.module("ui.bootstrap.tpls", ["template/progressbar/bar.html","template/p
 angular.module('ui.bootstrap.progressbar', [])
 
 .constant('progressConfig', {
-  animate: true,
+  animate: false,
   max: 100
 })
 
@@ -37,6 +37,15 @@ angular.module('ui.bootstrap.progressbar', [])
 
         bar.$watch('value', function( value ) {
             bar.percent = +(100 * value / $scope.max).toFixed(2);
+            if (value  == $scope.max){
+                element.parent().removeClass('active');
+                element.parent().removeClass('progress-striped');
+                element.text('completed');
+            } else{
+                element.text('working');
+                element.parent().addClass('active');            
+                element.parent().addClass('progress-striped');            
+            }
         });
 
         bar.$on('$destroy', function() {
@@ -84,7 +93,7 @@ angular.module('ui.bootstrap.progressbar', [])
     return {
         restrict: 'EA',
         replace: true,
-        transclude: false, //kein span mit info bitte
+        transclude: true, //kein span mit info bitte
         controller: 'ProgressController',
         scope: {
             value: '=',
@@ -97,6 +106,7 @@ angular.module('ui.bootstrap.progressbar', [])
         }
     };
 });
+
 angular.module("template/progressbar/bar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/progressbar/bar.html",
     "<div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" \
@@ -114,6 +124,6 @@ angular.module("template/progressbar/progressbar.html", []).run(["$templateCache
     "<div class=\"progress\">\n" +
     "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" \
     aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" \
-    aria-valuetext=\"{{percent | number:0}}%\" ng-transclude></div>\n" +
+    aria-valuetext=\"{{percent | number:0}}%\" ></div>\n" +
     "</div>");
 }]);
