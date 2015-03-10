@@ -1,6 +1,7 @@
 angular.module("wrtyuitab", [] )
 .directive('showTab', function() {
         return {
+            templateUrl: "./js/tabs/tabs.html",
             link: function (scope, element, attrs) {
 
                 angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8"; .tab-content{ padding-top: 2em; } </style>');

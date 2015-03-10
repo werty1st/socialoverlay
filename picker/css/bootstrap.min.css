@@ -36,11 +36,12 @@ preview {
 .tab-pane{
   display: flex;
   align-items: center;
+  height: 112px;
+  overflow-y: hidden;
 }
 
 
 .vertical-center {
-  height: 148px;
 
   /* Fallback for browsers do NOT support vh unit */
   /* min-height: 100%;  */

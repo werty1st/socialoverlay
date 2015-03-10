@@ -9,134 +9,33 @@
 <body ng-controller="TweecodeController as tapp">
 
 	<script src="js/libs/angular.js"></script>
-	<!--
-		<script src="js/libs/angular-spinner.min.js"></script>
-		<script src="js/libs/spin.min.js"></script>
-		<script src="js/libs/holder.js"></script>
-	-->
 	<script src="js/libs/socket.io.js"></script>
-	<script src="js/libs/socket.js"></script>
 	<script src="js/tabs/tabs.js"></script>
 	<script src="js/progressbar/ui-bootstrap-custom-tpls-0.12.1.js"></script>
 	<script src="js/progressbar/progressbar.js"></script>
+	<script src="js/socket/socket.js"></script>
 	<script src="js/ngapp.js"></script>
+	<script src="js/config.js"></script>
   	<script src="http://cm2-prod-pre.zdf.de/studio/pickerResultInterface.js" type="text/javascript"></script>
 
 
 	<script>
-	
-	var default_code = 'PGJsb2NrcXVvdGUgY2xhc3M9InR3aXR0ZXItdHdlZXQiIGxhbmc9ImRlIj48cD5I/GJzY2hlciBXaWxsa29tbWVuc2dydd8gaW4gdW5zZXJlciBLYW50aW5lIGF1ZiBkZW0gTGVyY2hlbmJlcmcuIDxhIGhyZWY9Imh0dHA6Ly90LmNvL2FoUTFZTkNIWlIiPnBpYy50d2l0dGVyLmNvbS9haFExWU5DSFpSPC9hPjwvcD4mbWRhc2g7IFpERiAoQFpERikgPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9aREYvc3RhdHVzLzUxNjUzNDU2NDQyMTEzNjM4NCI+MjkuIFNlcHRlbWJlciAyMDE0PC9hPjwvYmxvY2txdW90ZT4NCjxzY3JpcHQgYXN5bmMgc3JjPSIvL3BsYXRmb3JtLnR3aXR0ZXIuY29tL3dpZGdldHMuanMiIGNoYXJzZXQ9InV0Zi04Ij48L3NjcmlwdD4NCg==';
-
+		var default_code = 'PGJsb2NrcXVvdGUgY2xhc3M9InR3aXR0ZXItdHdlZXQiIGxhbmc9ImRlIj48cD5I/GJzY2hlciBXaWxsa29tbWVuc2dydd8gaW4gdW5zZXJlciBLYW50aW5lIGF1ZiBkZW0gTGVyY2hlbmJlcmcuIDxhIGhyZWY9Imh0dHA6Ly90LmNvL2FoUTFZTkNIWlIiPnBpYy50d2l0dGVyLmNvbS9haFExWU5DSFpSPC9hPjwvcD4mbWRhc2g7IFpERiAoQFpERikgPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9aREYvc3RhdHVzLzUxNjUzNDU2NDQyMTEzNjM4NCI+MjkuIFNlcHRlbWJlciAyMDE0PC9hPjwvYmxvY2txdW90ZT4NCjxzY3JpcHQgYXN5bmMgc3JjPSIvL3BsYXRmb3JtLnR3aXR0ZXIuY29tL3dpZGdldHMuanMiIGNoYXJzZXQ9InV0Zi04Ij48L3NjcmlwdD4NCg==';
 	</script>
 
-	<history>
-	<!-- Gallery der letzten 10
-	Gallery der meist besuchten -->
-	</history>
+
 
 	<form name="embcodeForm" role="form"
 		  ng-controller="EmbeddcodeController as embcodeCtrl"
 		  ng-submit="embcodeForm.$valid && renderCode()"
 		  novalidate >
-		<!-- 
-		Version
-		<select ng-model="version"
-			ng-options="opt.label for opt in versionopt">
-		</select>
-		-->
 
+		<div show-tab ></div>
 
-		<div show-tab >
-		    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-		        <li class="active"><a href="" data-toggle="tab">Allgemein</a></li>
-		        <li ><a href="" data-toggle="tab">Größe</a></li>
-		        <li ><a href="" data-toggle="tab">Aktualisieren</a></li>
-		        <li ><a href="" data-toggle="tab">Mobil</a></li>
-		        <li ><a href="" data-toggle="tab">History</a></li>
-		    </ul>
-		    <div id="my-tab-content" class="tab-content vertical-center">
-		        <div class="tab-pane active">
-		            <p>
-						Überschreiben
-						<select ng-model="overwrite"
-							ng-options="opt.label for opt in overwriteopt">
-						</select> 
-						<br/>
-		            </p>
-		        </div>
-		        <div class="tab-pane">
-		            <p>
-						Größe
-						breite/auto
-						auto/höhe
-						breite/höhe
-						<select ng-model="screensize" ng-disabled="'true'"
-							ng-options="opt.label for opt in screensizeopt">
-						</select>
-						<br/>
-		            </p>
-		        </div>
-		        <div class="tab-pane">
-		            	<label for="autorefresh.enabled">aktivieren</label>
-						<input id="autorefresh.enabled" type="checkbox" ng-model="autorefresh.enabled" ng-disabled="'true'"/>
-						<br>
-
-						<table class="table">
-						<tr>
-							<td class="col-md-3">
-								<label for="autorefresh.freq" >Frequenz (pro Tag)</label></td>
-							<td>
-								<input
-									id="autorefresh.freq"
-									type="number"
-									ng-required="autorefresh.enabled"
-									ng-disabled="!autorefresh.enabled"
-									min="1"
-									max="12"
-									ng-model="autorefresh.freq"
-									style="width:50px"/>
-							</td>
-						</tr>
-						<tr>
-							<td class="col-md-3">
-								<label for="autorefresh.duration" >Laufzeit (in Wochen)</label>
-							</td>
-							<td>
-								<input
-									id="autorefresh.duration"
-									type="number"
-									ng-required="autorefresh.enabled"
-									ng-disabled="!autorefresh.enabled"
-									min="1"
-									max="8"
-									ng-model="autorefresh.duration"
-									style="width:50px"/>
-							</td>
-						</tr>
-						</table>						
-						
-
-						
-						
-
-		        </div>
-		        <div class="tab-pane">
-		            <p>unterschiedliche angaben für mobil</p>
-		        </div>
-		        <div class="tab-pane">
-		            <p>
-						History						
-		            </p>
-		        </div>		        
-		    </div>
-		</div>
 		<hr>
 
-		Hintergrundbild
-		<input id="bgimageurl" ng-model="bgimageurl" size="100" type="text" placeholder="http://www.zdf.de/ZDF/zdfportal/blob/.../data.png" onclick="select()">
 
-		<br>
-		<br>
+
 
 			<label for="twicode">Bitte geben sie hier den Embedd-Code ein</label>
 		<!-- 	<input type="text" ng-model="code" required class="form-control" id="twicode" 
