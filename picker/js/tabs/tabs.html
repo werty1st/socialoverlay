@@ -1,0 +1,106 @@
+		<!-- <div show-tab > im ziel einsetzen-->
+		<!-- </div> -->
+		    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+		        <li class="active"><a href="" data-toggle="tab">Allgemein</a></li>
+		        <li ><a href="" data-toggle="tab">Größe</a></li>
+		        <li ><a href="" data-toggle="tab">Aktualisieren</a></li>
+		        <li ><a href="" data-toggle="tab">Mobil</a></li>
+		        <li ><a href="" data-toggle="tab">History</a></li>
+		    </ul>
+		    <div id="my-tab-content" class="tab-content ">
+		        <div class="tab-pane active">
+		            <p>
+		            	<table>
+		            		<tr>
+		            			<td>
+		            				Überschreiben:
+		            			</td>
+		            			<td>
+									<select ng-model="overwrite"
+										ng-options="opt.label for opt in overwriteopt">
+									</select> 		            				
+		            			</td>
+		            		</tr>
+		            		<tr>
+		            			<td>
+		            				Hintergrundbild:
+		            			</td>
+		            			<td>
+									<input
+										id="bgimageurl"
+										ng-model="bgimageurl"
+										size="100"
+										type="text"
+										placeholder="http://www.zdf.de/ZDF/zdfportal/blob/.../data.png"
+										onclick="select()" >
+		            			</td>
+		            		</tr>		            		
+		            	</table>
+						<br/>
+		            </p>
+		        </div>
+		        <div class="tab-pane">
+		            <p>
+						Größe
+						breite/auto
+						auto/höhe
+						breite/höhe
+						<select ng-model="screensize" ng-disabled="'true'"
+							ng-options="opt.label for opt in screensizeopt">
+						</select>
+						<br/>
+		            </p>
+		        </div>
+		        <div class="tab-pane">
+		            	<label for="autorefresh.enabled">aktivieren</label>
+						<input id="autorefresh.enabled" type="checkbox" ng-model="autorefresh.enabled" ng-disabled="'true'"/>
+						<br>
+
+						<table class="table">
+						<tr>
+							<td class="col-md-3">
+								<label for="autorefresh.freq" >Frequenz (pro Tag)</label></td>
+							<td>
+								<input
+									id="autorefresh.freq"
+									type="number"
+									ng-required="autorefresh.enabled"
+									ng-disabled="!autorefresh.enabled"
+									min="1"
+									max="12"
+									ng-model="autorefresh.freq"
+									style="width:50px"/>
+							</td>
+						</tr>
+						<tr>
+							<td class="col-md-3">
+								<label for="autorefresh.duration" >Laufzeit (in Wochen)</label>
+							</td>
+							<td>
+								<input
+									id="autorefresh.duration"
+									type="number"
+									ng-required="autorefresh.enabled"
+									ng-disabled="!autorefresh.enabled"
+									min="1"
+									max="8"
+									ng-model="autorefresh.duration"
+									style="width:50px"/>
+							</td>
+						</tr>
+						</table>						
+		        </div>
+		        <div class="tab-pane">
+		            <p>
+		            	unterschiedliche angaben für mobil
+		            </p>
+		        </div>
+		        <div class="tab-pane">
+		            <p>
+						<history>
+							<!-- Gallery der letzten 10
+							Gallery der meist besuchten -->
+						</history>						
+		            </p>
+		        </div>		        
+		    </div>
