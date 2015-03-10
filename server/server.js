@@ -43,7 +43,7 @@ function socketfunction (socket) {
     applogic.on("applogic.CodeComplete", function(id){
         console.log("app.applogic.CodeComplete");
         socket.emit('progress',{msg:"finished"});
-        socket.emit('CodeComplete', id);
+        socket.emit('applogic.CodeComplete', id);
     });
 
 
@@ -76,10 +76,6 @@ function socketfunction (socket) {
     socket.on('disconnect',function(){
         console.log('Server has disconnected');
         console.log('Todo handle running rendering');
-    });
-
-    io.sockets.on('connection', function (socket) {
-        //console.log('A new user connected!');
     });
 
 };

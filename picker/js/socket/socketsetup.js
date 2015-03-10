@@ -1,5 +1,4 @@
-angular.module( "tapp" )
-	.factory('socket', function ($rootScope) {
+angular.module( "socketsetup", [] ).factory('socket', function ($rootScope) {
 		//http://www.html5rocks.com/en/tutorials/frameworks/angular-websockets/?redirect_from_locale=de
 		var socket = io.connect(location.href, {path: "/tr/socket.io"});
 		return {
