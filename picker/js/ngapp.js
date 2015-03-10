@@ -13,6 +13,25 @@ angular.module("tapp",['wrtyuitab', 'wrtyuiprogressbar', 'ui.bootstrap', 'socket
 
 	});
 
+	//eigenes modul für einstellungen in den tabs
+	/*
+		$scope.autorefresh = {freq:1,duration:1};
+		
+
+		$scope.overwriteopt = [{label:"Ja", value:true},{label:"Nein", value:false}];
+		$scope.overwrite = $scope.overwriteopt[1];
+
+		$scope.screensizeopt = [{label:"klein", value:1},{label:"groß", value:2}];
+		$scope.screensize = $scope.screensizeopt[0];
+
+		$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
+		$scope.version = $scope.versionopt[1];
+
+		usw...	
+
+		
+	*/
+
 	//form
 	angular.module("tapp").controller("FormController", function($http, socket, $scope, db_host, $compile){
 		$scope.code = window.unescape(atob(default_code));
