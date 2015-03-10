@@ -1,7 +1,11 @@
 #_{{hash}}.zdfembed {
     text-align: center;
-    height: {{imagedimensions.height}}px;
+    height: 100%;
+    width: 100%;
+   /*
+    height: {{imagedimensions.height}}px;	
     width: {{imagedimensions.width}}px;     
+   */
 }  
 
 

@@ -56,7 +56,7 @@ var gm = require('gm');
 var webdriver = require('selenium-webdriver'),
 	By = webdriver.By,
     until = webdriver.until,
-    firefox = require('selenium-webdriver/firefox');
+    firefox = require('selenium-webdriver/chrome');
 
 var runHeadless = require('./headless');
 
@@ -119,6 +119,7 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 		
 				return driver.findElement(By.id("maincontainer")).then(function(ele) {
 					ele.getLocation().then(function(point){
+						console.log("image dim:", point);
 						imagedimensions.x = point.x;
 						imagedimensions.y = point.y;
 
@@ -156,7 +157,7 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 			// 			captureScreen(imagedimensions, posttarget, onCompleted);
 			// 		})
 			// 	});			
-		},4000);	
+		},5000);	
 }
 
 
@@ -184,7 +185,7 @@ function renderRequestTask(driver, url, posttarget, onCompleted){
 
 	pagestate.then(function(readyState){
 		console.log("pagestate",readyState);
-		if (readyState === "complete"){
+		if (readyState === "complete" || readyState === "interactive"){
 			pageloaded(driver, posttarget, timeout1, onCompleted);
 		}
 	});
@@ -194,6 +195,7 @@ var options = {};
 var headless = {};
 var driver = {};
 var rw = {};
+process.env.PATH = process.env.PATH+":"+"/opt/";
 
 	headless.klein = new runHeadless({ display: {width: 350, height: 350, depth: 24}},
 	function(err, childProcess, servernum) {
@@ -211,7 +213,7 @@ var rw = {};
 	});
 
 
-	headless.gross = runHeadless({ display: {width: 1600, height: 1200, depth: 24}},
+	headless.gross = runHeadless({ display: {width: 900, height: 650, depth: 24}},
 	function(err, childProcess, servernum){
 		//xvfb ready
 		if(!err){
@@ -232,18 +234,27 @@ module.exports.renderUrl = function renderUrl(url, posttarget, screensize){
 
 	if(screensize==1){
 		//klein
-		rw.klein.add(function(onCompleted){
-			var _url = url;
-			var _posttarget = posttarget;
-			renderRequestTask(driver.klein, _url, _posttarget, onCompleted);		
+
+		driver.klein.manage().window().setSize(360, 550).then(function (){
+			console.log("windows set size complete");	
+	
+			rw.klein.add(function(onCompleted){
+				var _url = url;
+				var _posttarget = posttarget;
+				renderRequestTask(driver.klein, _url, _posttarget, onCompleted);		
+			});
+
 		});
+
 	} else if (screensize==2){
 		//groß
-
-		rw.gross.add(function(onCompleted){
-			var _url = url;
-			var _posttarget = posttarget;
-			renderRequestTask(driver.gross, _url, _posttarget, onCompleted);		
+		driver.gross.manage().window().setSize(1600, 1200).then(function (){
+			console.log("windows set size complete");	
+			rw.gross.add(function(onCompleted){
+				var _url = url;
+				var _posttarget = posttarget;
+				renderRequestTask(driver.gross, _url, _posttarget, onCompleted);		
+			});
 		});		
 	}
 
