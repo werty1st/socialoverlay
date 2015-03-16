@@ -1,4 +1,4 @@
-<html ng-app="tapp">
+<html ng-app="tapp" ng-controller="appController">
 <head>
   <meta charset="utf8" />
   <meta author="ronny adams" />
@@ -6,80 +6,29 @@
   <title>Tweetrenderer</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-<body >
-
+<body class="app1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   	<script src="http://cm2-prod-pre.zdf.de/studio/pickerResultInterface.js" type="text/javascript"></script>
 	<script src="js/libs/angular.js"></script>
+	<script src="js/libs/angular-route.min.js"></script>
 	<script src="js/libs/socket.io.js"></script>
-	<script src="js/progressbar/ui-bootstrap-custom-tpls-0.12.1.js"></script>
+	<script src="js/libs/ui-bootstrap-tpls-0.12.1.min.js"></script>
 	<script src="js/progressbar/progressbar.js"></script>
 	<script src="js/tabs/tabs.js"></script>
 	<script src="js/socket/socketsetup.js"></script>
 	<script src="js/pickerinterface/pickerinterface.js"></script>
 	<script src="js/ngapp.js"></script>
-
-<!-- 
- -->
-
-	<script>
-		var default_code = 'PGJsb2NrcXVvdGUgY2xhc3M9InR3aXR0ZXItdHdlZXQiIGxhbmc9ImRlIj48cD5I/GJzY2hlciBXaWxsa29tbWVuc2dydd8gaW4gdW5zZXJlciBLYW50aW5lIGF1ZiBkZW0gTGVyY2hlbmJlcmcuIDxhIGhyZWY9Imh0dHA6Ly90LmNvL2FoUTFZTkNIWlIiPnBpYy50d2l0dGVyLmNvbS9haFExWU5DSFpSPC9hPjwvcD4mbWRhc2g7IFpERiAoQFpERikgPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9aREYvc3RhdHVzLzUxNjUzNDU2NDQyMTEzNjM4NCI+MjkuIFNlcHRlbWJlciAyMDE0PC9hPjwvYmxvY2txdW90ZT4NCjxzY3JpcHQgYXN5bmMgc3JjPSIvL3BsYXRmb3JtLnR3aXR0ZXIuY29tL3dpZGdldHMuanMiIGNoYXJzZXQ9InV0Zi04Ij48L3NjcmlwdD4NCg==';
-	</script>
+	<script src="js/main/main.js"></script>
+	<script src="js/maintance/maint.js"></script>
 
 
-
-	<form name="embcodeForm" role="form"
-		  ng-controller="FormController as formCtrl"
-		  ng-submit="embcodeForm.$valid && renderCode()"
-		  novalidate >
-
-		<div show-tab ></div>
-		<hr>
-
-		<label for="twicode">Bitte geben sie hier den Embedd-Code ein</label>
-	<!-- 	<input type="text" ng-model="code" required class="form-control" id="twicode" 
-			placeholder='<blockquote class="twitter-tweet" lang="de"><p>...'/> -->
-		<textarea ng-model="code" required class="form-control" id="twicode" 
-			placeholder='<blockquote class="twitter-tweet" lang="de"><p>...'></textarea>
-
-		<br>
-		<input type="submit" ng-class="{'btn-primary': embcodeForm.$valid, 'btn-default': !embcodeForm.$valid}" class="btn btn-group-justified" value="Code umwandeln"/>
-		
-		<!-- 
-		<input name="breite" value="" type="text" list="breite_source">
-		<datalist id="breite_source">
-			<option value="300">300</option>
-			<option value="400">400</option>
-			<option value="500">500</option>
-			<option value="600">600</option>
-		</datalist>
-		-->
+	<a ng-href="{{location}}">
+		<span class="glyphicon glyphicon-lock lock" aria-hidden="true"></span>		
+	</a>
 
 
-		<!-- <button ng-click="tapp.power()" class="btn btn-success btn-group-justified">empower me</button> -->
 
-		<br>
-		<result my-progress="true" progress-forward="progressProgress" finish="progressFinish" setup="progressSetup"></result>
-
-
-		<br>
-		<div class="text-center">
-			<lable for="linkurl">HTML Fragment URL:</lable>
-			<input id="linkurl" ng-model="playoutUrl" size="100" type="text" placeholder="http://....."/ onclick="select()">
-		</div>
-		
-
-	<!-- 	<h1 class="text-center">
-			Test Embedcode <button>reset</button>
-		</h1>
-		<div id="iframe_preview">
-			<iframe id="iframe_output" style="display: block;margin: 0 auto;min-width: 450;height: 500px;">
-			</iframe>
-		</div> -->
-		<br>
-		<div picker-result-interface picker-data="pickerData"></div>
-
-		<br>
-	</form>
+	<div ng-view></div>
 
 
 </body>

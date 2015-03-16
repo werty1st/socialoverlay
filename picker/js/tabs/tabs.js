@@ -1,4 +1,4 @@
-angular.module("wrtyuitab", [] )
+angular.module("wrtyuitab", ['ui.bootstrap.buttons'] )
 .directive('showTab', function() {
         return {
             templateUrl: "./js/tabs/tabs.html",
@@ -7,8 +7,8 @@ angular.module("wrtyuitab", [] )
                 angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8"; .tab-content{ padding-top: 2em; } </style>');
 
 
-                var lis = element.find("li");
-                var content_divs = element.find("ul").next().find("div");
+                var lis = element.find("li");                
+                var content_divs = element.find("ul").next().children();                
 
                 angular.forEach(lis, function(li, key) {
                     li.onclick = function(){

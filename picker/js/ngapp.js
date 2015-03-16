@@ -1,4 +1,10 @@
-angular.module("tapp",['wrtyuitab', 'wrtyuiprogressbar', 'ui.bootstrap', 'socketsetup', 'pickerinterface'])
+angular.module("tapp",[ 'ngRoute',
+						'wrtyuitab',
+						'wrtyuiprogressbar',
+						'ui.bootstrap',
+						'socketsetup',
+						'pickerinterface'
+					  ])
 	.config( function($provide, $compileProvider, $filterProvider){
 
 		//switch hostnames
@@ -11,7 +17,27 @@ angular.module("tapp",['wrtyuitab', 'wrtyuiprogressbar', 'ui.bootstrap', 'socket
 			alert("Hostname unsupported");
 		}
 
-	});
+		$provide.value('default_code', 'PGJsb2NrcXVvdGUgY2xhc3M9InR3aXR0ZXItdHdlZXQiIGxhbmc9ImRlIj48cD5I/GJzY2hlciBXaWxsa29tbWVuc2dydd8gaW4gdW5zZXJlciBLYW50aW5lIGF1ZiBkZW0gTGVyY2hlbmJlcmcuIDxhIGhyZWY9Imh0dHA6Ly90LmNvL2FoUTFZTkNIWlIiPnBpYy50d2l0dGVyLmNvbS9haFExWU5DSFpSPC9hPjwvcD4mbWRhc2g7IFpERiAoQFpERikgPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9aREYvc3RhdHVzLzUxNjUzNDU2NDQyMTEzNjM4NCI+MjkuIFNlcHRlbWJlciAyMDE0PC9hPjwvYmxvY2txdW90ZT4NCjxzY3JpcHQgYXN5bmMgc3JjPSIvL3BsYXRmb3JtLnR3aXR0ZXIuY29tL3dpZGdldHMuanMiIGNoYXJzZXQ9InV0Zi04Ij48L3NjcmlwdD4NCg==');			
+
+	})
+	.config(['$routeProvider',
+		function($routeProvider) {
+			$routeProvider.
+				when('/', {
+					templateUrl: 'js/main/main.html',
+					controller: 'MainController'
+				}).
+				when('/maint', {
+					templateUrl: 'js/maintance/maint.html',
+					controller: 'MaintController'
+				}).
+				otherwise({
+					redirectTo: '/'
+				});
+	}])
+	.controller('appController', function($scope){
+		$scope.location = "#maint";
+	})
 
 	//eigenes modul für einstellungen in den tabs
 	/*
@@ -29,110 +55,10 @@ angular.module("tapp",['wrtyuitab', 'wrtyuiprogressbar', 'ui.bootstrap', 'socket
 
 		usw...	
 
-		
+
 	*/
 
-	//form
-	angular.module("tapp").controller("FormController", function($http, socket, $scope, db_host, $compile){
-		$scope.code = window.unescape(atob(default_code));
-		
-		$scope.autorefresh = {freq:1,duration:1};
-		
-
-		$scope.overwriteopt = [{label:"Ja", value:true},{label:"Nein", value:false}];
-		$scope.overwrite = $scope.overwriteopt[1];
-
-		$scope.screensizeopt = [{label:"klein", value:1},{label:"groß", value:2}];
-		$scope.screensize = $scope.screensizeopt[0];
-
-		$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
-		$scope.version = $scope.versionopt[1];
-
-
-
-		$scope.durationopt = [
-								{label:"", value:1},
-								{label:"v2", value:2},
-								{label:"v2", value:2},
-								{label:"v2", value:2},
-							 ];
-		$scope.duration = $scope.durationopt[1];
-
-
-
-		var self = this;
-
-
-		socket.on("progress", function(data){
-			
-			if (data.msg == "start"){
-				console.log("start",data.max); // mal 3 plus start und ende event
-
-				$scope.progressSetup(data.max*2+2);
-				$scope.progressProgress();
-			} else if (data.msg == "speichern") {
-				console.log("speichern",data.name);
-				$scope.progressProgress();
-			} else if (data.msg == "gepspeichert") {
-				console.log("gepspeichert",data.name);
-				$scope.progressProgress();
-			} else if (data.msg == "finished") {
-				console.log("finished");
-				//progress 100%
-				$scope.progressSetup(10);
-				$scope.progressFinish();
-			}
-		})
-
-		socket.on("applogic.error", function(err){
-			console.log("Error",err);
-			alert("Starten sie einen neuen Versuch.");
-		})
-
-
-		socket.on('applogic.CodeComplete', function (id) {
-		    console.log("Generation complete");
-
-
-		    //todo auf event umschreiben
-		    var previewO = {};
-		    	//previewO.imageurl = "/c/twr/"+ id +"/2l";
-		    	previewO.htmlcode = "/c/twr/"+ id +"/embed.html";
-		    	previewO.xmlcode = "/c/twr/"+ id +"/embed.xml";
-
-		    //$scope.image = previewO.imageurl+"?"+ new Date().getTime();
-
-		    //selfPower
-   			$scope.pickerData = {};
-   			$scope.pickerData.playoutUrl = location.protocol + "//" + db_host + previewO.htmlcode;
-   			$scope.pickerData.playoutXmlUrl = location.protocol + "//" + db_host + previewO.xmlcode;
-
-			//$scope.tapp.playoutUrl = location.origin + previewO.htmlcode;
-			$http.get(previewO.htmlcode)
-			.success( function(data, status, headers, config) {
-				//var localS = document.getElementById('codetextarea').value = data;
-            });
-
-		});		
-
-
-
-		$scope.renderCode = function renderCode(){
-			//absenden
-			socket.emit('socket.renderImageRequest', {
-				code: $scope.code,
-				hostname: location.origin,
-				overwrite: $scope.overwrite.value,
-				screensize: $scope.screensize.value,
-				version: $scope.version.value,
-				bgimageurl: $scope.bgimageurl
-			});			
-		};
-
-
-
-
-	});
+	
 	
 
 

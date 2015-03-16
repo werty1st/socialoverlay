@@ -1,0 +1,24 @@
+<h1>Liste aller Elemente</h1>
+
+
+
+<form>
+<table>
+	<tr>
+	<td>Login</td>
+	<td><input name="name" type="text" ng-model="user.name"></td>
+	</tr>
+	<tr>
+	<td>Passwort</td>
+	<td><input name="password" type="password" ng-model="user.password"></td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td><input ng-click="logout()" type="button" value="logout">
+		<input ng-click="login()" type="button" value="login"></td>
+	</tr>	
+</table>
+</form>
+
+<div>form = {{user | json}}</div>

@@ -13,15 +13,16 @@
 		            	<table>
 		            		<tr>
 		            			<td>
-		            				Überschreiben:
+		            				<h4>Überschreiben</h4>
 		            			</td>
 		            			<td>
-									<select ng-model="overwrite"
-										ng-options="opt.label for opt in overwriteopt">
-									</select> 		            				
+								    <div class="btn-group">
+								        <label class="btn btn-primary" ng-model="overwrite" btn-radio="true" >Ja</label>
+								        <label class="btn btn-primary" ng-model="overwrite" btn-radio="false" >Nein</label>
+								    </div>										       								     				
 		            			</td>
 		            		</tr>
-		            		<tr>
+		            		<!-- <tr>
 		            			<td>
 		            				Hintergrundbild:
 		            			</td>
@@ -34,19 +35,18 @@
 										placeholder="http://www.zdf.de/ZDF/zdfportal/blob/.../data.png"
 										onclick="select()" >
 		            			</td>
-		            		</tr>		            		
+		            		</tr>		    -->         		
 		            	</table>
 						<br/>
 		            </p>
 		        </div>
 		        <div class="tab-pane">
 		            <p>
-						Größe
-						breite/auto
-						auto/höhe
-						breite/höhe
-						<select ng-model="screensize" ng-disabled="'true'"
-							ng-options="opt.label for opt in screensizeopt">
+						<h4>Breite</h4>
+						<!-- ng-options="opt.label for opt in screensizeopt" -->
+						<select multiple ng-model="screensize" ng-disabled="false"
+							ng-options="opt.value as opt.label for opt in screensizeopt"
+							>
 						</select>
 						<br/>
 		            </p>

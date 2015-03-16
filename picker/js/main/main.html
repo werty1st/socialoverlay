@@ -1,0 +1,44 @@
+<form name="embcodeForm" role="form"
+	  ng-controller="MainController"
+	  ng-submit="embcodeForm.$valid && renderCode()"
+	  novalidate >
+
+	<div show-tab ></div>
+
+	<hr>
+
+	<label for="twicode">Bitte geben sie hier den Embedd-Code ein</label>
+<!-- 	<input type="text" ng-model="code" required class="form-control" id="twicode" 
+		placeholder='<blockquote class="twitter-tweet" lang="de"><p>...'/> -->
+	<textarea ng-model="code" required class="form-control" id="twicode" 
+		placeholder='<blockquote class="twitter-tweet" lang="de"><p>...'></textarea>
+
+	<br>
+	<input type="submit" ng-class="{'btn-primary': embcodeForm.$valid, 'btn-default': !embcodeForm.$valid}" class="btn btn-group-justified" value="Code umwandeln"/>
+
+
+	<!-- <button ng-click="tapp.power()" class="btn btn-success btn-group-justified">empower me</button> -->
+
+	<br>
+	<result my-progress="true" progress-forward="progressProgress" finish="progressFinish" setup="progressSetup"></result>
+
+
+	<br>
+	<div class="text-center">
+		<lable for="linkurl">HTML Fragment URL:</lable>
+		<input id="linkurl" ng-model="playoutUrl" size="100" type="text" placeholder="http://....."/ onclick="select()">
+	</div>
+	
+
+<!-- 	<h1 class="text-center">
+		Test Embedcode <button>reset</button>
+	</h1>
+	<div id="iframe_preview">
+		<iframe id="iframe_output" style="display: block;margin: 0 auto;min-width: 450;height: 500px;">
+		</iframe>
+	</div> -->
+	<br>
+	<div picker-result-interface picker-data="pickerData"></div>
+
+	<br>
+</form>
