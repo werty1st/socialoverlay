@@ -5,8 +5,8 @@
  * Version: 0.12.1 - 2015-02-20
  * License: MIT
  */
-angular.module("ui.bootstrap", ["ui.bootstrap.tpls","ui.bootstrap.progressbar"]);
-angular.module("ui.bootstrap.tpls", ["template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html"]);
+//angular.module("ui.bootstrap", ["ui.bootstrap.tpls","ui.bootstrap.progressbar"]);
+//angular.module("ui.bootstrap.tpls", ["template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html"]);
 angular.module('ui.bootstrap.progressbar', [])
 
 .constant('progressConfig', {

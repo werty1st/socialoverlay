@@ -1,15 +1,13 @@
 //main
-angular.module("tapp").controller("MainController", function($http, socket, $scope, db_host, $compile, default_code){
+angular.module("tapp")
+.controller("MainController", function($http, socket, $rootScope, $scope, db_host, $compile, default_code){
 	$scope.code = window.unescape(atob(default_code));
 	$scope.$parent.location = "#/maint";
 
 
 	$scope.autorefresh = {freq:1,duration:1};
-	
-
 	//$scope.overwriteopt = [{label:"Ja", value:true},{label:"Nein", value:false}];
 	$scope.overwrite = false;//$scope.overwriteopt[1].value;
-
 	//min-width
 	$scope.screensizeopt = [{
 								label:"320px",
@@ -25,16 +23,8 @@ angular.module("tapp").controller("MainController", function($http, socket, $sco
 								value:4
 							}];
 	$scope.screensize = [1,2,3,4];
-
 	$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 	$scope.version = $scope.versionopt[1];
-
-
-	
-	// $scope.$watch('overwrite', function(newValue, oldValue) {
-	//   console.log($scope.overwrite);
-	// });
-
 	$scope.durationopt = [
 							{label:"", value:1},
 							{label:"v2", value:2},
@@ -49,7 +39,7 @@ angular.module("tapp").controller("MainController", function($http, socket, $sco
 
 
 	socket.on("progress", function(data){
-		
+
 		if (data.msg == "start"){
 			console.log("start",data.max); // mal 3 plus start und ende event
 
@@ -107,7 +97,7 @@ angular.module("tapp").controller("MainController", function($http, socket, $sco
 		socket.emit('socket.renderImageRequest', {
 			code: $scope.code,
 			hostname: location.origin,
-			overwrite: $scope.overwrite.value,
+			overwrite: $scope.overwrite,
 			screensize: $scope.screensize.value,
 			version: $scope.version.value,
 			bgimageurl: $scope.bgimageurl

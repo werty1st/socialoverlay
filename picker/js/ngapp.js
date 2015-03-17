@@ -3,9 +3,10 @@ angular.module("tapp",[ 'ngRoute',
 						'wrtyuiprogressbar',
 						'ui.bootstrap',
 						'socketsetup',
-						'pickerinterface'
+						'pickerinterface',
+						'ngCookies'			
 					  ])
-	.config( function($provide, $compileProvider, $filterProvider){
+	.config( function($provide){
 
 		//switch hostnames
 		if ("wmaiz-v-sofa02.dbc.zdf.de" == location.hostname) {
@@ -35,9 +36,83 @@ angular.module("tapp",[ 'ngRoute',
 					redirectTo: '/'
 				});
 	}])
+	.config(["$cookiesProvider", function($cookiesProvider) {
+		
+	}])
 	.controller('appController', function($scope){
 		$scope.location = "#maint";
 	})
+	.service('couchLoginService', function($http){
+		var user = true;
+		var self = this;
+
+		function userState(data){
+			if(data.userCtx && data.userCtx.name){
+				user = data.userCtx;
+			} else{
+				user = false;
+			}		
+		}
+
+		this.login = function login(loginname, loginpassword, cb){
+			$http({
+				method: 'POST',
+				withCredentials: true,
+				url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/_session',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function(obj) {
+					var str = [];
+					for(var p in obj)
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						return str.join("&");
+					},
+					data: {name: loginname, password: loginpassword}
+				}).success(function (data) {
+					self.status(cb);
+				}).error(function() {
+				    userState(data);
+				    cb(user);
+				});
+		}
+		this.logout = function logout(cb){
+			$http({
+				method: 'DELETE',
+				withCredentials: true,	
+				url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/_session',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+				}).success(function (data) {
+					userState(data);
+					cb(user);
+				}).error(function() {
+				    userState(data);
+				    cb(user);
+				});
+		}
+		
+		this.status = function status(cb){
+			$http({
+				method: 'GET',
+				withCredentials: true,
+				url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/_session',
+				}).success(function (data) {
+					userState(data);
+					cb(user);
+				}).error(function() {
+				    userState(data);
+				    cb(user);
+				});
+		}
+
+	})
+	.filter('bytes', function() {
+	return function(bytes, precision) {
+		if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
+		if (typeof precision === 'undefined') precision = 1;
+		var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
+			number = Math.floor(Math.log(bytes) / Math.log(1024));
+		return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) +  ' ' + units[number];
+	}
+});
 
 	//eigenes modul für einstellungen in den tabs
 	/*

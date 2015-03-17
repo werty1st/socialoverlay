@@ -1,46 +1,79 @@
-angular.module("tapp").controller("MaintController", function($http, $scope){
-	console.log("maint init");
-	$scope.$parent.location = "#/";
+angular.module("tapp")
+	.controller("MaintController", ['$http', '$scope', '$cookies', '$cookieStore', 'couchLoginService',
+		function($http, $scope, $cookies, $cookieStore, $cls){
+			console.log("maint init");
+			$scope.$parent.location = "#/";
+			
+			$scope.user = true;
+			$scope.couchdb = {};
 
-	/*
-> curl -vX PUT $HOST/mydatabase --cookie AuthSession=YW5uYTo0QUIzOTdFQjrC4ipN-D-53hw1sJepVzcVxnriEw -H "X-CouchDB-WWW-Authenticate: Cookie" -H "Content-Type: application/x-www-form-urlencoded"
-{"ok":true}
-	*/
+			/*
+		> curl -vX PUT $HOST/mydatabase --cookie AuthSession=YW5uYTo0QUIzOTdFQjrC4ipN-D-53hw1sJepVzcVxnriEw -H "X-CouchDB-WWW-Authenticate: Cookie" -H "Content-Type: application/x-www-form-urlencoded"
+		{"ok":true}
+			*/
 
-	$scope.login = function login(){
+			function getUser(user){
+				$scope.user = user;		
+				$scope.loginname = "";
+				$scope.loginpassword = "";							
+			}
 
-		console.log("login");
+			$scope.login = function () {
+				$cls.login($scope.loginname, $scope.loginpassword, getUser);
+			}
 
-		$http({
-			method: 'POST',
-			withCredentials: true,
-			url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/_session',
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			transformRequest: function(obj) {
-				var str = [];
-				for(var p in obj)
-					str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-					return str.join("&");
-				},
-				data: {name: $scope.user.name, password: $scope.user.password}
-			}).success(function (data, status, header, config) {
-				console.log("authorized");//,data, status, header, config);
+			$scope.logout = function () {
+				$cls.logout(getUser);
+			}
 
-			});
-	}
+			$scope.status = function () {
+				$cls.status(getUser);
+			}
+
+			$scope.status();
 
 
-	$scope.logout = function logout(){
 
-		console.log("login");
+			//alle //veraltet //live mit refresh oder ohne
 
-		$http({
-			method: 'DELETE',
-			url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/_session',
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-			}).success(function (data, status, header, config) {
-				console.log("logout");
-			});
-	}
+			$scope.remove = function remove(id, rev, index) {
+				$http({
+					method: 'DELETE',
+					withCredentials: true,
+					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/'+id+'?rev='+rev
+					}).success(function (data) {
+						$scope.couchdb.all.splice(index,1);
+						console.log("data",data)
+					}).error(function() {						
+					});
 
-});
+			}
+
+			$scope.imageFilter = function imageFilter(obj) {
+			    var wordsToFilter = ['image/png'];
+			    for (var i = 0; i < wordsToFilter.length; i++) {
+			        if (obj.content_type.indexOf(wordsToFilter[i]) !== -1) {
+			            return true;
+			        }
+			    }
+			    return false;
+			};
+
+			//http://bazalt-cms.com/ng-table/example/10
+
+			$scope.getAll = function getAll(){
+
+				$http({
+					method: 'GET',
+					withCredentials: true,
+					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_list/list_all/all',
+					}).success(function (data) {
+						$scope.couchdb.all = data;
+						console.log("data",data)
+					}).error(function() {
+						$scope.couchdb.all = null;
+					});
+
+			}
+
+	}]);

@@ -1,24 +1,45 @@
-<h1>Liste aller Elemente</h1>
+<h1>Wartungsfunktionen</h1>
+<input class="admin logout" ng-click="logout()" ng-show="user" type="button" value="{{ user.name }} logout">
 
 
-
-<form>
-<table>
-	<tr>
-	<td>Login</td>
-	<td><input name="name" type="text" ng-model="user.name"></td>
-	</tr>
-	<tr>
-	<td>Passwort</td>
-	<td><input name="password" type="password" ng-model="user.password"></td>
-	</tr>
-	<tr>
-		<td>
-		</td>
-		<td><input ng-click="logout()" type="button" value="logout">
-		<input ng-click="login()" type="button" value="login"></td>
-	</tr>	
-</table>
+<!-- <div>user = {{user | json}}</div> -->
+<form ng-submit="login()">
+	<table ng-hide="user">
+		<tr>
+		<td>Login</td>
+		<td><input name="name" type="text" ng-model="loginname"></td>
+		</tr>
+		<tr>
+		<td>Passwort</td>
+		<td><input name="password" type="password" ng-model="loginpassword"></td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+				<input ng-click="login()" ng-hide="user" type="submit" value="login">		
+			</td>
+		</tr>	
+	</table>
 </form>
 
-<div>form = {{user | json}}</div>
+
+<div ng-show="user" >
+	<button type="button" class="btn btn-default navbar-btn" ng-click="getAll()">All</button>
+
+
+	<ul ng-repeat="item in couchdb.all">
+		<li > {{item._id}} <a href="" ng-click="remove(item._id,item._rev,$index)">X</a>
+			<ul ng-repeat="att in item.attachments | filter:imageFilter ">
+				<li>
+					{{att.name}} - {{att.length | bytes}}
+					<div class="hover_img">
+					     <a href="#">Show Image<span>
+					     <img ng-src="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/{{item._id}}/{{att.name}}"  alt="image" width="250" /></span></a>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+</div>

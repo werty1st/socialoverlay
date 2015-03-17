@@ -1,5 +1,4 @@
 <form name="embcodeForm" role="form"
-	  ng-controller="MainController"
 	  ng-submit="embcodeForm.$valid && renderCode()"
 	  novalidate >
 
@@ -20,7 +19,10 @@
 	<!-- <button ng-click="tapp.power()" class="btn btn-success btn-group-justified">empower me</button> -->
 
 	<br>
-	<result my-progress="true" progress-forward="progressProgress" finish="progressFinish" setup="progressSetup"></result>
+	<result my-progress="true"
+			progress-forward="progressProgress"
+			finish="progressFinish"
+			setup="progressSetup"></result>
 
 
 	<br>

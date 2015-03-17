@@ -59,7 +59,9 @@ function Datastore(config)
 
 		db.get(Embeddcode.hash, function(err, doc)
 		{
-			//console.log(doc); 
+
+			// console.log(doc);
+			// process.exit();
 			if (!err && !RenderRequest.overwrite)
 			{
 				self.doc = doc;
@@ -68,10 +70,43 @@ function Datastore(config)
 				//self.emit("datastore.newDocCreated");
 			} else
 			{
-				console.log("overwrite by request");
-				self.doc.id = Embeddcode.hash;
-				delete self.doc.rev;
-				self.emit("datastore.newDocCreated");
+				//doc=undefined OR rev!=null
+				console.log("not found OR overwrite by request");		
+
+				var newdoc = {};
+				newdoc.type = "post";
+				newdoc.version = "101";
+				newdoc.dateCreated = new Date();
+
+				if(!doc){
+
+					db.save(Embeddcode.hash, newdoc, function (err, res) {
+					  if (err) {
+					    // Handle error
+					  } else {
+					    // Handle success
+					    self.doc = res;
+						console.log("new doc created",res);
+						self.emit("datastore.newDocCreated");
+					  }
+					});							
+
+				} else {
+
+					db.merge(Embeddcode.hash, newdoc, function (err, res) {
+					  if (err) {
+					    // Handle error
+					  } else {
+					    // Handle success
+					    self.doc = res;
+						console.log("doc updated",res);
+						self.emit("datastore.newDocCreated");
+					  }
+					});					
+				}
+
+
+
 			}
 
 		});
