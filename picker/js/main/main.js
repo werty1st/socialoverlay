@@ -5,33 +5,33 @@ angular.module("tapp")
 	$scope.$parent.location = "#/maint";
 
 
-	$scope.autorefresh = {freq:1,duration:1};
-	//$scope.overwriteopt = [{label:"Ja", value:true},{label:"Nein", value:false}];
-	$scope.overwrite = false;//$scope.overwriteopt[1].value;
-	//min-width
+	$scope.autorefresh = {freq:12,duration:1};
+	$scope.autorefresh.enabled = true;
+	
+	$scope.overwrite = true;
+	
 	$scope.screensizeopt = [{
+								label:"200px",
+								value:200
+							},{
 								label:"320px",
-								value:1
+								value:320
 							},{
 								label:"768px",
-								value:2
+								value:768
 							},{
 								label:"1224px",
-								value:3
+								value:1224
 							},{
 								label:"1824px",
-								value:4
+								value:1824
 							}];
-	$scope.screensize = [1,2,3,4];
+	$scope.screensize = [320,768];
 	$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 	$scope.version = $scope.versionopt[1];
-	$scope.durationopt = [
-							{label:"", value:1},
-							{label:"v2", value:2},
-							{label:"v2", value:2},
-							{label:"v2", value:2},
-						 ];
-	$scope.duration = $scope.durationopt[1];
+
+	$scope.mobileurl = "http://m.zdf.de";
+	$scope.slug = "test" + (new Date()).getMilliseconds();
 
 
 
@@ -98,9 +98,12 @@ angular.module("tapp")
 			code: $scope.code,
 			hostname: location.origin,
 			overwrite: $scope.overwrite,
-			screensize: $scope.screensize.value,
+			screensize: $scope.screensize,
 			version: $scope.version.value,
-			bgimageurl: $scope.bgimageurl
+			autorefresh: $scope.autorefresh,
+			bgimageurl: $scope.bgimageurl,
+			mobileurl: $scope.mobileurl,
+			slug: $scope.slug
 		});			
 	};
 

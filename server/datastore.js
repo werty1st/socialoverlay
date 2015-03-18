@@ -17,7 +17,7 @@ function Datastore(config)
 	if (typeof config !== "object") config = {};
 
 	config.couchserver = config.couchserver || "http://localhost";
-	config.version = config.version || "v2";	//umbauen: nicht am anfang sondern per request
+	config.version = config.version || "v2";
 
 	var self = this;
 	this.doc = {};
@@ -57,6 +57,26 @@ function Datastore(config)
 		RenderRequest = _RenderRequest;
 		Embeddcode 	  = _Embeddcode;		
 
+        /*
+        //RenderRequest
+        { code: '<blockquote class="twitter-tweet" lang="de"><p>Hübscher Willkommensgruß in unserer Kantine auf dem Lerchenberg. <a href="http://t.co/ahQ1YNCHZR">pic.twitter.com/ahQ1YNCHZR</a></p>&mdash; ZDF (@ZDF) <a href="https://twitter.com/ZDF/status/516534564421136384">29. September 2014</a></blockquote>\r\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>\r\n',
+          hostname: 'http://wmaiz-v-sofa02.dbc.zdf.de',
+          overwrite: true,
+          screensize: [ 320, 768, 1224, 1824 ],
+          version: 2,
+          autorefresh: { freq: 12, duration: 1, enabled: true },
+          mobileurl: 'http://m.zdf.de',
+          slug: 'test631' }
+        
+        //Embeddcode
+        { scriptlinks: [ '//platform.twitter.com/widgets.js' ],
+          inline: 'console.log("inline code");',
+          html64: 'PGJsb2NrcXVvdGUgY2xhc3M9InR3aXR0ZXItdHdlZXQiIGxhbmc9ImRlIj48cD5Iw7xic2NoZXIgV2lsbGtvbW1lbnNncnXDnyBpbiB1bnNlcmVyIEthbnRpbmUgYXVmIGRlbSBMZXJjaGVuYmVyZy4gPGEgaHJlZj0iaHR0cDovL3QuY28vYWhRMVlOQ0haUiI+cGljLnR3aXR0ZXIuY29tL2FoUTFZTkNIWlI8L2E+PC9wPuKAlCBaREYgKEBaREYpIDxhIGhyZWY9Imh0dHBzOi8vdHdpdHRlci5jb20vWkRGL3N0YXR1cy81MTY1MzQ1NjQ0MjExMzYzODQiPjI5LiBTZXB0ZW1iZXIgMjAxNDwvYT48L2Jsb2NrcXVvdGU+Cgo=',
+          hash: 'f4a7e6e2567107a950d86d74af9eea8b41904090',
+          hostname: 'http://wmaiz-v-sofa02.dbc.zdf.de' }
+
+        */  		
+
 		db.get(Embeddcode.hash, function(err, doc)
 		{
 
@@ -75,6 +95,12 @@ function Datastore(config)
 
 				var newdoc = {};
 				newdoc.type = "post";
+				newdoc.hostname 	= RenderRequest.overwrite;
+				newdoc.screensize 	= RenderRequest.screensize;
+				newdoc.autorefresh 	= RenderRequest.autorefresh;
+				newdoc.mobileurl 	= RenderRequest.mobileurl;
+				newdoc.slug 		= RenderRequest.slug;
+				
 				newdoc.version = "101";
 				newdoc.dateCreated = new Date();
 
@@ -169,6 +195,21 @@ function Datastore(config)
 							  },
 							  uploadComplete("datastore.saveImageComplete", {name: name} ) );
 	});
+
+
+
+
+	this.on("datastore.updateDocDateRequest", function (){
+		console.log("datastore.updateDocDateRequest");
+
+		db.merge(	self.doc.id,
+					{ dateUpdated: new Date() }, 
+					uploadComplete("datastore.updateDocDateComplete", {} )
+				);
+	});
+
+
+
 
 	// --> saveOrigEmbedCodeRequest
 	this.on("datastore.saveScriptRequest", function (){

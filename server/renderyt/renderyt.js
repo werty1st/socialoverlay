@@ -24,7 +24,7 @@ headless = runHeadless({ display: {width: 1920, height: 1080, depth: 24}},
 function(err, childProcess, servernum){
 	//xvfb ready
 	if(!err){
-		//servernum = 10;
+		servernum = 10;
 		console.log("display at:",servernum);
 		process.env.DISPLAY = ":" + servernum;
 		process.env.PATH = process.env.PATH+":"+__dirname;
@@ -157,11 +157,11 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 			var x = driver.wait(function() {
 		
 				return driver.findElement(By.id("maincontainer")).then(function(ele) {
-					ele.getLocation().then(function(point){
+					ele.firstElementChild.getLocation().then(function(point){
 						imagedimensions.x = point.x;
 						imagedimensions.y = point.y;
 
-						ele.getSize().then(function(size){
+						ele.firstElementChild.getSize().then(function(size){
 							imagedimensions.width = size.width;
 							imagedimensions.height = size.height;
 							//take screenshot
@@ -202,10 +202,7 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 
 function renderRequestTask(driver, url, posttarget, screensize, onCompleted){
 
-	//console.log("running session",url);
-
-
-	driver.manage().window().setSize(screensize.w, screensize.h).then(function (val1){
+	driver.manage().window().setSize(1920,1080).then(function (val1){
 		//console.log("windows set size complete");	
 		driver.manage().window().getSize().then(function (val1){
 			console.log("windows size:",val1);
@@ -229,8 +226,30 @@ function renderRequestTask(driver, url, posttarget, screensize, onCompleted){
 
 			pagestate.then(function(readyState){
 				console.log("pagestate",readyState);
+
 				if (readyState === "complete" || readyState === "interactive"){
-					pageloaded(driver, posttarget, timeout1, onCompleted);
+
+					//seite geladen und kann manipuliert werden
+					console.log("resize to",screensize);
+
+					var response = driver.executeAsyncScript(
+					    'var callback = arguments[arguments.length - 1];' +
+					    'document.getElementById(\"maincontainer\").style.width=\"'+screensize+'px\";' +
+					    'callback( document.getElementById(\"maincontainer\").style.width )' );
+
+					response.then(function (param) {
+						console.log("response", param);
+						
+						if(screensize+"px" == param){
+							pageloaded(driver, posttarget, timeout1, onCompleted);
+						} else {
+							console.log("resize error",screensize,param);
+							return;
+						}
+					})
+					
+
+
 				}
 			});
 

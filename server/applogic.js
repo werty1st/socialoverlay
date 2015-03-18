@@ -83,22 +83,33 @@ function Applogic ( rasterrizer )
     var datastore = new ds.Datastore({couchserver:"http://localhost"});
 
     var doc = {};
-
     var running = false;
 
-    /*
-     RenderRequest.code       => html embedcode
-     RenderRequest.hostname   => zur erknnung von prod oder int
-     RenderRequest.overwrite  => bei erkanntem hash trotzdem neu anlegen
-     RenderRequest.screensize => 1:360x400,2:800x600
-     RenderRequest.version    => nicht implementiert
-     RenderRequest.bgimageurl => bg image for iframe rendering
-    */
 
     this.on("applogic.renderImageRequest", function (myRenderRequest) {
         console.log('applogic.renderImageRequest');  
         console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
         //console.log(myRenderRequest);
+
+        /*
+        //RenderRequest
+        { code: '<blockquote class="twitter-tweet" lang="de"><p>Hübscher Willkommensgruß in unserer Kantine auf dem Lerchenberg. <a href="http://t.co/ahQ1YNCHZR">pic.twitter.com/ahQ1YNCHZR</a></p>&mdash; ZDF (@ZDF) <a href="https://twitter.com/ZDF/status/516534564421136384">29. September 2014</a></blockquote>\r\n<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>\r\n',
+          hostname: 'http://wmaiz-v-sofa02.dbc.zdf.de',
+          overwrite: true,
+          screensize: [ 320, 768, 1224, 1824 ],
+          autorefresh: { freq: 12, duration: 1, enabled: true },
+          mobileurl: 'http://m.zdf.de',
+          slug: 'test631' }
+        
+        //Embeddcode
+        { scriptlinks: [ '//platform.twitter.com/widgets.js' ],
+          inline: 'console.log("inline code");',
+          html64: 'PGJsb2NrcXVvdGUgY2xhc3M9InR3aXR0ZXItdHdlZXQiIGxhbmc9ImRlIj48cD5Iw7xic2NoZXIgV2lsbGtvbW1lbnNncnXDnyBpbiB1bnNlcmVyIEthbnRpbmUgYXVmIGRlbSBMZXJjaGVuYmVyZy4gPGEgaHJlZj0iaHR0cDovL3QuY28vYWhRMVlOQ0haUiI+cGljLnR3aXR0ZXIuY29tL2FoUTFZTkNIWlI8L2E+PC9wPuKAlCBaREYgKEBaREYpIDxhIGhyZWY9Imh0dHBzOi8vdHdpdHRlci5jb20vWkRGL3N0YXR1cy81MTY1MzQ1NjQ0MjExMzYzODQiPjI5LiBTZXB0ZW1iZXIgMjAxNDwvYT48L2Jsb2NrcXVvdGU+Cgo=',
+          hash: 'f4a7e6e2567107a950d86d74af9eea8b41904090',
+          hostname: 'http://wmaiz-v-sofa02.dbc.zdf.de' }
+
+        */  
+
 
         if (running){
             console.log("waiting for open request");
@@ -106,26 +117,16 @@ function Applogic ( rasterrizer )
         }
         running = true;
 
-        //console.log(RenderRequest);  return;
-        RenderRequest          = myRenderRequest;
+        RenderRequest          = myRenderRequest;        
 
         Embeddcode             = extractscript2( RenderRequest.code );
         Embeddcode.hash        = gethash( RenderRequest.code );//berechne hash und suche in db danach        
-        //Embeddcode.original  = RenderRequest.code;
         Embeddcode.hostname    = RenderRequest.hostname; //hostname; //wird überschrieben
-        //Embeddcode.hostname    = hostname; //wird überschrieben im webmaster editor anpassen auf sofa01.zdf.de
-        
+               
 
-        RenderRequest.version  = version; //wird überschrieben
-
-        
-        /*
-            Embeddcode.hash             => hash des embedcodes
-            Embeddcode.original         => original embedcode mit script
-            Embeddcode.html64           => embedcode ohne script als base64
-            Embeddcode.inline64         => inline js als base64
-            Embeddcode.scriptlinks      => array of js urls
-        */
+        // console.log(RenderRequest);  return;
+        // console.log(Embeddcode);
+        // process.exit();
         
         //suche nach doc mit doc.id==hash
         datastore.emit("datastore.getDocRequest", RenderRequest, Embeddcode); // --> newDocCreated
@@ -177,17 +178,6 @@ function Applogic ( rasterrizer )
         console.log(renderSource);
         //bilder rendern und hochlade
 
-        // erstelle bilder mit 3*4 4*3 16*9 9*16 mit (800*600, 1280*800, 1920*1080)
-        var screensizes = [
-            // {w:  800, h:  600, name:"1l"},
-            // {w:  600, h:  800, name:"1p"},
-            {w: 1280, h:  800, name:"2l"} //pflicht da default
-            // {w:  800, h: 1280, name:"2p"},
-            // {w: 1080, h: 1920, name:"3l"},
-            // {w: 1920, h: 1080, name:"3p"}
-        ];
-
-
         //todo
         /*
         default bild prüfen
@@ -196,27 +186,24 @@ function Applogic ( rasterrizer )
 
         var counter = 0;
 
-        //bleibt für ein doc gleich
-        Embeddcode.imagedimensions = screensizes;
-
         datastore.on("datastore.saveImageComplete", function( payload ){
             console.log('applogic.datastore.saveImageComplete');
+            self.emit("applogic.progress",{msg: "gepspeichert", name: payload.name});
+            
             open--;
-            console.log("open",open);
+            console.log("open",open);            
             if (open == 0){
                 //letztes bild erzeugt                
                 self.emit("applogic.renderImagesComplete");
             }
-            self.emit("applogic.progress",{msg: "gepspeichert", name: payload.name});
         });
 
         //ein screenshot wurde erstellt
-        function saveImagebuffer(name)
+        function saveImagebuffer(imagesize)
         {
-            var imagename = name;
+            var imagename = imagesize+"px";
 
-            return function (imagebuffer, imagedimensions, nextRender){
-                var name = screensizes[counter].name;
+            return function (imagebuffer, imagedimensions, nextRender){              
 
                 if (typeof imagebuffer === "function"){
                     //error
@@ -239,15 +226,18 @@ function Applogic ( rasterrizer )
 
         var open = 0;        
         //erzeuge 6 render tasks
-        self.emit("applogic.progress",{msg: "start", max: screensizes.length, screensizes: screensizes});
+        self.emit("applogic.progress",{ msg: "start",
+                                        max: RenderRequest.screensize.length,
+                                        screensizes: RenderRequest.screensize
+                                      });
 
-        for(var i = 0; i<screensizes.length; i++)
+        for(var i = 0; i< RenderRequest.screensize.length; i++)
         {
             try {
                 rasterrizer.renderUrl(
                     renderSource,
-                    saveImagebuffer( screensizes[i].name ), /*ist posttarget in renderyt*/
-                    screensizes[i]
+                    saveImagebuffer( RenderRequest.screensize[i] ), /*ist posttarget in renderyt*/
+                    RenderRequest.screensize[i]
                     /*url, saveImagebuffer(imagebuffer, nextRender)*/
                 );
                 open++;
@@ -262,8 +252,14 @@ function Applogic ( rasterrizer )
 
     this.on("applogic.renderImagesComplete", function () {
         console.log('applogic.renderImagesComplete');        
-        datastore.emit("datastore.saveScriptRequest");
+        datastore.emit("datastore.updateDocDateRequest");
     });
+
+
+    datastore.on("datastore.updateDocDateComplete", function () {
+        console.log('applogic.updateDocDateComplete');        
+        datastore.emit("datastore.saveScriptRequest");
+    });    
 
 
     datastore.on("datastore.saveScriptComplete", function(){
