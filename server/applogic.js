@@ -165,27 +165,15 @@ function Applogic ( rasterrizer )
     datastore.on("datastore.renderImageRequest", function(){
         console.log('applogic.datastore.renderImageRequest');
 
-        var renderSource = "";
-            renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
-
-        // if (RenderRequest.bgimageurl){
-        //     renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/iframe.html";
-        // } else {
-        //     renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
-        // }
+        //offene rendertasks zählen
+        var open = 0;  
 
         //renderSource
+        var renderSource = "";
+            renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
         console.log(renderSource);
+
         //bilder rendern und hochlade
-
-        //todo
-        /*
-        default bild prüfen
-        browser ansicht anpassen progressbar bild 1 von x usw
-        */
-
-        var counter = 0;
-
         datastore.on("datastore.saveImageComplete", function( payload ){
             console.log('applogic.datastore.saveImageComplete');
             self.emit("applogic.progress",{msg: "gepspeichert", name: payload.name});
@@ -198,39 +186,52 @@ function Applogic ( rasterrizer )
             }
         });
 
+        //erhaltene breiten erkennen und duplicate filtern
+        var imagesSizesReceived = [];
         //ein screenshot wurde erstellt
         function saveImagebuffer(imagesize)
         {
             var imagename = imagesize+"px";
 
-            return function (imagebuffer, imagedimensions, nextRender){              
+
+            return function (imagebuffer, imagedimensionsWanted, imagedimensionsGot, renderNext){              
 
                 if (typeof imagebuffer === "function"){
                     //error
                     console.log( imagebuffer() );
                     running = false;
-                    nextRender();
+                    renderNext();
                     //fehler beim rendern an browser durchleiten
                     self.emit("applogic.error", imagebuffer() );
                     return;
                 }
 
-                //console.log("save image with size:", imagedimensions);
+                console.log("save image with req-size:", imagedimensionsWanted);
+                console.log("save image with realsize:", imagedimensionsGot);
+
+
+                if (imagesSizesReceived.indexOf(imagedimensionsGot.width)>=0){
+                    console.log("got duplicate size");
+                } else {
+                    imagesSizesReceived.push(imagedimensionsGot.width);                    
+                }
                 // Embeddcode.imagebuffer     = imagebuffer;
 
-                datastore.emit("datastore.saveImageRequest", imagename, imagedimensions, imagebuffer);
-                nextRender();                
+                console.log(imagesSizesReceived);
+
+                datastore.emit("datastore.saveImageRequest", imagename, imagedimensionsWanted, imagebuffer);
+                renderNext();                
                 self.emit("applogic.progress",{msg: "speichern", name: imagename});
             }
         }
 
-        var open = 0;        
-        //erzeuge 6 render tasks
+        //erzeuge render tasks (je nach anzahl der ausgewählten größen)
         self.emit("applogic.progress",{ msg: "start",
                                         max: RenderRequest.screensize.length,
                                         screensizes: RenderRequest.screensize
                                       });
 
+              
         for(var i = 0; i< RenderRequest.screensize.length; i++)
         {
             try {

@@ -23,6 +23,7 @@
 // }
 
 //http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_list/list_all/all
+//convert object to array for angularjs loop or list function
 exports.list_all = function (head, req) {
     var header = {};
     var items = [];

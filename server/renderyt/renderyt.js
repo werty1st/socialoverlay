@@ -24,7 +24,7 @@ headless = runHeadless({ display: {width: 1920, height: 1080, depth: 24}},
 function(err, childProcess, servernum){
 	//xvfb ready
 	if(!err){
-		servernum = 10;
+		//servernum = 10;
 		console.log("display at:",servernum);
 		process.env.DISPLAY = ":" + servernum;
 		process.env.PATH = process.env.PATH+":"+__dirname;
@@ -99,13 +99,13 @@ function RenderWorker()
 }
 
 
-function saveImage(buffer, imagedimensions, posttarget, onCompleted) {
+function saveImage(buffer, imagedimensions, clientSize, posttarget, onCompleted) {
 	
-	posttarget(buffer, imagedimensions, onCompleted);
+	posttarget(buffer, imagedimensions, clientSize, onCompleted);
 }
 
 
-function captureScreen(driver, imagedimensions, posttarget, onCompleted) {
+function captureScreen(driver, imagedimensions, clientSize, posttarget, onCompleted) {
 
 	function convertImage(image, imagedimensions)
 	{
@@ -125,7 +125,11 @@ function captureScreen(driver, imagedimensions, posttarget, onCompleted) {
 			/*.crop(imagedimensions.width-deltax, imagedimensions.height-deltay, imagedimensions.x, imagedimensions.y)*/
 			.crop(imagedimensions.width, imagedimensions.height, imagedimensions.x, imagedimensions.y)
 			.toBuffer('PNG',function (err, buffer) {
-				saveImage(buffer, {"width":imagedimensions.width, "height": imagedimensions.height}, posttarget, onCompleted);
+				saveImage( buffer,
+						   {"width":imagedimensions.width, "height": imagedimensions.height}, 
+						   clientSize,
+						   posttarget,
+						   onCompleted);
 			});
 			// .write("test.png", function (err) {
 			// 	if (!err) console.log('crazytown has arrived');
@@ -134,7 +138,7 @@ function captureScreen(driver, imagedimensions, posttarget, onCompleted) {
 			// })
 	}
 
-	console.log("imagedimensions",imagedimensions);
+	//console.log("imagedimensions",imagedimensions);
 
 	driver.takeScreenshot().then(
 	    function(image, err) {
@@ -157,17 +161,29 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 			var x = driver.wait(function() {
 		
 				return driver.findElement(By.id("maincontainer")).then(function(ele) {
-					ele.firstElementChild.getLocation().then(function(point){
-						imagedimensions.x = point.x;
-						imagedimensions.y = point.y;
+					
+					//inject script
 
-						ele.firstElementChild.getSize().then(function(size){
-							imagedimensions.width = size.width;
-							imagedimensions.height = size.height;
-							//take screenshot
-							captureScreen(driver, imagedimensions, posttarget, onCompleted);
-						})
-					});
+					var response = driver.executeAsyncScript(
+					    'var callback = arguments[arguments.length - 1];' +
+					    'var d = document.getElementById(\"maincontainer\");' +
+					    'callback( { height: d.firstElementChild.clientHeight, width: d.firstElementChild.clientWidth } )' );
+
+					response.then(function (clientSize) {
+						//console.log("clientSize", clientSize);
+
+						ele.getLocation().then(function(point){
+							imagedimensions.x = point.x;
+							imagedimensions.y = point.y;
+
+							ele.getSize().then(function(size){
+								imagedimensions.width = clientSize.width;
+								imagedimensions.height = clientSize.height;
+								//take screenshot
+								captureScreen(driver, imagedimensions, clientSize, posttarget, onCompleted);
+							})
+						});
+					});					
 					return true;
 
 			 	}, function (Err) {
@@ -179,23 +195,9 @@ function pageloaded(driver, posttarget, Timeout, onCompleted){
 			 		return true;
 			 	});
 			 	
-			}, 7000);
+			}, 10000);
 
-
-
-			// var ele = driver.findElement(By.id("maincontainer"));
-			// 	ele.getLocation().then(function(point){
-			// 		imagedimensions.x = point.x;
-			// 		imagedimensions.y = point.y;
-	
-			// 		ele.getSize().then(function(size){
-			// 			imagedimensions.width = size.width;
-			// 			imagedimensions.height = size.height;
-			// 			//take screenshot
-			// 			captureScreen(imagedimensions, posttarget, onCompleted);
-			// 		})
-			// 	});			
-		},4000);	
+		},6000);	
 }
 
 
@@ -222,7 +224,7 @@ function renderRequestTask(driver, url, posttarget, screensize, onCompleted){
 			timeout1 = setTimeout(function ()
 			{
 				console.log("session took to much time to load");
-			},15000)
+			},16000)
 
 			pagestate.then(function(readyState){
 				console.log("pagestate",readyState);
@@ -246,7 +248,7 @@ function renderRequestTask(driver, url, posttarget, screensize, onCompleted){
 							console.log("resize error",screensize,param);
 							return;
 						}
-					})
+					});
 					
 
 

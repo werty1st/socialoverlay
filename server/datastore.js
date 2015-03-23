@@ -119,16 +119,35 @@ function Datastore(config)
 
 				} else {
 
-					db.merge(Embeddcode.hash, newdoc, function (err, res) {
-					  if (err) {
-					    // Handle error
-					  } else {
-					    // Handle success
-					    self.doc = res;
-						console.log("doc updated",res);
-						self.emit("datastore.newDocCreated");
-					  }
-					});					
+					self.doc = {id: doc._id, rev: doc._rev};
+
+					//delete doc
+					db.remove(self.doc.id, self.doc.rev, function (err, res) {
+						// Handle response
+						if(!err){
+						    self.doc = res;
+							console.log("doc updated");
+
+							//save new doc data
+							db.save(Embeddcode.hash, newdoc, function (err, res) {
+							  if (err) {
+							    // Handle error
+							    throw new Error("Doc save failed",err);
+							  } else {
+							    // Handle success
+							    self.doc = res;
+								console.log("doc updated");
+								self.emit("datastore.newDocCreated");
+							  }
+							});	
+
+						} else {
+							throw new Error("Doc overwrite failed",err);
+						}
+					});
+
+
+				
 				}
 
 
