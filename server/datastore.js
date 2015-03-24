@@ -21,7 +21,7 @@ function Datastore(config)
 
 	var self = this;
 	this.doc = {};
-	var db = new (cradle.Connection)(config.couchserver, 5984).database('twr');
+	var db = new (cradle.Connection)(config.couchserver, 5984, { cache: false }).database('twr');
 
 	var RenderRequest = {};
 	var Embeddcode = {};
@@ -80,7 +80,7 @@ function Datastore(config)
 		db.get(Embeddcode.hash, function(err, doc)
 		{
 
-			// console.log(doc);
+			//console.log(doc);
 			// process.exit();
 			if (!err && !RenderRequest.overwrite)
 			{
@@ -254,14 +254,14 @@ function Datastore(config)
 
 
 	this.on("datastore.saveCssRequest", function (){
-		console.log("datastore.saveCssRequest");
+		console.log("datastore.saveCssRequest");	
 
 		//template laden
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style.css", function(err, repl){
 			if (!err){
 				var template_script = repl.body.toString('utf8');
 				var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
-																  		imagedimensions : Embeddcode.imagedimensions,
+																  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  		bgimageurl: RenderRequest.bgimageurl
 																   });
 
@@ -287,7 +287,7 @@ function Datastore(config)
 				var template_html = repl.body.toString('utf8');
 				var target_html = renderTemplate(template_html, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname,
-																  imagedimensions : Embeddcode.imagedimensions,
+																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  bgimageurl: RenderRequest.bgimageurl
 																});
 

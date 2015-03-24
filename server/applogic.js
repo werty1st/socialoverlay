@@ -187,7 +187,7 @@ function Applogic ( rasterrizer )
         });
 
         //erhaltene breiten erkennen und duplicate filtern
-        var imagesSizesReceived = [];
+        Embeddcode.imagesSizesReceived = [];
         //ein screenshot wurde erstellt
         function saveImagebuffer(imagesize)
         {
@@ -210,16 +210,15 @@ function Applogic ( rasterrizer )
                 console.log("save image with realsize:", imagedimensionsGot);
 
 
-                if (imagesSizesReceived.indexOf(imagedimensionsGot.width)>=0){
-                    console.log("got duplicate size");
+                if (Embeddcode.imagesSizesReceived.indexOf(imagedimensionsGot.width)>=0){
+                    console.log("skip duplicate size");
+                    datastore.emit("datastore.saveImageComplete", {name:"skip"});
                 } else {
-                    imagesSizesReceived.push(imagedimensionsGot.width);                    
+                    Embeddcode.imagesSizesReceived.push(imagedimensionsGot.width);                    
+                    datastore.emit("datastore.saveImageRequest", imagename, imagedimensionsWanted, imagebuffer);
                 }
-                // Embeddcode.imagebuffer     = imagebuffer;
+                console.log(Embeddcode.imagesSizesReceived);
 
-                console.log(imagesSizesReceived);
-
-                datastore.emit("datastore.saveImageRequest", imagename, imagedimensionsWanted, imagebuffer);
                 renderNext();                
                 self.emit("applogic.progress",{msg: "speichern", name: imagename});
             }

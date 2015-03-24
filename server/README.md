@@ -34,8 +34,7 @@ MR heuteJ
 <div class="mr-space" id="mr-space_heutejournal_team" data-space-id="zdf/heutejournal_team" style="min-height: 500px;"></div>
 <script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_heutejournal_team");</script>
 
-MR Neo
-<iframe src="http://zdf.massrel.io/neo-magazin-royale" width="1050" height="630" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
+
 
 Vimdeo
 <iframe src="//player.vimeo.com/video/57974967" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -47,17 +46,27 @@ YT
 NEO
 <iframe src="http://zdf.massrel.io/neo-magazin-royale" width="1050" height="630" style="background-image:url(http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png)" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
 
+MR Neo
+<iframe src="http://zdf.massrel.io/neo-magazin-royale" width="100%" height="100%" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
+
 NEO2
 http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png
-<div class="mr-space" id="mr-space_neo-magazin-royale_int" data-space-id="zdf/neo-magazin-royale_int" style="min-height: 680px;"></div>
-<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_neo-magazin-royale_int");</script>
-
+http://zdf.massrel.io/neo-magazin-royale/
 <div class="mr-space" id="mr-space_neo-magazin-royale" data-space-id="zdf/neo-magazin-royale" style="min-height: 680px;"></div>
 <script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_neo-magazin-royale");</script>
 
 
 berlindirekt
 <a class="twitter-timeline" data-dnt=true href="https://twitter.com/search?q=%23ZDF" data-widget-id="288618915343515648">Tweets über "#ZDF"</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<a width="650" class="twitter-timeline" href="https://twitter.com/berlindirekt" data-widget-id="580351495411011584">Tweets von @berlindirekt </a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+Todo
+gewünschte größe und tatsächlich erhaltene größe getrennt speichern
+oder erhaltene unter name nder gewünschten speichern und beim neuladen die doppelten so auslassen
+css dummy erstellen
+
 
 
 noscript link finden
