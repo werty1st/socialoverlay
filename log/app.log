@@ -10,3 +10,449 @@ Xvfb: Dimensions { width: 900, height: 650, depth: 24 }
 display at: 122
 Server has disconnected
 Server has disconnected
+Server has disconnected
+Server has disconnected
+Server has disconnected
+Server has disconnected
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-2985e6462ad9a4aa0f5896335febbbc0
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/006c6c550cfd5e10f234cf2ba939ee70656f3b1e/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/006c6c550cfd5e10f234cf2ba939ee70656f3b1e/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-901e91cd8e3fe61dab50130132860b6f
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-e33725afa0986555f5210e19336bf654
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-c40baaadd55a7a10fcaff39757d9fbfc
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-e279348215c2b7398359c647cbc47508
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-99be4264191c2efb5738001f6dbf8cf8
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-d7402337d7742c74891205b0d779aaaf
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/ada22828db234e336ec1032938d3f6f06bc7f61c/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/ada22828db234e336ec1032938d3f6f06bc7f61c/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-35466d4273ded1f94f86936ff5db678e
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-b356314092244216411a7034dbd5faa3
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-84d3d8c9fc744c9b3ff8855e65c2cf7f
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-5e8ee47291da4b8a30aff2a2c7905ac3
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-3bcd07b4d1b3c6c4a3be54839f09a903
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-15abc08effdfbde159f9803f1d73e38b
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/78fb8689a176b228023dd90e4a0318fe335897d6/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/78fb8689a176b228023dd90e4a0318fe335897d6/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-46d81b19fd64a80caa991834e8783c64
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-e70d624182255056eac166ca2130aecf
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-2e2b6ff21ed59f29a92d599f07f8bc34
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-e93d3c35ef537ee73dbc5dd2e708f483
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-b282bad3d4a6bd6f0818e0d51ab6751c
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-ee7aed4c15bc8f07465345d692bbab86
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/77ed6a604cbc9c02ba05fd6245e3c2e9268aff19/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/77ed6a604cbc9c02ba05fd6245e3c2e9268aff19/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-a626178e4d096cbb7b4b8b933582e341
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-1d6811b90bbec8cf48a0aa01b78d9828
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-c9b4b88ca92de78aa1085d1c9658c1a4
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-47423b0f24106c0389b0902799b94d4c
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-461fb5b0402e3543620ba21bf8d1e7a4
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+datastore.docFound
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+datastore.docFound
+app.applogic.CodeComplete
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 7-1f358afad4723d9096659a004cae8bae
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/78fb8689a176b228023dd90e4a0318fe335897d6/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/78fb8689a176b228023dd90e4a0318fe335897d6/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 8-a92641c80c2f0ba5ee95b2ae0eae8a90
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 9-ee46b520d3a06e6344c95a27a2e614b2
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 10-bd23c499075af3c41e48e07685781cba
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 11-2f7790e389a658458f90c54dc10b02b8
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 12-01aad0dd5f67567d4c629737c1c17153
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-a9793359cca5f42df60c5d88c792894c
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/07aa00e1ea1ba1b9a537597738e800c200db8a7b/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/07aa00e1ea1ba1b9a537597738e800c200db8a7b/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-3813844ced76fc090eba32cf86381dd3
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-6cf672c74dda77bd44f7ad295819dd31
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-b89be4fb86c1bb8b668e853212db839f
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-7b89933c7d0e47b7fd0e7d2d8e8b5184
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-9c19d21d9c2caca7f6fd817a651b605a
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-9ab3d667ed30138e9dba6f4c85ae206d
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/cc057e5c35a11211ab5cf0d4dedc3e29a924ef90/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/cc057e5c35a11211ab5cf0d4dedc3e29a924ef90/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-a889e7fc68f66859b92946dfe644902c
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-e0f8d59124a3e01e994700fcae1471b6
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-6118e842a40ffe9cf7ad81c047c18f79
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-5f90762ad5ff6029f4c95e4718ebc03f
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-145ceb2311d201284cdf9a5e4cbee0ab
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+overwrite by request
+applogic.datastore.newDocCreated
+datastore.saveRendersourceRequest
+rev: 1-f0667cb4248ca9916f78dd4d08b95068
+next: datastore.saveRendersourceComplete
+applogic.datastore.saveRendersourceComplete
+applogic.datastore.renderImageRequest
+http://sofa01.zdf.de/c/twr/b418696bd9c4554e167cde7287c1f2d62fe69066/rendersource.html
+windows set size complete
+poolsize_add: 1
+running session http://sofa01.zdf.de/c/twr/b418696bd9c4554e167cde7287c1f2d62fe69066/rendersource.html
+pagestate complete
+session loaded
+image dim: { ceil: {},
+  clone: {},
+  floor: {},
+  round: {},
+  scale: {},
+  toString: {},
+  translate: {},
+  x: 8,
+  y: 8 }
+applogic.renderImageComplete
+datastore.saveImageRequest
+next rw
+poolsize_com: 0
+rev: 2-14deff7b94c0cb1132b147e8d698303a
+next: datastore.saveImageComplete
+applogic.datastore.saveImageComplete
+datastore.saveScriptRequest
+rev: 3-f317b8d849978cab720f838cb6d4a08b
+next: datastore.saveScriptComplete
+applogic.datastore.saveScriptComplete
+datastore.saveCssRequest
+rev: 4-9b9e68edd65918c2bc8d34f2f967f455
+next: datastore.saveCssComplete
+applogic.datastore.saveCssComplete
+datastore.saveHtmlRequest
+rev: 5-792fb3d2fcd43b5cc885f34509af25b7
+next: datastore.saveHtmlComplete
+applogic.datastore.saveHtmlComplete
+datastore.saveXmlRequest
+rev: 6-bca599b5141373bc5d727660f52bd65d
+next: datastore.saveXmlComplete
+applogic.datastore.saveXmlComplete
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+datastore.docFound
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
+app.socket.renderImageRequest
+applogic.renderImageRequest
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+datastore.getDocRequest
+datastore.docFound
+app.applogic.CodeComplete
+Server has disconnected
+Server has disconnected
