@@ -62,6 +62,12 @@ berlindirekt
 <a width="650" class="twitter-timeline" href="https://twitter.com/berlindirekt" data-widget-id="580351495411011584">Tweets von @berlindirekt </a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
+
+<iframe src="http://zdf.massrel.io/berlin-direkt" width="364px" height="410px" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
+
+24734482
+25441046
+
 Todo
 gewünschte größe und tatsächlich erhaltene größe getrennt speichern
 oder erhaltene unter name nder gewünschten speichern und beim neuladen die doppelten so auslassen
