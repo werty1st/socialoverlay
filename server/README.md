@@ -68,36 +68,28 @@ berlindirekt
 24734482
 25441046
 
-Todo
-gewünschte größe und tatsächlich erhaltene größe getrennt speichern
-oder erhaltene unter name nder gewünschten speichern und beim neuladen die doppelten so auslassen
-css dummy erstellen
+
+TODO
+css erstellen
+auto refresh screenshot
+	id bleibt ntürlich gleich, es wird nur der anhang geändert
+	bei neuem content ID neue ID. änderungen immer über picker
+
+Recent ID/Name Vie/Liste erstellen
+
+Bearbeiten einer alten ID über den picker ermöglichen.
+
+Langfristig Renderer komplett trennen.
+	Im Picker wird ein Auftrag erzeugt und in DB gespeichert.
+	Der Renderer überwacht den Changes Feed/listViewOpen und rendert nach einander.
+	Der P12 Script im HTML Embeddcode muss generisch sein, da beim Speichern die Anzahl der Bilder nicht fest steht.
+	Nachteil keine Vorschau oder 2 wege (mit und ohne vorschau implementieren)
+	Oder nicht so weit treiben und im Picker auf ChangesFeed warten und dann Vorschau anzeigen.
+	
 
 
 
-noscript link finden
-====================
-https://twitter.com/search?q=516534564421136384
-FB
-GP
-MR
 
-
-
-
-TODO Prio2
-----------
-ein globaler versonierter "arbeitsscript"
-dieser holt anhand der id im parentElement (später vlt url parameter)
-das passende js+preview image aus der DB
-
-//preview sollte mit verschiedenen hintergrundfarben gerendert werden können (besonders wichtig für MR)
-//rand aus bild entfernen
-
-
-#_FaktenBoxEl_3_#_NewFaktenBoxModul gp lädt nicht gescheit
-
-click -> "crossStorageClientHUB" ist undefiniert timer oder so einbauen für ie
 
 
 

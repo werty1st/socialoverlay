@@ -8,11 +8,27 @@
 </script>
 
 
-<div class="zdfembed" id="_{{hash}}"  > <!-- style="height: {{imagedimensions.height}}px; width: {{imagedimensions.width}}px;" -->
+<div class="zdfembed" id="_{{hash}}"  >
+<!-- 
+style="height: {{imagedimensions.height}}px; width: {{imagedimensions.width}}px;" 
+			<img src="{{clienthostname}}/c/twr/{{hash}}/320px" alt="Vorschaubild" />
+
+			<img src="{{clienthostname}}/c/twr/{{hash}}/320px"
+				 srcset="{{clienthostname}}/c/twr/{{hash}}/320px 320w,
+				 		 {{clienthostname}}/c/twr/{{hash}}/768px 600w,
+				 		 {{clienthostname}}/c/twr/{{hash}}/1224px 900w,
+				 		 {{clienthostname}}/c/twr/{{hash}}/1824px 1200w" alt="">
+-->
 
 	<script type="text/x-template" id="script{{hash}}">
 		<div class="socialbox" >
-			<img src="{{clienthostname}}/c/twr/{{hash}}/2l" alt="Vorschaubild" />
+
+			<img src="{{clienthostname}}/c/twr/{{hash}}/320px"
+				 srcset="{{clienthostname}}/c/twr/{{hash}}/320px 320w,
+				 		 {{clienthostname}}/c/twr/{{hash}}/768px 600w,
+				 		 {{clienthostname}}/c/twr/{{hash}}/1224px 900w,
+				 		 {{clienthostname}}/c/twr/{{hash}}/1824px 1200w" alt="">
+
 			<span class="caption fade-caption"  >
 				<div class="relative_wrapper_social">
 		        	<h3>Ihr Klick f&uuml;r den Datenschutz</h3>  
