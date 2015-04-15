@@ -70,7 +70,10 @@ berlindirekt
 
 
 TODO
-css erstellen
+css erstellen Done
+
+Im Picker alten eintrag auswählbar machen ohne identischen quelltext einfügen zu müssen
+
 auto refresh screenshot
 	id bleibt ntürlich gleich, es wird nur der anhang geändert
 	bei neuem content ID neue ID. änderungen immer über picker
@@ -85,7 +88,7 @@ Langfristig Renderer komplett trennen.
 	Der P12 Script im HTML Embeddcode muss generisch sein, da beim Speichern die Anzahl der Bilder nicht fest steht.
 	Nachteil keine Vorschau oder 2 wege (mit und ohne vorschau implementieren)
 	Oder nicht so weit treiben und im Picker auf ChangesFeed warten und dann Vorschau anzeigen.
-	
+
 
 
 

@@ -1,5 +1,6 @@
 angular.module("tapp",[ 'ngRoute',
 						'wrtyuitab',
+						'wrtyuihistory',
 						'wrtyuiprogressbar',
 						'ui.bootstrap',
 						'socketsetup',

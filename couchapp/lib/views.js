@@ -4,6 +4,7 @@ exports.posts = {
                 emit(doc.type, doc);
         }
     };
+
 //http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_view/uncat
 exports.uncat = {
         map: function (doc) {
@@ -20,3 +21,9 @@ exports.all = {
 }
 
     
+exports.posts_available = {
+        map: function (doc) {
+            if ((doc.type == "post") && (doc.screensize.length > 0))
+                emit(doc.dateCreated, doc);
+        }
+    };    
