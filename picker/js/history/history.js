@@ -1,7 +1,12 @@
 angular.module("wrtyuihistory", ['ui.bootstrap.buttons'] )
 .directive('history', ['$http', function($http) {
 
+        //ziel: pickerinterface abschicken können ohne neu zu rendern,        
         //starte abfrage an couchdb und hänge ergebnis an result
+        // ansicht: name, datum, vorschaubild(analog admin), auswahlbutton
+        // speichern button aktivieren ...
+
+
         function getAvailable(element){
 
 
