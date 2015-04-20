@@ -28,7 +28,7 @@ preview {
 .tab-pane{
   display: flex;
   align-items: center;
-  height: 112px;
+  /*height: 112px;*/
   overflow-y: hidden;
 }
 
@@ -57,5 +57,6 @@ input.admin.logout{
 }
 
 .hover_img a { position:relative; }
-.hover_img a span { position:absolute; display:none; z-index:99; }
-.hover_img a:hover span { display:block; }
+.hover_img a div { position:absolute; display:none; z-index:99; }
+/*.hover_img a:hover div { display:block; position:static; padding: 10px; margin: -10px;}*/
+.hover_img a:hover div { display:block; position:fixed;   right: 10px;  top: 100px;}

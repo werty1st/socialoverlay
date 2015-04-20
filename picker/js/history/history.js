@@ -1,38 +1,81 @@
-angular.module("wrtyuihistory", ['ui.bootstrap.buttons'] )
-.directive('history', ['$http', function($http) {
+angular.module( "wrtyuihistory", ["pickerinterface"] )
+.provider('wrtyuihistoryConfig', function () {
+
+    this.hostname = "";
+
+    this.setHost = function (dbhost) {
+      this.db_host = dbhost;
+    };
+
+    this.$get = function () {
+      return this;
+    };
+
+})
+.directive('history', ['$http', 'wrtyuihistoryConfig', 'pickerinterfaceService', function($http, wrtyuihistoryConfig, $picker) {
 
         //ziel: pickerinterface abschicken können ohne neu zu rendern,        
         //starte abfrage an couchdb und hänge ergebnis an result
         // ansicht: name, datum, vorschaubild(analog admin), auswahlbutton
         // speichern button aktivieren ...
 
+        /*
+            $scope.pickerData.playoutUrl = location.protocol + "//" + db_host + previewO.htmlcode;
+            $scope.pickerData.playoutXmlUrl = location.protocol + "//" + db_host + previewO.xmlcode;
+        */
 
-        function getAvailable(element){
-
+        function getAvailable($scope){
 
             $http({
                 method: 'GET',
                 withCredentials: true,
-                url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_list/list_available_by_date/posts_available?descending=true',
+                url: 'http://' + wrtyuihistoryConfig.db_host + ':5984/twr/_design/tweetrenderdb/_list/list_available_by_date/posts_active?descending=true',
                 }).success(function (data) {
                     //$scope.couchdb.all = data;
-                    console.log("data",data)
+                    //console.log("data",data);
+                    $scope.recents = data;
                 }).error(function() {
+                    $scope.recents = "empty";
                     //$scope.couchdb.all = null;
                 });
 
         }
 
+        function imageFilter(obj) {
+            var wordsToFilter = ['image/png'];
+            for (var i = 0; i < wordsToFilter.length; i++) {
+                if (obj.content_type.indexOf(wordsToFilter[i]) !== -1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        function controller ($scope){
+            $scope.imageFilter = imageFilter;
+            $scope.db_host = wrtyuihistoryConfig.db_host;
+            getAvailable($scope);
+
+            $scope.insert = function insert(item){
+                console.log("Item insert:", item);
+            }
+
+            console.log("history controllerFn");
+        }
 
         function link (scope, element, attrs){
             console.log("history linkFn");
-            getAvailable(element);
+            //getAvailable(element);
         }
 
         return {
             restrict: 'E',
+            scope: {
+
+            },
             templateUrl: "./js/history/history.html",
-            link: link
+            link: link,
+            controller: controller
         }
     }]);
 

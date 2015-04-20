@@ -1,4 +1,23 @@
 angular.module( "pickerinterface", [] )
+.service('pickerinterfaceService', function($http){
+		var user = true;
+		var self = this;
+
+		this.status = function status(cb){
+			$http({
+				method: 'GET',
+				withCredentials: true,
+				url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/_session',
+				}).success(function (data) {
+					userState(data);
+					cb(user);
+				}).error(function() {
+				    userState(data);
+				    cb(user);
+				});
+		}
+
+	})
 .directive('pickerResultInterface', function() {
 
 		var path = 'http://cm2-prod-pre.zdf.de/studio/pickerResultInterface.js';

@@ -10,28 +10,31 @@ angular.module("tapp")
 	
 	$scope.overwrite = true;
 	
-	$scope.screensizeopt = [{
-								label:"200px",
-								value:200
-							},{
-								label:"320px",
-								value:320
-							},{
-								label:"768px",
-								value:768
-							},{
-								label:"1224px",
-								value:1224
-							},{
-								label:"1824px",
-								value:1824
-							}];
-	$scope.screensize = [320,768];
+	$scope.screensizeopt = [
+		{
+			label:"200px",
+			value:200
+		},{
+			label:"320px",
+			value:320
+		},{
+			label:"768px",
+			value:768
+		},{
+			label:"1224px",
+			value:1224
+		},{
+			label:"1824px",
+			value:1824
+		}
+	];
+
+	$scope.screensize = [320,768]; //preselected defaults
 	$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 	$scope.version = $scope.versionopt[1];
 
 	$scope.mobileurl = "http://m.zdf.de";
-	$scope.slug = "test" + (new Date()).getMilliseconds();
+	$scope.slug = "unbenannt_" + (new Date()).getMilliseconds();
 
 
 

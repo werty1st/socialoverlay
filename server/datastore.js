@@ -95,7 +95,6 @@ function Datastore(config)
 
 				var newdoc = {};
 				newdoc.type = "post";
-				newdoc.hostname 	= RenderRequest.overwrite;
 				newdoc.screensize 	= RenderRequest.screensize;
 				newdoc.autorefresh 	= RenderRequest.autorefresh;
 				newdoc.mobileurl 	= RenderRequest.mobileurl;

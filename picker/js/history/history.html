@@ -1,3 +1,16 @@
-<input ng-click="reload()" type="button" value="reload">
-
-<div id="result"></div>
+<!-- <input ng-click="reload()" type="button" value="reload"> -->
+<div id="result">
+	<ul ng-repeat="item in recents">
+		<li >{{ item.slug }} - <a ng-href="http://{{ $parent.db_host }}/twr/{{item._id}}/rendersource.html" >Vorschau</a> - <span ng-click="insert(item)">Einfügen</span>
+			<ul ng-repeat="att in item.attachments | filter:imageFilter | limitTo:1">
+				<li>
+					{{att.name}} - {{att.length | bytes}}
+					<div class="hover_img">
+					     <a href="">Show Image<div>
+					     <img ng-src="http://{{ $parent.$parent.db_host }}/twr/{{item._id}}/{{att.name}}"  alt="image" width="250" /></div></a>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>

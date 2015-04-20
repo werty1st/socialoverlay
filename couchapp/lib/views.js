@@ -20,8 +20,8 @@ exports.all = {
     }
 }
 
-    
-exports.posts_available = {
+//kriterium definieren mind 1 bild, (eigener aktiv haken, zeitfenster)    
+exports.posts_active = {
         map: function (doc) {
             if ((doc.type == "post") && (doc.screensize.length > 0))
                 emit(doc.dateCreated, doc);

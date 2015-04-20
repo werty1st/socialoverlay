@@ -75,8 +75,8 @@ function Applogic ( rasterrizer )
     var Embeddcode = {};
     
     var version = "v2";
-    var hostname = "http://sofa01.zdf.de";
-    //var hostname = "http://wmaiz-v-sofa02.dbc.zdf.de";
+    //var hostname = "http://sofa01.zdf.de";
+    var hostname = ""; //"http://wmaiz-v-sofa02.dbc.zdf.de";
 
 
     var dbcomplete = false;
@@ -174,9 +174,9 @@ function Applogic ( rasterrizer )
         console.log(renderSource);
 
         //bilder rendern und hochlade
-        datastore.on("datastore.saveImageComplete", function( payload ){
+        datastore.on("datastore.saveImageComplete", function( imagedata ){
             console.log('applogic.datastore.saveImageComplete');
-            self.emit("applogic.progress",{msg: "gepspeichert", name: payload.name});
+            self.emit("applogic.progress",{msg: "gepspeichert", name: imagedata.name});
             
             open--;
             console.log("open",open);            
