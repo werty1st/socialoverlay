@@ -1,18 +1,5 @@
 angular.module( "wrtyuihistory", ["pickerinterface"] )
-.provider('wrtyuihistoryConfig', function () {
-
-    this.hostname = "";
-
-    this.setHost = function (dbhost) {
-      this.db_host = dbhost;
-    };
-
-    this.$get = function () {
-      return this;
-    };
-
-})
-.directive('history', ['$http', 'wrtyuihistoryConfig', 'pickerinterfaceService', function($http, wrtyuihistoryConfig, $picker) {
+.directive('history', ['$http', '$picker', 'db_host', function($http, $picker, db_host) {
 
         //ziel: pickerinterface abschicken können ohne neu zu rendern,        
         //starte abfrage an couchdb und hänge ergebnis an result
@@ -22,14 +9,14 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
         /*
             $scope.pickerData.playoutUrl = location.protocol + "//" + db_host + previewO.htmlcode;
             $scope.pickerData.playoutXmlUrl = location.protocol + "//" + db_host + previewO.xmlcode;
-        */
+        */        
 
         function getAvailable($scope){
 
             $http({
                 method: 'GET',
                 withCredentials: true,
-                url: 'http://' + wrtyuihistoryConfig.db_host + ':5984/twr/_design/tweetrenderdb/_list/list_available_by_date/posts_active?descending=true',
+                url: 'http://' + db_host + ':5984/twr/_design/tweetrenderdb/_list/list_available_by_date/posts_active?descending=true',
                 }).success(function (data) {
                     //$scope.couchdb.all = data;
                     //console.log("data",data);
@@ -53,19 +40,21 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
 
         function controller ($scope){
             $scope.imageFilter = imageFilter;
-            $scope.db_host = wrtyuihistoryConfig.db_host;
+            $scope.db_host = db_host;
             getAvailable($scope);
 
             $scope.insert = function insert(item){
                 console.log("Item insert:", item);
+                $picker.save({ 
+                    playoutUrl:     "http://"+ db_host + "/twr/" + item._id + "/embed.html",
+                    playoutXmlUrl:  "http://"+ db_host + "/twr/" + item._id + "/embed.xml"});
             }
 
             console.log("history controllerFn");
         }
 
         function link (scope, element, attrs){
-            console.log("history linkFn");
-            //getAvailable(element);
+            //console.log("history linkFn");            
         }
 
         return {

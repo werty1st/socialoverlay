@@ -1,7 +1,7 @@
 <!-- <input ng-click="reload()" type="button" value="reload"> -->
 <div id="result">
 	<ul ng-repeat="item in recents">
-		<li >{{ item.slug }} - <a ng-href="http://{{ $parent.db_host }}/twr/{{item._id}}/rendersource.html" >Vorschau</a> - <span ng-click="insert(item)">Einfügen</span>
+		<li >{{ item.slug }} - <a ng-href="http://{{ $parent.db_host }}/twr/{{item._id}}/rendersource.html" >Original</a> - <a href="" ng-click="insert(item)">Einfügen</a>
 			<ul ng-repeat="att in item.attachments | filter:imageFilter | limitTo:1">
 				<li>
 					{{att.name}} - {{att.length | bytes}}

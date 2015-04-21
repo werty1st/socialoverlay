@@ -199,7 +199,7 @@ function Datastore(config)
 
 
 
-	this.on("datastore.saveImageRequest", function (name,imagedimensions,imagebuffer){
+	this.on("datastore.saveImageRequest", function (name, imagebuffer){
 	//this.on("datastore.saveImageRequest", function (){
 		//gucke im speicher/cache nach sonst render neu
 		console.log("datastore.saveImageRequest as",name);
@@ -329,11 +329,11 @@ function Datastore(config)
 			} else if(sizes.length == 2){
 				htmlstring  = '<!--[if IE 9]><video style="display: none;"><![endif]-->';
 
-				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" media="(min-width: '+sizes[1]+'px)">'; 
+				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[1]+'px" media="(min-width: '+sizes[0]+'px)">'; 
 				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" media="(max-width: '+sizes[0]+'px)">'; 
 				
 				htmlstring += '<!--[if IE 9]></video><![endif]-->';
-				htmlstring += '<img style="width: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" alt="Vorschaubild Social Media">';
+				htmlstring += '<img style="widthx: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" alt="Vorschaubild Social Media">';
 			} else if(sizes.length > 2){
 				htmlstring  = '<!--[if IE 9]><video style="display: none;"><![endif]-->';
 	

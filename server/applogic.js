@@ -191,7 +191,7 @@ function Applogic ( rasterrizer )
         //ein screenshot wurde erstellt
         function saveImagebuffer(imagesize)
         {
-            var imagename = imagesize+"px";
+            //var imagename = imagesize+"px";
 
 
             return function (imagebuffer, imagedimensionsWanted, imagedimensionsGot, renderNext){              
@@ -209,13 +209,15 @@ function Applogic ( rasterrizer )
                 console.log("save image with req-size:", imagedimensionsWanted);
                 console.log("save image with realsize:", imagedimensionsGot);
 
+                var imagename = imagedimensionsGot.width+"px";
+
 
                 if (Embeddcode.imagesSizesReceived.indexOf(imagedimensionsGot.width)>=0){
                     console.log("skip duplicate size");
                     datastore.emit("datastore.saveImageComplete", {name:"skip"});
                 } else {
                     Embeddcode.imagesSizesReceived.push(imagedimensionsGot.width);                    
-                    datastore.emit("datastore.saveImageRequest", imagename, imagedimensionsWanted, imagebuffer);
+                    datastore.emit("datastore.saveImageRequest", imagename, imagebuffer);
                 }
                 console.log(Embeddcode.imagesSizesReceived);
 
