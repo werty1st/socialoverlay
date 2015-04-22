@@ -1,16 +1,54 @@
-<!-- <input ng-click="reload()" type="button" value="reload"> -->
-<div id="result">
-	<ul ng-repeat="item in recents">
-		<li >{{ item.slug }} - <a ng-href="http://{{ $parent.db_host }}/twr/{{item._id}}/rendersource.html" >Original</a> - <a href="" ng-click="insert(item)">Einfügen</a>
-			<ul ng-repeat="att in item.attachments | filter:imageFilter | limitTo:1">
-				<li>
-					{{att.name}} - {{att.length | bytes}}
-					<div class="hover_img">
-					     <a href="">Show Image<div>
-					     <img ng-src="http://{{ $parent.$parent.db_host }}/twr/{{item._id}}/{{att.name}}"  alt="image" width="250" /></div></a>
-					</div>
-				</li>
-			</ul>
-		</li>
+<div id="histroy">
+
+	<ul class="list-group" >
+		<li href="" ng-repeat="item in recents" class="list-group-item input-group" >
+
+
+		<button type="button" ng-click="insert(item)" class="btn btn-success pull-right">
+			<span class="glyphicon glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> in P12 einfügen
+		</button>
+
+
+
+		<a ng-href="http://{{ $parent.db_host }}/twr/{{item._id}}/rendersource.html" target="_blank">
+			<button type="button" class="btn btn-default pull-right">
+				<span class="glyphicon glyphicon glyphicon-new-window" aria-hidden="true"></span> Original anzeigen
+			</button>
+		</a>
+
+		<table id="infotable" class="table table-condensed table-striped">
+			<tr>
+				<td>ID</td>
+				<td>{{ item._id }}</td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td>{{ item.slug }}</td>
+			</tr>
+			<tr>
+				<td>Erzeugt</td>
+				<td>{{ item.dateCreated | date : format : timezone }}</td>
+			</tr>
+			<tr>
+				<td>Aktualisiert</td>
+				<td>{{ item.dateUpdated | date : format : timezone }}</td>
+			</tr>
+		</table>
+						
+		
+		
+		<div class="row" id="imagelistitem">
+		  <div class="col-xs-2 col-md-2" ng-repeat="att in item.attachments | filter:imageFilter">
+		    <a href="" class="thumbnail">
+		      <img ng-src="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/{{item._id}}/{{att.name}}" alt="Bild">
+				<div class="caption">
+				<h5>{{att.name}} - {{att.length | bytes}}</h5>
+				</div>				      
+		    </a>
+		  </div>
+		</div>
+
+		</li>		
 	</ul>
+
 </div>

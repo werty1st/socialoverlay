@@ -8,14 +8,16 @@ angular.module("tapp")
 			$scope.couchdb = {};
 
 			/*
-		> curl -vX PUT $HOST/mydatabase --cookie AuthSession=YW5uYTo0QUIzOTdFQjrC4ipN-D-53hw1sJepVzcVxnriEw -H "X-CouchDB-WWW-Authenticate: Cookie" -H "Content-Type: application/x-www-form-urlencoded"
-		{"ok":true}
+			> curl -vX PUT $HOST/mydatabase --cookie AuthSession=YW5uYTo0QUIzOTdFQjrC4ipN-D-53hw1sJepVzcVxnriEw -H "X-CouchDB-WWW-Authenticate: Cookie" -H "Content-Type: application/x-www-form-urlencoded"
+			{"ok":true}
 			*/
 
 			function getUser(user){
 				$scope.user = user;		
 				$scope.loginname = "";
-				$scope.loginpassword = "";							
+				$scope.loginpassword = "";
+
+				if (user !== false) $scope.getAll();
 			}
 
 			$scope.login = function () {
@@ -37,6 +39,8 @@ angular.module("tapp")
 			//alle //veraltet //live mit refresh oder ohne
 
 			$scope.remove = function remove(id, rev, index) {
+				if (!confirm("Der Eintrag wird entfernt.") ) return;
+
 				$http({
 					method: 'DELETE',
 					withCredentials: true,

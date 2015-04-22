@@ -1,28 +1,33 @@
+
+<button type="button" class="btn btn-default btn-xs pull-right" ng-click="logout()" ng-show="user">
+  <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {{ user.name }} logout
+</button>
+
 <h1>Wartungsfunktionen</h1>
-<input class="admin logout" ng-click="logout()" ng-show="user" type="button" value="{{ user.name }} logout">
 
 
 <!-- <div>user = {{user | json}}</div> -->
-<form ng-submit="login()">
-	<table ng-hide="user">
-		<tr>
-		<td>Login</td>
-		<td><input name="name" type="text" ng-model="loginname"></td>
-		</tr>
-		<tr>
-		<td>Passwort</td>
-		<td><input name="password" type="password" ng-model="loginpassword"></td>
-		</tr>
-		<tr>
-			<td>
-			</td>
-			<td>
-				<input ng-click="login()" ng-hide="user" type="submit" value="login">		
-			</td>
-		</tr>	
-	</table>
-</form>
-
+<div id="centercontainer">
+	<form ng-submit="login()">
+		<table ng-hide="user">
+			<tr>
+			<td>Login</td>
+			<td><input name="name" type="text" ng-model="loginname"></td>
+			</tr>
+			<tr>
+			<td>Passwort</td>
+			<td><input name="password" type="password" ng-model="loginpassword"></td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<input ng-click="login()" ng-hide="user" type="submit" value="login">		
+				</td>
+			</tr>	
+		</table>
+	</form>
+</div>
 
 <!-- 
 	bearbeiten funktion zum ändern von name und mobil url ohne bilder neu zu rendern
@@ -31,22 +36,40 @@
 	
  -->
 
-<div ng-show="user" >
-	<button type="button" class="btn btn-default navbar-btn" ng-click="getAll()">All</button>
+	
+	<ul class="list-group histroy" >
+		<li href="" ng-repeat="item in couchdb.all" class="list-group-item input-group" >
+		<button type="button" ng-click="remove(item._id,item._rev,$index)" class="btn btn-danger pull-right">löschen</button>
 
+		<div class="subject">
+			ID: {{item._id}}
+		</div>
+		<div class="subjectName">
+			<strong>
+				Name: {{item.slug}}
+			</strong>
+		</div>
+		<div class="subjectDateCreated">
+			Erzeugt: {{item.dateCreated}}
+		</div>
+		<div class="subjectDateUpdated">
+			Aktualisieren: {{item.dateUpdated}}
+		</div>	
+		
+		
+		<div class="row" id="imagelistitem">
+		  <div class="col-xs-2 col-md-2" ng-repeat="att in item.attachments | filter:imageFilter">
+		    <a href="" class="thumbnail">
+		      <img ng-src="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/{{item._id}}/{{att.name}}" alt="Bild">
+				<div class="caption">
+				<h5>{{att.name}} - {{att.length | bytes}}</h5>
+				</div>				      
+		    </a>
+		  </div>
+		</div>
 
-	<ul ng-repeat="item in couchdb.all">
-		<li > {{item._id}} <a href="" ng-click="remove(item._id,item._rev,$index)">X</a>
-			<ul ng-repeat="att in item.attachments | filter:imageFilter ">
-				<li>
-					{{att.name}} - {{att.length | bytes}}
-					<div class="hover_img">
-					     <a href="#">Show Image<div>
-					     <img ng-src="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/{{item._id}}/{{att.name}}"  alt="image" width="250" /></div></a>
-					</div>
-				</li>
-			</ul>
-		</li>
+		</li>		
 	</ul>
+	
 
 </div>
