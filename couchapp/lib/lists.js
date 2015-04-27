@@ -58,6 +58,7 @@ exports.list_available_by_date = function (head, req) {
     var list = "empty";
     while(row = getRow()){
         row.value.attachments = [];
+        row.value.images = [];
         for(var att in row.value._attachments){
             var tatt = row.value._attachments[att];
                 tatt.name = att;

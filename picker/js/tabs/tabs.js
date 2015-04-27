@@ -1,11 +1,33 @@
 angular.module("wrtyuitab", ['ui.bootstrap.buttons'] )
-.directive('showTab', function() {
+.factory('wrtyuitabService', ['$rootScope', function ($rootScope) {
+    var self = this;
+    var tab = "default";
+
+    function set(value){
+
+        if($rootScope.$root.$$phase != '$apply' && $rootScope.$root.$$phase != '$digest'){
+            $rootScope.$apply(function() {
+                tab = value;
+            });
+        }
+        else {
+            tab = value;
+        }        
+    }
+
+    function get(){
+        return tab;
+    }
+
+    return {get: get, set: set};
+}])
+.directive('showTab', function($rootScope, wrtyuitabService) {
         return {
+            scope: false,
             templateUrl: "./js/tabs/tabs.html",
             link: function (scope, element, attrs) {
 
                 angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8"; .tab-content{ padding-top: 2em; } </style>');
-
 
                 var lis = element.find("li");                
                 var content_divs = element.find("ul").next().children();                
@@ -17,8 +39,10 @@ angular.module("wrtyuitab", ['ui.bootstrap.buttons'] )
                         return function(e){
                             var mylis = _e.find("li");
 
+
                             angular.forEach(lis, function(li, key) {
                                 if (_li == li){
+                                    wrtyuitabService.set( li.textContent );
                                     angular.element(li).addClass("active");
                                     angular.element(content_divs[key]).addClass("active");
                                 } else {

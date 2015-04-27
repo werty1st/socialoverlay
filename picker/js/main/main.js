@@ -1,6 +1,6 @@
 //main
 angular.module("tapp")
-.controller("MainController", function($http, socket, $rootScope, $scope, db_host, $compile, default_code){
+.controller("MainController", function($http, socket, $rootScope, $scope, db_host, $compile, default_code, wrtyuitabService){
 	$scope.code = window.unescape(atob(default_code));
 	$scope.$parent.location = "#/maint";
 
@@ -33,13 +33,19 @@ angular.module("tapp")
 	$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 	$scope.version = $scope.versionopt[1];
 
+
+	$scope.usemobileurl = false;
 	$scope.mobileurl = "http://m.zdf.de";
 	$scope.slug = "unbenannt_" + (new Date()).getMilliseconds();
 
-
-
 	var self = this;
 
+	$scope.$watch(function () {
+			return wrtyuitabService.get();
+		},
+		function(newVal, oldVal) {
+			$scope.activeTab = newVal;
+		});
 
 	socket.on("progress", function(data){
 
@@ -92,7 +98,6 @@ angular.module("tapp")
         });
 
 	});		
-
 
 
 	$scope.renderCode = function renderCode(){

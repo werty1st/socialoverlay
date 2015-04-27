@@ -13,7 +13,7 @@
 		            	<table>
 		            		<tr>
 		            			<td>
-		            				<h4>Überschreiben</h4>
+		            				Überschreiben
 		            			</td>
 		            			<td>
 								    <div class="btn-group">
@@ -50,7 +50,7 @@
 		        </div>
 		        <div class="tab-pane">
 		            <p>
-						<h4>Breite</h4>
+						<h4>Viewport</h4>
 						<!-- ng-options="opt.label for opt in screensizeopt" -->
 						<select multiple ng-model="screensize" ng-disabled="false"
 							ng-options="opt.value as opt.label for opt in screensizeopt"
@@ -61,7 +61,12 @@
 		        </div>
 		        <div class="tab-pane">
 		            	<label for="autorefresh.enabled">aktivieren</label>
-						<input id="autorefresh.enabled" type="checkbox" ng-model="autorefresh.enabled" />
+						<!-- <input id="autorefresh.enabled" type="checkbox" ng-model="autorefresh.enabled" /> -->
+					    <div id="autorefresh.enabled" class="btn-group">
+					        <label class="btn btn-primary" ng-model="autorefresh.enabled" btn-radio="true" >Ja</label>
+					        <label class="btn btn-primary" ng-model="autorefresh.enabled" btn-radio="false" >Nein</label>
+					    </div>							
+						<br>
 						<br>
 
 						<table class="table">
@@ -99,18 +104,22 @@
 						</table>						
 		        </div>
 		        <div class="tab-pane">
+					<label for="usemobileurl">aktivieren</label>
+					<!-- <input id="usemobileurl" type="checkbox" ng-model="usemobileurl" />		        -->
+				    <div id="usemobileurl" class="btn-group">
+				        <label class="btn btn-primary" ng-model="usemobileurl" btn-radio="true" >Ja</label>
+				        <label class="btn btn-primary" ng-model="usemobileurl" btn-radio="false" >Nein</label>
+				    </div>						     	
+				    <br>
+				    <br>
 		            <p>
-		            	
 		            	<label for="mobileurl" >Playout Url für m.zdf.de</label><br>
-		            	<input id="mobileurl" type="url" ng-model="mobileurl" size="80">
+		            	<input id="mobileurl" type="url" ng-model="mobileurl" ng-disabled="!usemobileurl" size="80">
 		            </p>
 		        </div>
 		        <div class="tab-pane">
 		            <p>
-						<history>
-							<!-- Gallery der letzten 10
-							Gallery der meist besuchten -->
-						</history>						
+						<history></history>						
 		            </p>
 		        </div>		        
 		    </div>
