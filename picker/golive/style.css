@@ -51,7 +51,7 @@
     /*background: #fa7d19;*/
     position: absolute;  
     /*color: #333333;  */
-    z-index: 100;  
+    z-index: 9999;  
     -webkit-transition: all 300ms ease-out;  
     -moz-transition: all 300ms ease-out;  
     -o-transition: all 300ms ease-out;  
@@ -64,12 +64,11 @@
     #_5ca604e477c1f7facb7fe705afb10c9e1fd4e49d.zdfembed .socialbox .fade-caption, #_5ca604e477c1f7facb7fe705afb10c9e1fd4e49d.zdfembed .socialbox .scale-caption {  
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
         filter: alpha(opacity=0);
-        opacity: 0;  
+        visibility: hidden;
+        /*opacity: 0;  */
         height: 100%;
         text-align: left;  
-        padding: 1em 1em 0px 1em;
-        padding-right: 3em;
-        padding-left: 3em;
+        padding: 1em 2em 0px 2em;
     }  
 
     #_5ca604e477c1f7facb7fe705afb10c9e1fd4e49d .relative_wrapper_social{
@@ -101,7 +100,8 @@
 
 
 #_5ca604e477c1f7facb7fe705afb10c9e1fd4e49d.zdfembed .socialbox:hover .fade-caption {  
-    opacity: 1;  
+    /*opacity: 1;  */
+    visibility: visible;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC, endColorstr=#EAEAEA);    
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCCCCC, endColorstr=#EAEAEA)";    
 /*    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";

@@ -72,15 +72,16 @@ berlindirekt
 TODO
 css erstellen Done
 
-Im Picker alten eintrag auswählbar machen ohne identischen quelltext einfügen zu müssen
+Im Picker alten eintrag auswählbar machen ohne identischen quelltext einfügen zu müssen Done
+Recent ID/Name Vie/Liste erstellen Done
 
 auto refresh screenshot
 	id bleibt ntürlich gleich, es wird nur der anhang geändert
 	bei neuem content ID neue ID. änderungen immer über picker
 
-Recent ID/Name Vie/Liste erstellen
 
-Bearbeiten einer alten ID über den picker ermöglichen.
+Bearbeiten einer alten ID über den picker ermöglichen. Rejected
+
 
 Langfristig Renderer komplett trennen.
 	Im Picker wird ein Auftrag erzeugt und in DB gespeichert.
@@ -90,7 +91,10 @@ Langfristig Renderer komplett trennen.
 	Oder nicht so weit treiben und im Picker auf ChangesFeed warten und dann Vorschau anzeigen.
 
 
-
+Live schalten Funktion
+	auf sofa02 ausgewählte (aktivierte) Elemente auf sofa01 synchronisieren. picker auf sofa01 so aufbauen das er den auf sofa02 nutzt
+	auf 01 im prinzip alles ausbauen. live und dev arbeiten(rendern) auf 02. dafür unterschiedliche design docs benutzen. 
+	dev auf merlin umziehen.
 
 
 
