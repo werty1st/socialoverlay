@@ -1,14 +1,15 @@
 //css
 (function (){
 	
-	if (typeof socialcss == 'undefined') {
+	
+	//if (typeof socialcss == 'undefined') { //nutzen? bei mehreren auf einer seite funkt es nicht
 		var csslink = document.createElement('link');
 		csslink.setAttribute("rel","stylesheet")
 		csslink.setAttribute("type","text/css")
 		csslink.setAttribute("href","{{hostname}}/c/twr/{{hash}}/style.css");
 		document.getElementsByTagName('head')[0].appendChild(csslink);
-		socialcss = true;
-	}
+		//socialcss = true;
+	//}
 
 })();
 
