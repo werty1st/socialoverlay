@@ -121,7 +121,9 @@ function Applogic ( rasterrizer )
 
         Embeddcode             = extractscript2( RenderRequest.code );
         Embeddcode.hash        = gethash( RenderRequest.code );//berechne hash und suche in db danach        
-        Embeddcode.hostname    = RenderRequest.hostname; //hostname; //wird überschrieben
+        Embeddcode.hostname         = {};
+        Embeddcode.hostname.int     = 'http://' + RenderRequest.hostname_int; //hostname; //wird überschrieben
+        Embeddcode.hostname.prod    = 'http://' + RenderRequest.hostname_prod; //hostname; //wird überschrieben
                
 
         // console.log(RenderRequest);  return;
@@ -170,7 +172,7 @@ function Applogic ( rasterrizer )
 
         //renderSource
         var renderSource = "";
-            renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
+            renderSource = Embeddcode.hostname.int + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
         console.log(renderSource);
 
         //bilder rendern und hochlade

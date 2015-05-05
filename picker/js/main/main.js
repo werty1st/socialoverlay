@@ -1,6 +1,6 @@
 //main
 angular.module("tapp")
-.controller("MainController", function($http, socket, $rootScope, $scope, db_host, $compile, default_code, wrtyuitabService){
+.controller("MainController", function($http, socket, $rootScope, $scope, $compile, default_code, wrtyuitabService, db_hosts){
 	$scope.code = window.unescape(atob(default_code));
 	$scope.$parent.location = "#/maint";
 
@@ -77,25 +77,8 @@ angular.module("tapp")
 	socket.on('applogic.CodeComplete', function (id) {
 	    console.log("Generation complete");
 
-
 	    //todo auf event umschreiben
-	    var previewO = {};
-	    	//previewO.imageurl = "/c/twr/"+ id +"/2l";
-	    	previewO.htmlcode = "/c/twr/"+ id +"/embed.html";
-	    	previewO.xmlcode = "/c/twr/"+ id +"/embed.xml";
-
-	    //$scope.image = previewO.imageurl+"?"+ new Date().getTime();
-
-	    //selfPower
-			$scope.pickerData = {};
-			$scope.pickerData.playoutUrl = location.protocol + "//" + db_host + previewO.htmlcode;
-			$scope.pickerData.playoutXmlUrl = location.protocol + "//" + db_host + previewO.xmlcode;
-
-		//$scope.tapp.playoutUrl = location.origin + previewO.htmlcode;
-		$http.get(previewO.htmlcode)
-		.success( function(data, status, headers, config) {
-			//var localS = document.getElementById('codetextarea').value = data;
-        });
+		$scope.pickerData = id;	
 
 	});		
 
@@ -104,7 +87,8 @@ angular.module("tapp")
 		//absenden
 		socket.emit('socket.renderImageRequest', {
 			code: $scope.code,
-			hostname: location.origin,
+			hostname_int:  db_hosts.int, //location.origin,
+			hostname_prod: db_hosts.pub, //location.origin,
 			overwrite: $scope.overwrite,
 			screensize: $scope.screensize,
 			version: $scope.version.value,

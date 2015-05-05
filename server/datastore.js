@@ -8,6 +8,7 @@ function renderTemplate(html,data){
 	var template = Handlebars.compile(html);
 	var text = template(data);
 	//return new Handlebars.SafeString(text);
+	console.log("XXXXXXX render clienthostname",data.clienthostname);
 	return (text);
 }
 
@@ -363,10 +364,10 @@ function Datastore(config)
 			if (!err){
 				var template_html = repl.body.toString('utf8');
 
-				//template 2 mal rendern
+				//template 2 mal rendern wegen {{{PictureElementContent}}}
 
 				var target_html1 = renderTemplate(template_html, { hash : self.doc.id,
-																  clienthostname : Embeddcode.hostname,
+																  clienthostname : Embeddcode.hostname.prod,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  PictureElementContent: createPictureElement(),
 																  bgimageurl: RenderRequest.bgimageurl
@@ -374,7 +375,7 @@ function Datastore(config)
 
 
 				var target_html = renderTemplate(target_html1, { hash : self.doc.id,
-																  clienthostname : Embeddcode.hostname,
+																  clienthostname : Embeddcode.hostname.prod,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  PictureElementContent: createPictureElement(),
 																  bgimageurl: RenderRequest.bgimageurl
@@ -396,7 +397,7 @@ function Datastore(config)
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/embed.xml", function(err, repl){
 			if (!err){
 				var template_html = repl.body.toString('utf8');
-				var target_html = renderTemplate(template_html, {hash:self.doc.id,clienthostname:Embeddcode.hostname});
+				var target_html = renderTemplate(template_html, {hash:self.doc.id,clienthostname:Embeddcode.hostname.prod});
 
 				db.saveAttachment( self.doc , 	//doc.id
 				{ name : 'embed.xml',

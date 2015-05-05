@@ -6,7 +6,7 @@
 		var csslink = document.createElement('link');
 		csslink.setAttribute("rel","stylesheet")
 		csslink.setAttribute("type","text/css")
-		csslink.setAttribute("href","{{hostname}}/c/twr/{{hash}}/style.css");
+		csslink.setAttribute("href","{{hostname.prod}}/c/twr/{{hash}}/style.css");
 		document.getElementsByTagName('head')[0].appendChild(csslink);
 		//socialcss = true;
 	//}

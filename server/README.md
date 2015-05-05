@@ -34,6 +34,8 @@ MR heuteJ
 <div class="mr-space" id="mr-space_heutejournal_team" data-space-id="zdf/heutejournal_team" style="min-height: 500px;"></div>
 <script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_heutejournal_team");</script>
 
+<div class="mr-space" id="mr-space_heutejournal_team" data-space-id="zdf/heutejournal_team" style="height: 100%;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_heutejournal_team");</script>
 
 
 Vimdeo
@@ -58,6 +60,10 @@ http://zdf.massrel.io/neo-magazin-royale/
 
 berlindirekt
 <a class="twitter-timeline" data-dnt=true href="https://twitter.com/search?q=%23ZDF" data-widget-id="288618915343515648">Tweets über "#ZDF"</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+<a style="height: 100%;width=100%" class="twitter-timeline" href="https://twitter.com/berlindirekt" data-widget-id="580351495411011584">Tweets von @berlindirekt </a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 <a width="650" class="twitter-timeline" href="https://twitter.com/berlindirekt" data-widget-id="580351495411011584">Tweets von @berlindirekt </a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -96,6 +102,28 @@ Live schalten Funktion
 	auf 01 im prinzip alles ausbauen. live und dev arbeiten(rendern) auf 02. dafür unterschiedliche design docs benutzen. 
 	dev auf merlin umziehen.
 
+
+ziel:
+ neue funktionen live verfügbar machen
+ alte inhalte müssen erreichbar bleiben. (alte docs auf sofa01)
+ entwicklungsfähigkeit muss bleiben
+
+ sofa1 spielt weiter aus
+ picker auf sofa02 umleiten. 02 rendert und synct auf 01
+ 
+ live und testing als desiogn doc einsetzen
+
+
+Ablauf:
+Vor die Pickerschnittstelle:
+	Live stelle Button: doc.status = "live", replicate mit filter auf 01
+	Zurückziehen:		doc.status = "depub", doc auf 01 löschen
+	playouturl ändern
+
+
+curl -X DELETE http://s2:5984/twr/f4a7e6e2567107a950d86d74af9eea8b41904090?rev=9-c02092f2442ebdff4d7cd7e0973ce8ac
+
+curl -X POST -H "Content-Type: application/json" -d '{"source":"http://s2:5984/twr", "target":"http://s2:5984/twr2", "doc_ids":["f4a7e6e2567107a950d86d74af9eea8b41904090"], "filter":"tweetrenderdb/livefilter", "query_params": {"status":"live"} }' http://s2:5984/_replicate
 
 
 

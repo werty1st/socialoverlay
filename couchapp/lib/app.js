@@ -12,7 +12,10 @@ module.exports = {
     // shows: require('./shows'),
     views: require('./views'),
     lists: require('./lists'),
-    rewrites: require('./rewrites')
+    rewrites: require('./rewrites'),
+    filters: require('./filters')   
+    //http://www***.de:5984/twr/_changes?filter=tweetrenderdb/livefilter
+    //http://         :5984/twr/_changes?filter=tweetrenderdb/livefilter&status=live
     //validate_doc_update: require('./validate'),
 	//http://localhost:5984/diebruecke/_design/b2/_view/byType
 

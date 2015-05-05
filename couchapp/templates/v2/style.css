@@ -5,15 +5,12 @@
     overflow: hidden; 
 }  
 
-
 /*
-
 {{#each imagesSizesReceived}}
   {{@index}}: {{this}}
 {{/each}}
-
-
 */
+
 
 #_{{hash}}.zdfembed .socialbox {  
     float: left;  
@@ -26,10 +23,17 @@
     font-size: 14px;
 }  
 
+#_{{hash}}.zdfembed .socialbox p{  
+    color: #333333;
+    padding-right: 0px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}  
 
 
 #_{{hash}}.zdfembed .socialbox h3 {  
     font-size: 18px;
+    color: #333333;
 }  
 
 #_{{hash}} .button{
@@ -86,6 +90,7 @@
 
     #_{{hash}}.zdfembed .socialbox h3 {  
         font-size: 15px;
+        color: #333333;
     }      
 
     #_{{hash}} .button{
@@ -106,7 +111,6 @@
   
 
 }
-
 
 
 
