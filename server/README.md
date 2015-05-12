@@ -102,6 +102,11 @@ Live schalten Funktion
 	auf 01 im prinzip alles ausbauen. live und dev arbeiten(rendern) auf 02. dafür unterschiedliche design docs benutzen. 
 	dev auf merlin umziehen.
 
+####
+render auftrag speichern damit er für url=int oder url=live gerendert werden kann. 
+speichern wärend render deaktivieren
+####
+
 
 ziel:
  neue funktionen live verfügbar machen
