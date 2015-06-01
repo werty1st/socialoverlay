@@ -105,6 +105,10 @@ Live schalten Funktion
 ####
 render auftrag speichern damit er für url=int oder url=live gerendert werden kann. 
 speichern wärend render deaktivieren
+
+renderauftrag abspeichern mit feld für targets=c1/c2
+dienst auf c2 prüft auf renderaufträge und erzeugt einmal bilder und für jedes ziel css/html/js dateien.
+
 ####
 
 

@@ -5,6 +5,7 @@ angular.module("tapp")
 	$scope.$parent.location = "#/maint";
 
 
+
 	$scope.autorefresh = {freq:12,duration:1};
 	$scope.autorefresh.enabled = true;
 	
@@ -30,8 +31,15 @@ angular.module("tapp")
 	];
 
 	$scope.screensize = [320,768]; //preselected defaults
-	$scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
-	$scope.version = $scope.versionopt[1];
+
+	//hidden
+	// $scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
+	// $scope.version = $scope.versionopt[1].value;
+
+	$scope.targetlocationopt = [ { name:"Standard", value:'default'},
+								 { name:"zdfsport.de Startseite", value:'zdfsportstart'} ];
+	$scope.targetlocation = $scope.targetlocationopt[0].value;
+
 
 
 	$scope.usemobileurl = false;
@@ -40,6 +48,7 @@ angular.module("tapp")
 
 	var self = this;
 
+	//geht nicht richtig resettet sich nicht nach rückkehr von maint nicht als service implementieren
 	$scope.$watch(function () {
 			return wrtyuitabService.get();
 		},
@@ -76,10 +85,8 @@ angular.module("tapp")
 
 	socket.on('applogic.CodeComplete', function (id) {
 	    console.log("Generation complete");
-
 	    //todo auf event umschreiben
-		$scope.pickerData = id;	
-
+		$scope.pickerData = id;
 	});		
 
 
@@ -91,7 +98,8 @@ angular.module("tapp")
 			hostname_prod: db_hosts.pub, //location.origin,
 			overwrite: $scope.overwrite,
 			screensize: $scope.screensize,
-			version: $scope.version.value,
+			version: "v2",				 //$scope.version.value", //hidden
+			targetlocation: $scope.targetlocation,
 			autorefresh: $scope.autorefresh,
 			bgimageurl: $scope.bgimageurl,
 			mobileurl: $scope.mobileurl,

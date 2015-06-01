@@ -234,6 +234,11 @@ function Applogic ( rasterrizer )
                                         screensizes: RenderRequest.screensize
                                       });
 
+
+        //Extrawurst
+        if (RenderRequest.targetlocation == "zdfsportstart"){
+            RenderRequest.screensize = [946]; //946x532
+        }
               
         for(var i = 0; i< RenderRequest.screensize.length; i++)
         {
