@@ -237,6 +237,7 @@ function Applogic ( rasterrizer )
 
         //Extrawurst
         if (RenderRequest.targetlocation == "zdfsportstart"){
+            console.log("targetlocation", "zdfsportstart");
             RenderRequest.screensize = [946]; //946x532
         }
               
