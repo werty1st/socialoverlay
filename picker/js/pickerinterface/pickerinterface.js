@@ -112,12 +112,12 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 				//hier erzeugen sonst doppelt
 				pickerData = { 
 	                    playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
-	                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.xml"
+	                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embedm.html"
 	                };
 			} else {
 				pickerData = { 
 	                    playoutUrl:     "http://"+ db_hosts.int + "/twr/" + docId + "/embed.html",
-	                    playoutXmlUrl:  "http://"+ db_hosts.int + "/twr/" + docId + "/embed.xml"
+	                    playoutXmlUrl:  "http://"+ db_hosts.int + "/twr/" + docId + "/embedm.html"
 	                };
 			}
 
