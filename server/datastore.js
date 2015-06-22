@@ -96,10 +96,11 @@ function Datastore(config)
 
 				var newdoc = {};
 				newdoc.type = "post";
-				newdoc.screensize 	= RenderRequest.screensize;
-				newdoc.autorefresh 	= RenderRequest.autorefresh;
-				newdoc.mobileurl 	= RenderRequest.mobileurl;
-				newdoc.slug 		= RenderRequest.slug;
+				newdoc.screensize 	  = RenderRequest.screensize;
+				newdoc.autorefresh 	  = RenderRequest.autorefresh;
+				newdoc.mobileurl 	  = RenderRequest.mobileurl;
+				newdoc.targetlocation = RenderRequest.targetlocation;
+				newdoc.slug 		  = RenderRequest.slug;
 				
 				newdoc.version = "101";
 				newdoc.dateCreated = new Date();
@@ -256,24 +257,50 @@ function Datastore(config)
 	this.on("datastore.saveCssRequest", function (){
 		console.log("datastore.saveCssRequest");	
 
-		//template laden
-		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style.css", function(err, repl){
-			if (!err){
-				var template_script = repl.body.toString('utf8');
-				var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
-																  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
-																  		bgimageurl: RenderRequest.bgimageurl
-																   });
 
-				db.saveAttachment( self.doc , 	//doc.id
-					{ name : 'style.css',
-					  'Content-Type' : 'text/css;charset=utf-8',
-					  body : targetscript
-					},
-					uploadComplete("datastore.saveCssComplete")
-				);
-			}
-		})
+		if (RenderRequest.targetlocation == "zdfsportstart") {
+
+			db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style_sportstart.css", function(err, repl){
+				if (!err){
+					var template_script = repl.body.toString('utf8');
+					var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
+																	  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
+																	  		bgimageurl: RenderRequest.bgimageurl
+																	   });
+
+					db.saveAttachment( self.doc , 	//doc.id
+						{ name : 'style.css',
+						  'Content-Type' : 'text/css;charset=utf-8',
+						  body : targetscript
+						},
+						uploadComplete("datastore.saveCssComplete")
+					);
+				}
+			})
+
+ 		} else {
+
+			//template laden
+			db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style.css", function(err, repl){
+				if (!err){
+					var template_script = repl.body.toString('utf8');
+					var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
+																	  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
+																	  		bgimageurl: RenderRequest.bgimageurl
+																	   });
+
+					db.saveAttachment( self.doc , 	//doc.id
+						{ name : 'style.css',
+						  'Content-Type' : 'text/css;charset=utf-8',
+						  body : targetscript
+						},
+						uploadComplete("datastore.saveCssComplete")
+					);
+				}
+			})
+ 			
+ 		}
+
 	});
 
 

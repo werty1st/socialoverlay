@@ -95,8 +95,19 @@ socialcontentbdsg.push( function bdsg{{hash}}() {
 
 //Click
 if (typeof activateSocial !== "function"){
+
+	var removeclass = function removeclass(){
+
+		var els  = document.getElementsByClassName("overlayon");
+		for (var i=0;i<els.length;i++){
+			var el = els[i];
+				el.className = el.className.replace(/\boverlayon\b/,'overlayoff');
+		}
+	}
+
 	var activateSocial = function activateSocial()
 	{
+
 		socialcookievalue = true;
 		crossStorageClientHUB.onConnect()
 			.then(function() {
@@ -112,7 +123,9 @@ if (typeof activateSocial !== "function"){
 
 		while(socialitem = socialcontentbdsg.pop()){
 			socialitem.activate();
-		}	
+		}
+
+		removeclass();	
 	}
 }
 

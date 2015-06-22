@@ -45,31 +45,58 @@ YT
 <iframe width="560" height="315" src="//www.youtube.com/embed/UDAXuWANp5c" frameborder="0" allowfullscreen></iframe>
 
 
+
 NEO
-<iframe src="http://zdf.massrel.io/neo-magazin-royale" width="1050" height="630" style="background-image:url(http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png)" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
-
-MR Neo
-<iframe src="http://zdf.massrel.io/neo-magazin-royale" width="100%" height="100%" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
-
-NEO2
 http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png
 http://zdf.massrel.io/neo-magazin-royale/
-<div class="mr-space" id="mr-space_neo-magazin-royale" data-space-id="zdf/neo-magazin-royale" style="min-height: 680px;"></div>
+<div class="mr-space" id="mr-space_neo-magazin-royale" data-space-id="zdf/neo-magazin-royale" style="min-height: 1080px;"></div>
 <script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_neo-magazin-royale");</script>
 
 
 berlindirekt
-<a class="twitter-timeline" data-dnt=true href="https://twitter.com/search?q=%23ZDF" data-widget-id="288618915343515648">Tweets über "#ZDF"</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-
-<a style="height: 100%;width=100%" class="twitter-timeline" href="https://twitter.com/berlindirekt" data-widget-id="580351495411011584">Tweets von @berlindirekt </a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-<a width="650" class="twitter-timeline" href="https://twitter.com/berlindirekt" data-widget-id="580351495411011584">Tweets von @berlindirekt </a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-
 <iframe src="http://zdf.massrel.io/berlin-direkt" width="364px" height="410px" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
+
+<div class="mr-space" id="mr-space_berlin-direkt" data-space-id="zdf/berlin-direkt" style="min-height: 410px;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_berlin-direkt");</script>
+
+
+CL_mobil
+<div class="mr-space" id="mr-space_cl_final_mobil" data-space-id="zdf/cl_final_mobil" style="min-height: 800px;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_cl_final_mobil");</script>
+
+CL_sport_start
+<div class="mr-space" id="mr-space_cl_final" data-space-id="zdf/cl_final" style="min-height: 500px;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_cl_final");</script>
+
+
+##Live
+
+NEO
+4695a46e2d3fb6579ed3587c6d6882b61ded2e64
+http://www.zdf.de/neo-magazin-mit-jan-boehmermann/neo-magazin-fanmeile-36922968.html
+Neu: 5be2823d16c86d455dff7e7b8c4b58c8b08e3d80
+
+Berlin Direkt
+acb994a5f28413c296c551a3d8ba0023e3742a2e
+http://www.zdf.de/berlin-direkt/twittern-sie-berlin-direkt-die-meinung-21765160.html
+
+Heute+
+e2728800d782491dee6623f8011761e7c520cc55
+http://www.zdf.de/heute-plus/heute-plus-5989324.html
+
+
+CL_mobil
+d61a424a8989ac9381753b99a76fc97cbb50b343
+
+CL_sport
+b02e9d27fa3e3afc02fce5d6a1ddc204b2b5d1de
+
+var ids = ["4695a46e2d3fb6579ed3587c6d6882b61ded2e64","acb994a5f28413c296c551a3d8ba0023e3742a2e","e2728800d782491dee6623f8011761e7c520cc55"]
+ids.indexOf(doc._id)
+
+Sync
+curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr", 
+"target":"http://wmaiz-v-sofa01.dbc.zdf.de:5984/twr", "doc_ids":["d61a424a8989ac9381753b99a76fc97cbb50b343"] }' http://wmaiz-v-sofa01.dbc.zdf.de:5984/_replicate
 
 24734482
 25441046
@@ -105,6 +132,10 @@ Live schalten Funktion
 ####
 render auftrag speichern damit er für url=int oder url=live gerendert werden kann. 
 speichern wärend render deaktivieren
+
+renderauftrag abspeichern mit feld für targets=c1/c2
+dienst auf c2 prüft auf renderaufträge und erzeugt einmal bilder und für jedes ziel css/html/js dateien.
+
 ####
 
 

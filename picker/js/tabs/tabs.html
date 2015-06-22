@@ -4,46 +4,26 @@
 		        <li class="active"><a href="" data-toggle="tab">Allgemein</a></li>
 		        <li ><a href="" data-toggle="tab">Größe</a></li>
 		        <li ><a href="" data-toggle="tab">Aktualisieren</a></li>
-		        <li ><a href="" data-toggle="tab">Mobil</a></li>
+		        <li ><a href="" data-toggle="tab">Platzierung</a></li>
 		        <li ><a href="" data-toggle="tab">History</a></li>
 		    </ul>
 		    <div id="my-tab-content" class="tab-content ">
 		        <div class="tab-pane active">
 		            <p>
-		            	<table>
+		            	<table class="table">
 		            		<tr>
+		            			<td>Überschreiben</td>
 		            			<td>
-		            				Überschreiben
-		            			</td>
-		            			<td>
-								    <div class="btn-group">
+								    <div class="btn-group pull-left">
 								        <label class="btn btn-primary" ng-model="overwrite" btn-radio="true" >Ja</label>
 								        <label class="btn btn-primary" ng-model="overwrite" btn-radio="false" >Nein</label>
-								    </div>										       								     				
+								    </div>		     				
 		            			</td>
 		            		</tr>
 		            		<tr>
-		            			<td>
-		            				Name
-		            			</td>
-		            			<td>
-		            				<input type="text" ng-model="slug">
-		            			</td>		            			
-		            		</tr>
-		            		<!-- <tr>
-		            			<td>
-		            				Hintergrundbild:
-		            			</td>
-		            			<td>
-									<input
-										id="bgimageurl"
-										ng-model="bgimageurl"
-										size="100"
-										type="text"
-										placeholder="http://www.zdf.de/ZDF/zdfportal/blob/.../data.png"
-										onclick="select()" >
-		            			</td>
-		            		</tr>		    -->         		
+		            			<td>Name</td>
+		            			<td><input type="text" ng-model="slug"></td>		            			
+		            		</tr>      		
 		            	</table>
 						<br/>
 		            </p>
@@ -104,18 +84,38 @@
 						</table>						
 		        </div>
 		        <div class="tab-pane">
-					<label for="usemobileurl">aktivieren</label>
-					<!-- <input id="usemobileurl" type="checkbox" ng-model="usemobileurl" />		        -->
-				    <div id="usemobileurl" class="btn-group">
-				        <label class="btn btn-primary" ng-model="usemobileurl" btn-radio="true" >Ja</label>
-				        <label class="btn btn-primary" ng-model="usemobileurl" btn-radio="false" >Nein</label>
-				    </div>						     	
+
+		        	
+					<table class="table">
+						<tr>
+							<td colspan="2">
+							Einbauen auf:
+							<select ng-model="targetlocation"
+									ng-disabled="false"
+									ng-options="item.value as item.name for item in targetlocationopt" >
+							</select>
+							</td>		            			
+						</tr>   					
+						<tr>
+							<td>
+								<label for="usemobileurl">andere Mobile URL aktivieren</label>
+								<!-- <input id="usemobileurl" type="checkbox" ng-model="usemobileurl" />		        -->
+							    <div id="usemobileurl" class="btn-group">
+							        <label class="btn btn-primary" ng-model="usemobileurl" btn-radio="true" >Ja</label>
+							        <label class="btn btn-primary" ng-model="usemobileurl" btn-radio="false" >Nein</label>
+							    </div>						     	
+							</td>
+							<td>
+					            <p>
+					            	<label for="mobileurl" >Playout Url für m.zdf.de</label><br>
+					            	<input id="mobileurl" type="url" ng-model="mobileurl" ng-disabled="!usemobileurl" size="80">
+					            </p>								
+							</td>
+						</tr>   		
+					</table>
+
 				    <br>
 				    <br>
-		            <p>
-		            	<label for="mobileurl" >Playout Url für m.zdf.de</label><br>
-		            	<input id="mobileurl" type="url" ng-model="mobileurl" ng-disabled="!usemobileurl" size="80">
-		            </p>
 		        </div>
 		        <div class="tab-pane">
 		            <p>
