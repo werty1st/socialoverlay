@@ -1,0 +1,35 @@
+Flow
+====
+
+applogic 	on "applogic.renderImageRequest" 		-> applogic  	emit "datastore.getDocRequest"
+
+datastore 	on "datastore.getDocRequest"			-> datastore 	emit "datastore.docFound"
+													-> datastore 	emit "datastore.newDocCreated"
+
+datastore	on "datastore.docFound"					-> datastore 	emit "applogic.CodeComplete"
+
+
+
+applogic 	on "datastore.newDocCreated"			-> datastore 	emit "datastore.saveScriptRequest"
+
+datastore 	on "datastore.saveScriptRequest"		-> datastore 	emit "datastore.saveOrigEmbedCodeRequest"
+
+datastore	on "datastore.saveOrigEmbedCodeRequest" -> datastore 	emit "datastore.saveHtmlRequest"
+
+datastore	on "datastore.saveHtmlRequest"			-> datastore 	emit "datastore.saveXmlRequest"
+
+datastore	on "datastore.saveXmlRequest"			-> datastore 	emit "datastore.saveScriptCompleted"
+
+
+applogic	on "datastore.saveScriptCompleted"		-> applogic 	emit "applogic.renderImageCompleted"
+
+
+applogic 	on "applogic.renderImageCompleted"		-> datastore 	emit "datastore.saveImageRequest"
+
+datastore	on "datastore.saveImageRequest"			-> datastore 	emit "datastore.saveImageCompleted"
+
+applogic	on "datastore.saveImageCompleted"		-> applogic 	emit "applogic.CodeComplete"
+
+
+app 		on "applogic.CodeComplete"				-> socket 		emit "CodeComplete"
+

@@ -70,7 +70,7 @@ CL_sport_start
 
 
 HeutePLus
-<div class="mr-space" id="mr-space_tweets-heuteplus" data-space-id="zdf/tweets-heuteplus" style="min-height: 500px;"></div>
+<div class="mr-space" id="mr-space_tweets-heuteplus" data-space-id="zdf/tweets-heuteplus" style="height: 100%;"></div>
 <script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_tweets-heuteplus");</script>
 
 
@@ -167,6 +167,8 @@ curl -X DELETE http://s2:5984/twr/f4a7e6e2567107a950d86d74af9eea8b41904090?rev=9
 
 curl -X POST -H "Content-Type: application/json" -d '{"source":"http://s2:5984/twr", "target":"http://s2:5984/twr2", "doc_ids":["f4a7e6e2567107a950d86d74af9eea8b41904090"], "filter":"tweetrenderdb/livefilter", "query_params": {"status":"live"} }' http://s2:5984/_replicate
 
+
+MR Code min-height durch height:100% ersetzen
 
 
 

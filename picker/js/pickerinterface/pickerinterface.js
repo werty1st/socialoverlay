@@ -2,8 +2,10 @@ angular.module( "pickerinterface", [] )
 	.service('$picker', ["db_hosts", '$http', function (db_hosts, $http) {
 
 		console.log("picker setup");
+	
+		var targetOrigin = unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
+		var path = targetOrigin + '/studio/pickerResultInterface.js';
 
-		var path = 'http://cm2-prod-pre.zdf.de/studio/pickerResultInterface.js';
 
 	    var scriptEl = document.createElement('script');
 		    scriptEl.type = 'text/javascript';
@@ -108,19 +110,12 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 
 			var pickerData;
 
-			if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
-				//hier erzeugen sonst doppelt
-				pickerData = { 
-	                    playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
-	                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embedm.html"
-	                };
-			} else {
-				pickerData = { 
-	                    playoutUrl:     "http://"+ db_hosts.int + "/twr/" + docId + "/embed.html",
-	                    playoutXmlUrl:  "http://"+ db_hosts.int + "/twr/" + docId + "/embedm.html"
-	                };
-			}
-
+			//raus oder imperia mit aufnehmen
+			//if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
+			pickerData = { 
+                    playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
+                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embedm.html"
+                };
 
 			if(!pickerData || (location.search == "")) return;
 
@@ -138,7 +133,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 				"content":[
 					{
 						"id": "noid",
-						"description":	"socialbdsg",
+						"description":	"Social  Overlay",
 						"visibleFrom":"2011-11-24T00:00:00+01:00",
 						"visibleTo":"2024-11-24T00:00:00+01:00",
 						"fragments":[
@@ -154,7 +149,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 					}
 				]
 			};
-			var targetOrigin = unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
+
 			PickerResultInterface.sendResult(res, targetOrigin);	    	
 	    }
 
