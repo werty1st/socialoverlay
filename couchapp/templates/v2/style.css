@@ -1,9 +1,9 @@
 #_{{hash}}.zdfembed {
     text-align: center;
-    height: 100%;
+    height: {{css.elHeight}};
     width: 100%;    
     overflow: hidden;
-    margin: -8px;
+    margin: {{css.margin}};
 }  
 
 /*

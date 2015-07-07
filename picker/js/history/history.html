@@ -26,19 +26,23 @@
 				<td>{{ item.slug }}</td>
 			</tr>
 			<tr>
+				<td>Container</td>
+				<td>{{ item.targetlocation }}</td>
+			</tr>			
+			<tr>
 				<td>Erzeugt</td>
-				<td>{{ item.dateCreated | date : format : timezone }}</td>
+				<td>{{ item.dateCreated | date:'yyyy-MM-dd HH:mm:ss' }}</td>
 			</tr>
 			<tr>
 				<td>Aktualisiert</td>
-				<td>{{ item.dateUpdated | date : format : timezone }}</td>
+				<td>{{ item.dateUpdated | date:'yyyy-MM-dd HH:mm:ss' }}</td>
 			</tr>
 		</table>
 						
 		
 		
 		<div class="row" id="imagelistitem">
-		  <div class="col-xs-2 col-md-2" ng-repeat="att in item.attachments | filter:imageFilter">
+		  <div class="col-xs-2 col-md-2" ng-repeat="att in imageFilter(item._attachments)">
 		    <a href="" class="thumbnail">
 		      <img ng-src="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/{{item._id}}/{{att.name}}" alt="Bild">
 				<div class="caption">

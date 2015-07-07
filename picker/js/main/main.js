@@ -36,8 +36,10 @@ angular.module("tapp")
 	// $scope.versionopt = [{label:"v1", value:1},{label:"v2", value:2}];
 	// $scope.version = $scope.versionopt[1].value;
 
-	$scope.targetlocationopt = [ { name:"Standard", value:'default'},
-								 { name:"zdfsport.de Startseite", value:'zdfsportstart'} ];
+	$scope.targetlocationopt = [ { name:"Standard", value:'default'}, //100% kein margin
+								 { name:"zdfsport.de Startseite", value:'zdfsportstart'}, //feste größe kein margin
+								 { name:"zdf.de SB Raster", value:'zdfsbraster'}, //100% mit margin -8px
+								 { name:"zdf.de Faktenbox", value:'faktenbox'} ]; //über html-src 
 	$scope.targetlocation = $scope.targetlocationopt[0].value;
 
 

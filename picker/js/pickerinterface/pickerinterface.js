@@ -1,17 +1,19 @@
 angular.module( "pickerinterface", [] )
 	.service('$picker', ["db_hosts", '$http', function (db_hosts, $http) {
 
-		console.log("picker setup");
+		var targetOrigin = "";
+
+		if (location.search.match(/targetOrigin=([^&]+)/) != null){
+			targetOrigin = location.search.match(/targetOrigin=([^&]+)/)!= null && unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
 	
-		var targetOrigin = unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
-		var path = targetOrigin + '/studio/pickerResultInterface.js';
+		    var scriptEl = document.createElement('script');
+			    scriptEl.type = 'text/javascript';
+			    scriptEl.async = true;
+			    scriptEl.src = targetOrigin + '/studio/pickerResultInterface.js';
+		    (document.head || document.body).appendChild(scriptEl);
+		}
 
 
-	    var scriptEl = document.createElement('script');
-		    scriptEl.type = 'text/javascript';
-		    scriptEl.async = true;
-		    scriptEl.src = path;
-	    (document.head || document.body).appendChild(scriptEl);
 
 
 
@@ -100,24 +102,20 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 	    }	    
 
 	    function submitPicker ( docId ) {
-			console.log("document.referrer",document.referrer);
+			if(!targetOrigin || (location.search == "")) return; //kein submit ohne hostsystem
 
 			if ("http://cm2-int-pre.zdf.de/studio/"  != document.referrer && 
 				"http://cm2-prod-pre.zdf.de/studio/" != document.referrer){
-				//todo button ohne p12 ausblenden
+				//todo button ohne p12 oder imp ausblenden
 				//alert("Nur aus P12 heraus aufrufbar.");
 			}
 
-			var pickerData;
-
 			//raus oder imperia mit aufnehmen
 			//if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
-			pickerData = { 
+			var pickerData = { 
                     playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
                     playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embedm.html"
-                };
-
-			if(!pickerData || (location.search == "")) return;
+                };			
 
 			var query = window.location.search.substring(1);
 			var vars = query.split("&");

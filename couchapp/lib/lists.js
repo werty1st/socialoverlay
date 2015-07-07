@@ -31,17 +31,16 @@ exports.list_all = function (head, req) {
     header['Content-Type'] = 'application/json; charset=utf-8';
     start({code: 200, headers: header});
 
-    var list = "empty";
-    while(row = getRow()){
-        row.value.attachments = [];
-        for(var att in row.value._attachments){
-            var tatt = row.value._attachments[att];
-                tatt.name = att;
-            row.value.attachments.push(tatt);
-        }
-        delete row.value._attachments;
-        items.push(row.value);
-    }
+    // while(row = getRow()){
+    //     row.value.attachments = [];
+    //     for(var att in row.value._attachments){
+    //         var tatt = row.value._attachments[att];
+    //             tatt.name = att;
+    //         row.value.attachments.push(tatt);
+    //     }
+    //     row.value._attachments;
+    //     items.push(row.value);
+    // }
     
     send(JSON.stringify(items)); 
 
@@ -55,18 +54,18 @@ exports.list_available_by_date = function (head, req) {
     header['Content-Type'] = 'application/json; charset=utf-8';
     start({code: 200, headers: header});
 
-    var list = "empty";
-    while(row = getRow()){
-        row.value.attachments = [];
-        row.value.images = [];
-        for(var att in row.value._attachments){
-            var tatt = row.value._attachments[att];
-                tatt.name = att;
-            row.value.attachments.push(tatt);
-        }
-        delete row.value._attachments;
-        items.push(row.value);
-    }
+    // var list = "empty";
+    // while(row = getRow()){
+    //     row.value.attachments = [];
+    //     row.value.images = [];
+    //     for(var att in row.value._attachments){
+    //         var tatt = row.value._attachments[att];
+    //             tatt.name = att;
+    //         row.value.attachments.push(tatt);
+    //     }
+    //     delete row.value._attachments;
+    //     items.push(row.value);
+    // }
     
     send(JSON.stringify(items)); 
 
