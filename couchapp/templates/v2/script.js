@@ -6,7 +6,7 @@
 		var csslink = document.createElement('link');
 		csslink.setAttribute("rel","stylesheet")
 		csslink.setAttribute("type","text/css")
-		csslink.setAttribute("href","{{hostname.prod}}/c/twr/{{hash}}/style.css");
+		csslink.setAttribute("href","{{Embeddcode.hostname.prod}}/c/twr/{{Embeddcode.hash}}/{{style}}");
 		document.getElementsByTagName('head')[0].appendChild(csslink);
 		//socialcss = true;
 	//}
@@ -21,11 +21,11 @@ if (typeof socialcontentbdsg == 'undefined') {
 
 socialcontentbdsg.push( function bdsg{{hash}}() {
 
-	var htmlsrc64 = '{{{html64}}}';
-	var script = '{{{inline}}}';
+	var htmlsrc64 = '{{{Embeddcode.html64}}}';
+	var script = '{{{Embeddcode.inline}}}';
 	var scripts = [];
 
-	{{#each scriptlinks}}
+	{{#each Embeddcode.scriptlinks}}
 	scripts.push("{{this}}");
 	{{/each}}	
 
@@ -70,7 +70,7 @@ socialcontentbdsg.push( function bdsg{{hash}}() {
 			    return r;			
 			}
 		}
-		document.getElementById('_{{hash}}').innerHTML = atobforIE(htmlsrc64);
+		document.getElementById('_{{Embeddcode.hash}}').innerHTML = atobforIE(htmlsrc64);
 
 		if (scripts.length > 0){
 			for(var i1=0; i1 < scripts.length; i1++)

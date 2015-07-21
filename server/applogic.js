@@ -268,29 +268,19 @@ function Applogic ( rasterrizer )
 
     datastore.on("datastore.updateDocDateComplete", function () {
         console.log('applogic.updateDocDateComplete');        
-        datastore.emit("datastore.saveScriptRequest");
-    });    
-
-
-    datastore.on("datastore.saveScriptComplete", function(){
-        console.log('applogic.datastore.saveScriptComplete');
-        datastore.emit("datastore.saveCssRequest");
-    });
-
-    datastore.on("datastore.saveCssComplete", function(){
-        console.log('applogic.datastore.saveCssComplete');
         datastore.emit("datastore.saveHtmlRequest");
     });    
 
+
     datastore.on("datastore.saveHtmlComplete", function(){
         console.log('applogic.datastore.saveHtmlComplete');
-        datastore.emit("datastore.saveXmlRequest");
+        datastore.emit("datastore.saveMobileRequest");
     });
 
 
 
-    datastore.on("datastore.saveXmlComplete", function(){
-        console.log('applogic.datastore.saveXmlComplete');        
+    datastore.on("datastore.saveMobileComplete", function(){
+        console.log('applogic.datastore.saveMobileComplete');        
         self.emit("applogic.CodeComplete", Embeddcode.hash);
         running = false;
     });

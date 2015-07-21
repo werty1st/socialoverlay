@@ -13,6 +13,7 @@
     "jsdom": "~1.0.0-pre.5",
     "phantom": "~0.6.5",
     "phantomjs": "^1.9.13",
+    "q": "^1.4.1",
     "socket.io": "~1.0.6",
     "weak": "^0.3.3"
   },
@@ -30,7 +31,7 @@
     "nodemon": "~1.2.1",
     "open": "*"
   },
-  "scripts" : {
-    "debug" : "node-debug --web-host 0.0.0.0 --debug-port 5888 app.js"
-  }  
+  "scripts": {
+    "debug": "node-debug --web-host 0.0.0.0 --debug-port 5888 app.js"
+  }
 }
