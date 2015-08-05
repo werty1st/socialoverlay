@@ -3,10 +3,15 @@ ids.indexOf(doc._id)
 
 Sync
 curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr", 
-"target":"http://wmaiz-v-sofa01.dbc.zdf.de:5984/twr", "doc_ids":["d61a424a8989ac9381753b99a76fc97cbb50b343"] }' http://wmaiz-v-sofa01.dbc.zdf.de:5984/_replicate
+"target":"http://wmaiz-v-sofa01.dbc.zdf.de:5984/twr", "doc_ids":["b02e9d27fa3e3afc02fce5d6a1ddc204b2b5d1de"] }' http://wmaiz-v-sofa01.dbc.zdf.de:5984/_replicate
 
 
 
 curl -X DELETE http://s2:5984/twr/f4a7e6e2567107a950d86d74af9eea8b41904090?rev=9-c02092f2442ebdff4d7cd7e0973ce8ac
 
 curl -X POST -H "Content-Type: application/json" -d '{"source":"http://s2:5984/twr", "target":"http://s2:5984/twr2", "doc_ids":["f4a7e6e2567107a950d86d74af9eea8b41904090"], "filter":"tweetrenderdb/livefilter", "query_params": {"status":"live"} }' http://s2:5984/_replicate
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr", 
+"target":"http://wmaiz-v-sofa01.dbc.zdf.de:5984/twr_neu" }' http://wmaiz-v-sofa01.dbc.zdf.de:5984/_replicate
