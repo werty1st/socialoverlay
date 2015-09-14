@@ -49,13 +49,13 @@ function extractscript2 (src)
             var sr = s[i].getAttribute("src");
             result.scriptlinks.push(sr);
         }
-    };
+    }
 
 
     for (var i = s.length - 1; i >= 0; i--) {
         var el = s[i];
         el.parentNode.removeChild(el);
-    };
+    }
     
     //result.html = doc.getElementsByTagName("body")[0].innerHTML;
     result.html64 = new Buffer( doc.getElementsByTagName("body")[0].innerHTML ).toString('base64');
@@ -182,7 +182,7 @@ function Applogic ( rasterrizer )
             
             open--;
             console.log("open",open);            
-            if (open == 0){
+            if (open === 0){
                 //letztes bild erzeugt                
                 self.emit("applogic.renderImagesComplete");
             }
@@ -225,7 +225,7 @@ function Applogic ( rasterrizer )
 
                 renderNext();                
                 self.emit("applogic.progress",{msg: "speichern", name: imagename});
-            }
+            };
         }
 
         //erzeuge render tasks (je nach anzahl der ausgewählten größen)

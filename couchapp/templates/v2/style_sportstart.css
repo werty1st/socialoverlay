@@ -167,7 +167,7 @@
     /*background: #fa7d19;*/
     position: absolute;  
     /*color: #333333;  */
-    z-index: 9999;  
+    z-index: 1000;   /*heute.de kurznachrichten sind bei 1050*/
     -webkit-transition: all 300ms ease-out;  
     -moz-transition: all 300ms ease-out;  
     -o-transition: all 300ms ease-out;  

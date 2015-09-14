@@ -4,8 +4,8 @@
 	
 	//if (typeof socialcss == 'undefined') { //nutzen? bei mehreren auf einer seite funkt es nicht
 		var csslink = document.createElement('link');
-		csslink.setAttribute("rel","stylesheet")
-		csslink.setAttribute("type","text/css")
+		csslink.setAttribute("rel","stylesheet");
+		csslink.setAttribute("type","text/css");
 		csslink.setAttribute("href","{{Embeddcode.hostname.prod}}/c/twr/{{Embeddcode.hash}}/{{style}}");
 		document.getElementsByTagName('head')[0].appendChild(csslink);
 		//socialcss = true;
@@ -131,8 +131,8 @@ if (typeof activateSocial !== "function"){
 
 
 //HUB
-(function (undefined ) {	
-
+(function ( ) {	
+	console.log("step2");
 	function socialcookie() {
 		var setup = {};
 			setup.timeout = 3000;
@@ -166,9 +166,9 @@ if (typeof activateSocial !== "function"){
 
 	function insertScript(url,exec,callback) {
 	    scriptEl = document.createElement('script');
-	    scriptEl.type = 'text/javascript';
+	    scriptEl.type = 'text\/javascript';
 	    scriptEl.async = true;
-	    scriptEl.src = url;
+	    
 
 	    if (exec){
 	    	if ("onload" in scriptEl){
@@ -196,7 +196,9 @@ if (typeof activateSocial !== "function"){
 	    		},2000);
 	    	}	    	
 	    }
+
 	    document.getElementsByTagName('head')[0].appendChild(scriptEl);
+	    scriptEl.src = url;
 	}
 
 
@@ -213,23 +215,5 @@ if (typeof activateSocial !== "function"){
 
 })();
 
-//eventcapture for p12
-
-
-// function SocialElementBdsg()
-// {
-// 	var id = "{{hash}}";
-// 	var htmlsrc64 = '{{{html64}}}';
-
-// 	this.getID = function getID()
-// 	{
-// 		return id;
-// 	}
-
-// 	this.getSource = function getSource()
-// 	{
-// 		return atob(htmlsrc64);
-// 	}
-// }
 
 
