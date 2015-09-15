@@ -109,7 +109,7 @@ Es gibt keine Extra Mobil Version mehr. -> CSS:
     margin: {{css.margin}};
 }  
 
-.fitMlbody #_{{hash}}.zdfembed {  
+.socialbox-wrapper #_{{hash}}.zdfembed {  
     margin: 0px;
     margin-bottom: 8px;
 }  

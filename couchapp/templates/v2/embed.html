@@ -8,8 +8,7 @@ document.createElement( "picture" );
 <div class="zdfembed" id="_{{hash}}"  >
 
 
-	<div class="socialbox" >
-
+	<div class="socialbox" style="display:none">
 		<picture>
 		 {{{PictureElementContent}}}
 		</picture>
@@ -26,6 +25,25 @@ document.createElement( "picture" );
 			</div>
 		</span>  					
 	</div>
+
+	<script type="text/javascript">
+		var socialbox = document.getElementsByClassName("socialbox");
+		for(i=0;i < socialbox.length;i++){ 
+			if (socialbox[i].hasAttribute('style')){
+				socialbox[i].removeAttribute('style');
+			}
+		}
+	</script>
+	<noscript>
+		<a href="#noscript" >
+			{{#each imagesSizesReceived}}
+				{{#if @first}}
+				<img style="width: 100%;" src="http://sofa01.zdf.de/c/twr/{{@root.hash}}/{{this}}px">
+				<!-- <img src="{{@root.clienthostname}}/c/twr/{{@root.hash}}/{{this}}px"> -->
+				{{/if}}
+			{{/each}}			
+		</a>
+	</noscript>
 
 
 </div>

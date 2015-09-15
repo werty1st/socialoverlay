@@ -6,6 +6,7 @@ angular.module("tapp")
 
 
 
+
 	$scope.autorefresh = {freq:12,duration:1};
 	$scope.autorefresh.enabled = true;
 	
@@ -51,8 +52,9 @@ angular.module("tapp")
 	var self = this;
 
 	//geht nicht richtig resettet sich nicht nach rückkehr von maint nicht als service implementieren
-	$scope.$watch(function () {
-			return wrtyuitabService.get();
+	$scope.$watch('activeTab', function () {
+			return $scope.$parent.activeTab;
+			//return wrtyuitabService.get();
 		},
 		function(newVal, oldVal) {
 			$scope.activeTab = newVal;

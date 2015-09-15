@@ -3,6 +3,7 @@ angular.module("tapp")
 		function($http, $scope, $cookies, $cookieStore, $cls){
 			console.log("maint init");
 			$scope.$parent.location = "#/";
+			$scope.$parent.activeTab = ""; //rest to start
 			
 			$scope.user = true;
 			$scope.couchdb = {};

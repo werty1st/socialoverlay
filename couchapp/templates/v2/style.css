@@ -8,6 +8,7 @@
 
 [class^="FITML"] #_{{hash}}.zdfembed,
 [class*=" FITML"] #_{{hash}}.zdfembed,
+.socialbox-wrapper #_{{hash}}.zdfembed,
 .fitMlbody #_{{hash}}.zdfembed {
     margin: 0px;
     margin-bottom: 8px;
@@ -17,7 +18,6 @@
   {{@index}}: {{this}}
 {{/each}}
 */
-
 
 #_{{hash}}.zdfembed .socialbox {  
     float: left;  
