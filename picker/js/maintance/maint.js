@@ -3,6 +3,7 @@ angular.module("tapp")
 		function($http, $scope, $cookies, $cookieStore, $cls){
 			console.log("maint init");
 			$scope.$parent.location = "#/";
+			$scope.$parent.activeTab = ""; //rest to start
 			
 			$scope.user = true;
 			$scope.couchdb = {};
@@ -53,15 +54,22 @@ angular.module("tapp")
 
 			}
 
-			$scope.imageFilter = function imageFilter(obj) {
+			$scope.imageFilter = function imageFilter(items) {
+			    var result = {};
 			    var wordsToFilter = ['image/png'];
-			    for (var i = 0; i < wordsToFilter.length; i++) {
-			        if (obj.content_type.indexOf(wordsToFilter[i]) !== -1) {
-			            return true;
-			        }
-			    }
-			    return false;
-			};
+			    angular.forEach(items, function(obj, key) {
+
+				    for (var i = 0; i < wordsToFilter.length; i++) {
+				        if (obj.content_type.indexOf(wordsToFilter[i]) !== -1) {
+				        	obj.name = key;
+				            result[key] = obj;
+				        }
+				    }
+
+	
+			    });
+			    return result;
+			}			
 
 			//http://bazalt-cms.com/ng-table/example/10
 
@@ -70,12 +78,33 @@ angular.module("tapp")
 				$http({
 					method: 'GET',
 					withCredentials: true,
-					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_list/list_all/all',
+					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_view/all',
+					//url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_list/list_all/all',
 					}).success(function (data) {
-						$scope.couchdb.all = data;
-						console.log("data",data)
+						$scope.couchdb.all = [];
+							angular.forEach(data.rows, function(obj, key) {
+								$scope.couchdb.all.push(obj.value);
+							});
+						console.log("data",data.rows)
 					}).error(function() {
 						$scope.couchdb.all = null;
+					});
+
+			}
+
+			$scope.hideFromSync = function hideFromSync(id, rev, index){
+				var $doc = $scope.couchdb.all[index];
+				$doc.live = !$doc.live;
+
+				$http({
+					method: 'PUT',
+					withCredentials: true,
+					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/' + id,
+					data: $doc
+					}).success(function (data) {
+						$doc._rev = data.rev;
+						console.log("data",data)
+					}).error(function() {						
 					});
 
 			}

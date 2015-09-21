@@ -1,15 +1,19 @@
 angular.module( "pickerinterface", [] )
 	.service('$picker', ["db_hosts", '$http', function (db_hosts, $http) {
 
-		console.log("picker setup");
+		var targetOrigin = "";
 
-		var path = 'http://cm2-prod-pre.zdf.de/studio/pickerResultInterface.js';
+		if (location.search.match(/targetOrigin=([^&]+)/) != null){
+			targetOrigin = location.search.match(/targetOrigin=([^&]+)/)!= null && unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
+	
+		    var scriptEl = document.createElement('script');
+			    scriptEl.type = 'text/javascript';
+			    scriptEl.async = true;
+			    scriptEl.src = targetOrigin + '/studio/pickerResultInterface.js';
+		    (document.head || document.body).appendChild(scriptEl);
+		}
 
-	    var scriptEl = document.createElement('script');
-		    scriptEl.type = 'text/javascript';
-		    scriptEl.async = true;
-		    scriptEl.src = path;
-	    (document.head || document.body).appendChild(scriptEl);
+
 
 
 
@@ -98,31 +102,20 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 	    }	    
 
 	    function submitPicker ( docId ) {
-			console.log("document.referrer",document.referrer);
+			if(!targetOrigin || (location.search == "")) return; //kein submit ohne hostsystem
 
 			if ("http://cm2-int-pre.zdf.de/studio/"  != document.referrer && 
 				"http://cm2-prod-pre.zdf.de/studio/" != document.referrer){
-				//todo button ohne p12 ausblenden
+				//todo button ohne p12 oder imp ausblenden
 				//alert("Nur aus P12 heraus aufrufbar.");
 			}
 
-			var pickerData;
-
-			if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
-				//hier erzeugen sonst doppelt
-				pickerData = { 
-	                    playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
-	                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.xml"
-	                };
-			} else {
-				pickerData = { 
-	                    playoutUrl:     "http://"+ db_hosts.int + "/twr/" + docId + "/embed.html",
-	                    playoutXmlUrl:  "http://"+ db_hosts.int + "/twr/" + docId + "/embed.xml"
-	                };
-			}
-
-
-			if(!pickerData || (location.search == "")) return;
+			//raus oder imperia mit aufnehmen
+			//if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
+			var pickerData = { 
+                    playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
+                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embedm.html"
+                };			
 
 			var query = window.location.search.substring(1);
 			var vars = query.split("&");
@@ -138,7 +131,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 				"content":[
 					{
 						"id": "noid",
-						"description":	"socialbdsg",
+						"description":	"Social  Overlay",
 						"visibleFrom":"2011-11-24T00:00:00+01:00",
 						"visibleTo":"2024-11-24T00:00:00+01:00",
 						"fragments":[
@@ -154,7 +147,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 					}
 				]
 			};
-			var targetOrigin = unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
+
 			PickerResultInterface.sendResult(res, targetOrigin);	    	
 	    }
 

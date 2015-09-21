@@ -1,17 +1,90 @@
 //db setup
 var cradle = require('cradle');
+var Q = require('q');
 var util = require("util");
 var EventEmitter = require('events').EventEmitter;
 
 var Handlebars = require('handlebars');
-function renderTemplate(html,data){
-	var template = Handlebars.compile(html);
-	var text = template(data);
-	//return new Handlebars.SafeString(text);
-	console.log("XXXXXXX render clienthostname",data.clienthostname);
-	return (text);
-}
+	
 
+
+
+function createPictureElement(Embeddcode){
+
+	/*
+	<picture>
+	     <!--[if IE 9]><video style="display: none;"><![endif]-->
+	     
+		<source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/1824px" 
+	     		 media="(min-width: 1224px)">
+
+	     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/1224px" 
+	     		 media="(min-width: 768px) and (max-width: 1224px)">
+	     
+	     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/768px" 
+	     		 media="(min-width: 320px) and (max-width: 768px)">
+	     
+	     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/320px" 
+	     		 media="(min-width: 200px) and (max-width: 320px)">
+
+	     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/200px" 
+	     		 media="(max-width: 200px)">
+
+	     <!--[if IE 9]></video><![endif]-->
+	     <img style="width: 100%;" srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/320px" alt="Vorschaubild Social Media">
+	</picture>
+	*/
+
+	// [ 200, 320, 768, 1224, 1824 ]
+
+
+	/*
+		definiere start und endgröße
+		setze die mitteleren größen
+		1 größe
+		2 größen
+		3 und mehr
+	*/
+
+	var sizes = Embeddcode.imagesSizesReceived;
+
+	var htmlstring = '';
+	
+
+	if (sizes.length == 1){
+		htmlstring = '<img style="width: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+ sizes[0] +'px" alt="Vorschaubild Social Media">';
+	} else if(sizes.length == 2){
+		htmlstring  = '<!--[if IE 9]><video style="display: none;"><![endif]-->';
+
+		htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[1]+'px" media="(min-width: '+sizes[0]+'px)">'; 
+		htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" media="(max-width: '+sizes[0]+'px)">'; 
+		
+		htmlstring += '<!--[if IE 9]></video><![endif]-->';
+		htmlstring += '<img style="widthx: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" alt="Vorschaubild Social Media">';
+	} else if(sizes.length > 2){
+		htmlstring  = '<!--[if IE 9]><video style="display: none;"><![endif]-->';
+
+		var imageMax  = sizes[sizes.length-1];
+		var imageMax1 = sizes[sizes.length-2];
+		var imageMin  = sizes[0];
+
+		htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+ imageMax +'px" media="(min-width: '+imageMax1+'px)">'; 
+		
+		//läuft n-2 mal
+		for (var i = sizes.length-2; i > 0; i--){
+			var imageL = sizes[i], imageS = sizes[i-1];
+			htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+imageL+'px" media="(min-width: '+imageS+'px) and (max-width: '+imageL+'px)">'; 
+		}
+
+		htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+ imageMin +'px" media="(max-width: '+imageMin+'px)">'; 
+		htmlstring += '<!--[if IE 9]></video><![endif]-->';
+		htmlstring += '<img style="width: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" alt="Vorschaubild Social Media">';
+	} else {
+		//Error TODO: muss schon früher erkannt werden
+	}
+
+	return htmlstring;
+}
 
 function Datastore(config)
 {
@@ -35,13 +108,22 @@ function Datastore(config)
 	  });
 
 
+	function renderTemplate(html,data){
+		var template = Handlebars.compile(html);
+		var text = template(data);
+		//return new Handlebars.SafeString(text);
+		//console.log("XXXXXXX render clienthostname",data.clienthostname);
+		return (text);
+	}
+
+
 	function uploadComplete ( emitNext, payload ){
 		return function(err, doc)
 		{
 			if (!err)
 			{
-				console.log("rev:",doc.rev);
-				console.log("next:",emitNext);
+				//console.log("rev:",doc.rev);
+				//console.log("next:",emitNext);
 				self.doc = doc;
 				self.emit(emitNext, payload);
 			} else 
@@ -146,15 +228,8 @@ function Datastore(config)
 							throw new Error("Doc overwrite failed",err);
 						}
 					});
-
-
-				
 				}
-
-
-
 			}
-
 		});
 	});
 
@@ -180,27 +255,6 @@ function Datastore(config)
 	})
 
 
-	// this.on("datastore.saveIframeRequest", function(){
-	// 	console.log("datastore.saveIframeRequest");
-
-	// 	db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/iframe.html", function(err, repl){
-	// 		if (!err){
-	// 			var template_html = repl.body.toString('utf8');
-	// 			var renderSource = Embeddcode.hostname + "/c/twr/"+ Embeddcode.hash +"/rendersource.html";
-	// 			var target_html = renderTemplate(template_html, { rendersource: renderSource , bgimageurl: RenderRequest.bgimageurl});
-
-	// 			db.saveAttachment( self.doc , 	//doc.id
-	// 			{ name : 'iframe.html',
-	// 			  'Content-Type' : 'text/html;charset=utf-8',
-	// 			  body : target_html
-	// 			},
-	// 			uploadComplete("datastore.saveIframeComplete"));
-	// 		}
-	// 	});
-	// })
-
-
-
 	this.on("datastore.saveImageRequest", function (name, imagebuffer){
 	//this.on("datastore.saveImageRequest", function (){
 		//gucke im speicher/cache nach sonst render neu
@@ -217,8 +271,6 @@ function Datastore(config)
 	});
 
 
-
-
 	this.on("datastore.updateDocDateRequest", function (){
 		console.log("datastore.updateDocDateRequest");
 
@@ -229,163 +281,10 @@ function Datastore(config)
 	});
 
 
+	function saveHTML(){
 
-
-	// --> saveOrigEmbedCodeRequest
-	this.on("datastore.saveScriptRequest", function (){
-		console.log("datastore.saveScriptRequest");
-
-		//template laden
-		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/script.js", function(err, repl){
-			if (!err){
-				var template_script = repl.body.toString('utf8');
-				var targetscript = renderTemplate(template_script, Embeddcode);
-
-				db.saveAttachment( self.doc , 	//doc.id
-					{ name : 'script.js',
-					  'Content-Type' : 'text/javascript;charset=utf-8',
-					  body : targetscript
-					},
-					uploadComplete("datastore.saveScriptComplete")
-				);
-			}
-		})
-	});
-
-
-
-	this.on("datastore.saveCssRequest", function (){
-		console.log("datastore.saveCssRequest");	
-
-
-		if (RenderRequest.targetlocation == "zdfsportstart") {
-
-			db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style_sportstart.css", function(err, repl){
-				if (!err){
-					var template_script = repl.body.toString('utf8');
-					var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
-																	  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
-																	  		bgimageurl: RenderRequest.bgimageurl
-																	   });
-
-					db.saveAttachment( self.doc , 	//doc.id
-						{ name : 'style.css',
-						  'Content-Type' : 'text/css;charset=utf-8',
-						  body : targetscript
-						},
-						uploadComplete("datastore.saveCssComplete")
-					);
-				}
-			})
-
- 		} else {
-
-			//template laden
-			db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/style.css", function(err, repl){
-				if (!err){
-					var template_script = repl.body.toString('utf8');
-					var targetscript = renderTemplate(template_script, { 	hash : self.doc.id,
-																	  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
-																	  		bgimageurl: RenderRequest.bgimageurl
-																	   });
-
-					db.saveAttachment( self.doc , 	//doc.id
-						{ name : 'style.css',
-						  'Content-Type' : 'text/css;charset=utf-8',
-						  body : targetscript
-						},
-						uploadComplete("datastore.saveCssComplete")
-					);
-				}
-			})
- 			
- 		}
-
-	});
-
-
-	this.on("datastore.saveHtmlRequest", function(){
-		console.log("datastore.saveHtmlRequest");
-
-		var template_name = "embed.html";
-
-
-		function createPictureElement(){
-
-			/*
-			<picture>
-			     <!--[if IE 9]><video style="display: none;"><![endif]-->
-			     
-				<source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/1824px" 
-			     		 media="(min-width: 1224px)">
-
-			     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/1224px" 
-			     		 media="(min-width: 768px) and (max-width: 1224px)">
-			     
-			     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/768px" 
-			     		 media="(min-width: 320px) and (max-width: 768px)">
-			     
-			     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/320px" 
-			     		 media="(min-width: 200px) and (max-width: 320px)">
-
-			     <source srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/200px" 
-			     		 media="(max-width: 200px)">
-
-			     <!--[if IE 9]></video><![endif]-->
-			     <img style="width: 100%;" srcset="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/e09755cbb1012beb8b30e2a2399db9620641f2a4/320px" alt="Vorschaubild Social Media">
-			</picture>
-			*/
-
-			// [ 200, 320, 768, 1224, 1824 ]
-
-
-			/*
-				definiere start und endgröße
-				setze die mitteleren größen
-				1 größe
-				2 größen
-				3 und mehr
-			*/
-
-			var sizes = Embeddcode.imagesSizesReceived;
-
-			var htmlstring = '';
-			
-
-			if (sizes.length == 1){
-				htmlstring = '<img style="width: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+ sizes[0] +'px" alt="Vorschaubild Social Media">';
-			} else if(sizes.length == 2){
-				htmlstring  = '<!--[if IE 9]><video style="display: none;"><![endif]-->';
-
-				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[1]+'px" media="(min-width: '+sizes[0]+'px)">'; 
-				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" media="(max-width: '+sizes[0]+'px)">'; 
-				
-				htmlstring += '<!--[if IE 9]></video><![endif]-->';
-				htmlstring += '<img style="widthx: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" alt="Vorschaubild Social Media">';
-			} else if(sizes.length > 2){
-				htmlstring  = '<!--[if IE 9]><video style="display: none;"><![endif]-->';
-	
-				var imageMax  = sizes[sizes.length-1];
-				var imageMax1 = sizes[sizes.length-2];
-				var imageMin  = sizes[0];
-
-				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+ imageMax +'px" media="(min-width: '+imageMax1+'px)">'; 
-				
-				//läuft n-2 mal
-				for (var i = sizes.length-2; i > 0; i--){
-					var imageL = sizes[i], imageS = sizes[i-1];
-					htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+imageL+'px" media="(min-width: '+imageS+'px) and (max-width: '+imageL+'px)">'; 
-				}
-
-				htmlstring += '<source srcset="{{clienthostname}}/c/twr/{{hash}}/'+ imageMin +'px" media="(max-width: '+imageMin+'px)">'; 
-				htmlstring += '<!--[if IE 9]></video><![endif]-->';
-				htmlstring += '<img style="width: 100%;" srcset="{{clienthostname}}/c/twr/{{hash}}/'+sizes[0]+'px" alt="Vorschaubild Social Media">';
-			} else {
-				//Error TODO: muss schon früher erkannt werden
-			}
-
-			return htmlstring;
-		}
+		var deferred = Q.defer();
+		var template_name = "embed.html";	
 		
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/"+template_name, function(err, repl){
 			if (!err){
@@ -396,7 +295,7 @@ function Datastore(config)
 				var target_html1 = renderTemplate(template_html, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname.prod,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
-																  PictureElementContent: createPictureElement(),
+																  PictureElementContent: createPictureElement(Embeddcode),
 																  bgimageurl: RenderRequest.bgimageurl
 																});
 
@@ -404,7 +303,7 @@ function Datastore(config)
 				var target_html = renderTemplate(target_html1, { hash : self.doc.id,
 																  clienthostname : Embeddcode.hostname.prod,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
-																  PictureElementContent: createPictureElement(),
+																  PictureElementContent: createPictureElement(Embeddcode),
 																  bgimageurl: RenderRequest.bgimageurl
 																});
 
@@ -413,40 +312,257 @@ function Datastore(config)
 				  'Content-Type' : 'text/html;charset=utf-8',
 				  body : target_html
 				},
-				uploadComplete("datastore.saveHtmlComplete"));
-			}
-		});		
-	})
+				function(err,doc){
+						if (!err){
+							deferred.resolve(doc);
+						} else {
+							deferred.reject(err);
+						}
+					}
+				);
+			}else{
+				deferred.reject(err);
+			}			
+		});	
+		return deferred.promise;	
+	}
 
-	this.on("datastore.saveXmlRequest", function(){
-		console.log("datastore.saveXmlRequest");	
-
-		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/embed.xml", function(err, repl){
+	function saveSCRIPT(){
+		var deferred = Q.defer();
+		//template laden
+		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/script.js", function(err, repl){
 			if (!err){
-				var template_html = repl.body.toString('utf8');
-				var target_html = renderTemplate(template_html, {hash:self.doc.id,clienthostname:Embeddcode.hostname.prod});
+				var template_script = repl.body.toString('utf8');
+				var targetscript = renderTemplate(template_script, { Embeddcode: Embeddcode, style: "style.css"} );
 
 				db.saveAttachment( self.doc , 	//doc.id
-				{ name : 'embed.xml',
-				  'Content-Type' : 'text/xml;charset=utf-8',
-				  body : target_html
-				},
-				uploadComplete("datastore.saveXmlComplete"));
+					{ name : 'script.js',
+					  'Content-Type' : 'text/javascript;charset=utf-8',
+					  body : targetscript
+					},
+					function(err,doc){
+						if (!err){
+							deferred.resolve(doc);
+						} else {
+							deferred.reject(err);
+						}
+					}
+				);
+			}else{
+				deferred.reject(err);
+			}			
+		});	
+		return deferred.promise;
+	}
+
+	function saveCSS(){
+		var deferred = Q.defer();		
+		var css_source = "templates/"+config.version+"/style.css";
+		var dyncss = { elHeight : "100%", margin:"0px" };
+
+		if (RenderRequest.targetlocation == "zdfsportstart") {
+			css_source = "templates/"+config.version+"/style_sportstart.css";
+		} else if (RenderRequest.targetlocation == "zdfsbraster") {
+			dyncss.margin = "-8px";
+ 		} else if (RenderRequest.targetlocation == "faktenbox"){
+			dyncss.elHeight = "350px";
+			dyncss.margin = "0px";
+ 		}else /*default*/ {
+ 		}
+
+		//template laden
+		db.getAttachment("_design/tweetrenderdb", css_source , function(err, repl){
+			if (!err){
+				var template_script = repl.body.toString('utf8');
+				var targetscript = renderTemplate(template_script, { 	hash: self.doc.id,
+																  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
+																  		bgimageurl: RenderRequest.bgimageurl,
+																  		css: dyncss });
+				db.saveAttachment( self.doc , 	//doc.id
+					{ name : 'style.css', 'Content-Type' : 'text/css;charset=utf-8', body : targetscript },
+					function(err,doc){
+						if (!err){
+							deferred.resolve(doc);
+						} else {
+							deferred.reject(err);
+						}
+					}
+				);
+			}else{
+				deferred.reject(err);
+			}			
+		});	
+		return deferred.promise;
+	}
+
+	this.on("datastore.saveHtmlRequest", function(){
+		console.log("datastore.saveHtmlRequest");
+		
+		//saveCSS
+		saveCSS()
+		.then(function(doc){
+			self.doc = doc;
+			return saveSCRIPT();
+		})
+		.then(function(doc){
+			self.doc = doc;
+			return saveHTML();
+		})
+		.then(function(doc){
+			self.doc = doc;			
+			console.log("Q completed","datastore.saveHtmlComplete");
+			uploadComplete( "datastore.saveHtmlComplete" )(false,doc);
+		})
+		.catch(function(err){
+			console.log("Q error",err);
+		})
+		
+	})
+
+
+
+	function saveHTMLm(){
+		var deferred = Q.defer();
+
+		var template_name = "embedm.html";
+
+		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/"+template_name, function(err, repl){
+			if (!err){
+				var template_html = repl.body.toString('utf8');
+
+				//template 2 mal rendern wegen {{{PictureElementContent}}} das selbst {{enthält mit verweis auf bild url}}
+				//todo erst picturehtml rendern dann in den rest einfügem
+
+				var target_html = renderTemplate(template_html, { hash : self.doc.id,
+																  clienthostname : Embeddcode.hostname.prod,
+																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
+																  PictureElementContent: createPictureElement(Embeddcode),
+																  bgimageurl: RenderRequest.bgimageurl
+																});
+
+
+					target_html = renderTemplate(target_html, { hash : self.doc.id,
+																  clienthostname : Embeddcode.hostname.prod,
+																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
+																  PictureElementContent: createPictureElement(Embeddcode),
+																  bgimageurl: RenderRequest.bgimageurl
+																});
+
+				db.saveAttachment( self.doc , 	//doc.id
+					{ name : 'embedm.html',
+					  'Content-Type' : 'text/html;charset=utf-8',
+					  body : target_html
+					},
+					function(err,doc){
+						if (!err){
+							deferred.resolve(doc);
+						} else {
+							deferred.reject(err);
+						}
+					}			
+				);
+			}else{
+				deferred.reject(err);
+			}			
+		});	
+		return deferred.promise;
+	}
+
+	function saveSCRIPTm(){
+		var deferred = Q.defer();
+
+		//template laden
+		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/script.js", function(err, repl){
+			if (!err){
+				var template_script = repl.body.toString('utf8');
+				var targetscript = renderTemplate(template_script, { Embeddcode: Embeddcode, style: "stylem.css"} );
+
+				db.saveAttachment( self.doc , 	//doc.id
+					{ name : 'scriptm.js',
+					  'Content-Type' : 'text/javascript;charset=utf-8',
+					  body : targetscript
+					},
+					function(err,doc){
+						if (!err){
+							deferred.resolve(doc);
+						} else {
+							deferred.reject(err);
+						}
+					}
+				);
+			}else{
+				deferred.reject(err);
 			}
-		});		
-	})	
+		})
+		return deferred.promise;
+	}
 
+	function saveCSSm(){
 
+		var deferred = Q.defer();
+		
+		var css_source = "templates/"+config.version+"/stylem.css";
+		var dyncss = { elHeight : "100%", margin:"0px" };
 
+		if (RenderRequest.targetlocation == "zdfsportstart") {
+			css_source = "templates/"+config.version+"/style_sportstart.css";
+		} else if (RenderRequest.targetlocation == "zdfsbraster") {
+			dyncss.margin = "-8px";
+ 		} else if (RenderRequest.targetlocation == "faktenbox"){
+			dyncss.elHeight = "100%"; //mobil wird die höhe nicht gebraucht
+			dyncss.margin = "0px";
+ 		}else /*default*/ {
+ 		}
 
+		//template laden
+		db.getAttachment("_design/tweetrenderdb", css_source , function(err, repl){
+			if (!err){
+				var template_script = repl.body.toString('utf8');
+				var targetscript = renderTemplate(template_script, { 	hash: self.doc.id,
+																  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
+																  		bgimageurl: RenderRequest.bgimageurl,
+																  		css: dyncss });
+				db.saveAttachment( self.doc , 	//doc.id
+					{ name : 'stylem.css', 'Content-Type' : 'text/css;charset=utf-8', body : targetscript },
+					function(err,doc){
+						if (!err){
+							deferred.resolve(doc);
+						} else {
+							deferred.reject(err);
+						}
+					}
+				);
+			}else{
+				deferred.reject(err);
+			}
+		});
 
+		return deferred.promise;
+	}
 
+	this.on("datastore.saveMobileRequest", function(){
 
+		console.log("datastore.saveMobileRequest")
+		//saveCSSm
+		saveCSSm()
+		.then(function(doc){
+			self.doc = doc;
+			return saveSCRIPTm();
+		})
+		.then(function(doc){
+			self.doc = doc;
+			return saveHTMLm();
+		})
+		.then(function(doc){
+			self.doc = doc;			
+			console.log("Q completed","datastore.saveMobileRequest");
+			uploadComplete( "datastore.saveMobileComplete" )(false,doc);
+		})
+		.catch(function(err){
+			console.log("Q error",err);
+		})
 
-
-
-
-
+	})
 
 }
 

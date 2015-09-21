@@ -1,0 +1,23 @@
+http://www.zdf.de/neo-magazin-mit-jan-boehmermann/neo-magazin-fanmeile-36922968.html
+0efc76c847ed38932c17761d7fee1c527764826d
+
+NEO
+http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/blob/36041990/5/data.png
+http://zdf.massrel.io/neo-magazin-royale/
+<div class="mr-space" id="mr-space_neo-magazin-royale" data-space-id="zdf/neo-magazin-royale" style="height:100%;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_neo-magazin-royale");</script>
+
+
+mobil fix:
+
+body{
+	maring:0px;	
+} 
+
+#{{id}}.zdfembed {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* margin: -8px; */
+}

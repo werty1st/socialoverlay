@@ -41,7 +41,9 @@ angular.module("wrtyuitab", ['ui.bootstrap.buttons'] )
 
 
                             angular.forEach(lis, function(li, key) {
+
                                 if (_li == li){
+                                    scope.$parent.activeTab = angular.element(li).text();
                                     wrtyuitabService.set( li.textContent );
                                     angular.element(li).addClass("active");
                                     angular.element(content_divs[key]).addClass("active");

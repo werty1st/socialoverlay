@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<zdfembed>
-	<id>{{hash}}</id>
-	<preview>http://sofa01.zdf.de/c/twr/{{hash}}/2l</preview>
-	<htmlsrc>http://sofa01.zdf.de/c/twr/{{hash}}/embed.html</htmlsrc>
-	<js>http://sofa01.zdf.de/c/twr/{{hash}}/script.js</js>
-</zdfembed>

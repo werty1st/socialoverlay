@@ -39,7 +39,10 @@
 	
 	<ul class="list-group histroy" >
 		<li href="" ng-repeat="item in couchdb.all" class="list-group-item input-group" >
-		<button type="button" ng-click="remove(item._id,item._rev,$index)" class="btn btn-danger pull-right">löschen</button>
+		<button type="button" ng-click="remove(item._id,item._rev,$index)" class="btn btn-danger pull-right">löschen (dev)</button>
+		<!-- call live machine and update on result -->		
+		<button type="button" ng-click="hideFromSync(item._id,item._rev,$index)" class="btn btn-default pull-right">live on/off</button>
+
 
 		<div class="subject">
 			ID: {{item._id}}
@@ -49,16 +52,19 @@
 				Name: {{item.slug}}
 			</strong>
 		</div>
+		<div class="targetlocation">
+				Container: {{item.targetlocation}}
+		</div>		
 		<div class="subjectDateCreated">
-			Erzeugt: {{item.dateCreated}}
+			Erzeugt: {{item.dateCreated | date:'yyyy-MM-dd HH:mm:ss' }}
 		</div>
 		<div class="subjectDateUpdated">
-			Aktualisieren: {{item.dateUpdated}}
+			Aktualisieren: {{item.dateUpdated | date:'yyyy-MM-dd HH:mm:ss'}}
 		</div>	
 		
 		
 		<div class="row" id="imagelistitem">
-		  <div class="col-xs-2 col-md-2" ng-repeat="att in item.attachments | filter:imageFilter">
+		  <div class="col-xs-2 col-md-2" ng-repeat="att in imageFilter(item._attachments)">
 		    <a href="" class="thumbnail">
 		      <img ng-src="http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/{{item._id}}/{{att.name}}" alt="Bild">
 				<div class="caption">

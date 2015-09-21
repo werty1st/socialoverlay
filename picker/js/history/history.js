@@ -16,11 +16,14 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
             $http({
                 method: 'GET',
                 withCredentials: true,
-                url: 'http://' + db_hosts.int + ':5984/twr/_design/tweetrenderdb/_list/list_available_by_date/posts_active?descending=true',
+                url: 'http://' + db_hosts.int + ':5984/twr/_design/tweetrenderdb/_view/posts_active?descending=true',
                 }).success(function (data) {
                     //$scope.couchdb.all = data;
                     //console.log("data",data);
-                    $scope.recents = data;
+                    $scope.recents = [];
+                        angular.forEach(data.rows, function(obj, key) {
+                            $scope.recents.push(obj.value);
+                        });
                 }).error(function() {
                     $scope.recents = "empty";
                     //$scope.couchdb.all = null;
@@ -28,15 +31,22 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
 
         }
 
-        function imageFilter(obj) {
+        function imageFilter(items) {
+            var result = {};
             var wordsToFilter = ['image/png'];
-            for (var i = 0; i < wordsToFilter.length; i++) {
-                if (obj.content_type.indexOf(wordsToFilter[i]) !== -1) {
-                    return true;
+            angular.forEach(items, function(obj, key) {
+
+                for (var i = 0; i < wordsToFilter.length; i++) {
+                    if (obj.content_type.indexOf(wordsToFilter[i]) !== -1) {
+                        obj.name = key;
+                        result[key] = obj;
+                    }
                 }
-            }
-            return false;
-        };
+
+
+            });
+            return result;
+        }
 
         function controller ($scope){
             $scope.imageFilter = imageFilter;

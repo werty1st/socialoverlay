@@ -78,7 +78,8 @@ function socketfunction (socket) {
         console.log('Todo handle running rendering');
     });
 
-};
+}
+
 var ws1 = io.of('/t/');
     ws1.on('connection', socketfunction);
 

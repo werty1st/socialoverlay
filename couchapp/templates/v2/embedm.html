@@ -1,0 +1,48 @@
+<html>
+<head>
+	<script>
+	// Picture element HTML5 shiv
+	document.createElement( "picture" );
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.0/picturefill.min.js" async></script>
+</head>
+<body>
+
+	<div class="zdfembed" id="_{{hash}}"  >
+
+		<script type="text/x-template" id="script{{hash}}">
+			<div class="socialbox" >
+
+				<picture>
+				 {{{PictureElementContent}}}
+				</picture>
+
+				<span class="caption fade-caption">
+					<div class="relative_wrapper_social">
+			        	<h3>Ihr Klick f&uuml;r den Datenschutz</h3>  
+			        	<p>Erst wenn Sie hier klicken, werden Bilder und andere Daten von Drittanbietern nachgeladen. Ihre IP-Adresse wird dabei an externe Server (Facebook, Google, Twitter etc.) &uuml;bertragen. &Uuml;ber den Datenschutz dieser Anbieter k&ouml;nnen Sie sich auf den jeweiligen Seiten informieren.
+			        	</p>
+			        	<button class="button" onclick="activateSocial()">Einverstanden</button>
+						<a class="settingsbutton" target="_parent" href="http://www.zdf.de/social-media-optin-37013018.html">
+							<button class="socialbottom button" >Datenschutz Einstellung</button>
+						</a>					
+					</div>
+				</span>  					
+			</div>
+		</script>
+		<script>document.write(document.getElementById('script{{hash}}').innerHTML);</script>
+		<noscript>
+			<a href="http://anonym.to/?url=" >
+				{{#each imagesSizesReceived}}
+					{{#if @first}}
+					<img src="http://sofa01.zdf.de/c/twr/{{@root.hash}}/{{this}}px">
+					<!-- <img src="{{@root.clienthostname}}/c/twr/{{@root.hash}}/{{this}}px"> -->
+					{{/if}}
+				{{/each}}			
+			</a>
+		</noscript>
+	</div>
+	<script src="{{clienthostname}}/c/twr/{{hash}}/scriptm.js"></script>
+
+</body>
+</html>

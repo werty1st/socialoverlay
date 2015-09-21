@@ -1,11 +1,18 @@
 #_{{hash}}.zdfembed {
     text-align: center;
-    height: 532px;
-    width: 946px;    
+    height: {{css.elHeight}};
+    width: 100%;    
     overflow: hidden;
-    
+    margin: 0px;
 }  
 
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0px;  
+}
 /*
 {{#each imagesSizesReceived}}
   {{@index}}: {{this}}
@@ -167,7 +174,7 @@
     /*background: #fa7d19;*/
     position: absolute;  
     /*color: #333333;  */
-    z-index: 1000;   /*heute.de kurznachrichten sind bei 1050*/
+    z-index: 9999;  
     -webkit-transition: all 300ms ease-out;  
     -moz-transition: all 300ms ease-out;  
     -o-transition: all 300ms ease-out;  

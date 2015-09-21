@@ -49,13 +49,13 @@ function extractscript2 (src)
             var sr = s[i].getAttribute("src");
             result.scriptlinks.push(sr);
         }
-    };
+    }
 
 
     for (var i = s.length - 1; i >= 0; i--) {
         var el = s[i];
         el.parentNode.removeChild(el);
-    };
+    }
     
     //result.html = doc.getElementsByTagName("body")[0].innerHTML;
     result.html64 = new Buffer( doc.getElementsByTagName("body")[0].innerHTML ).toString('base64');
@@ -182,7 +182,7 @@ function Applogic ( rasterrizer )
             
             open--;
             console.log("open",open);            
-            if (open == 0){
+            if (open === 0){
                 //letztes bild erzeugt                
                 self.emit("applogic.renderImagesComplete");
             }
@@ -225,7 +225,7 @@ function Applogic ( rasterrizer )
 
                 renderNext();                
                 self.emit("applogic.progress",{msg: "speichern", name: imagename});
-            }
+            };
         }
 
         //erzeuge render tasks (je nach anzahl der ausgewählten größen)
@@ -268,29 +268,19 @@ function Applogic ( rasterrizer )
 
     datastore.on("datastore.updateDocDateComplete", function () {
         console.log('applogic.updateDocDateComplete');        
-        datastore.emit("datastore.saveScriptRequest");
-    });    
-
-
-    datastore.on("datastore.saveScriptComplete", function(){
-        console.log('applogic.datastore.saveScriptComplete');
-        datastore.emit("datastore.saveCssRequest");
-    });
-
-    datastore.on("datastore.saveCssComplete", function(){
-        console.log('applogic.datastore.saveCssComplete');
         datastore.emit("datastore.saveHtmlRequest");
     });    
 
+
     datastore.on("datastore.saveHtmlComplete", function(){
         console.log('applogic.datastore.saveHtmlComplete');
-        datastore.emit("datastore.saveXmlRequest");
+        datastore.emit("datastore.saveMobileRequest");
     });
 
 
 
-    datastore.on("datastore.saveXmlComplete", function(){
-        console.log('applogic.datastore.saveXmlComplete');        
+    datastore.on("datastore.saveMobileComplete", function(){
+        console.log('applogic.datastore.saveMobileComplete');        
         self.emit("applogic.CodeComplete", Embeddcode.hash);
         running = false;
     });
