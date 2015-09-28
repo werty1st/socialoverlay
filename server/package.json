@@ -15,6 +15,8 @@
     "phantomjs": "^1.9.13",
     "q": "^1.4.1",
     "socket.io": "~1.0.6",
+    "uglify-js": "^2.4.24",
+    "uglifycss": "0.0.18",
     "weak": "^0.3.3"
   },
   "devDependencies": {

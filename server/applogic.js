@@ -65,22 +65,22 @@ function extractscript2 (src)
 
 }
 
-function Applogic ( rasterrizer )
+function Applogic ( config, rasterrizer )
 {
-    //var config = config || {};
+    var config = config || {};
     
     // we need to store the reference of `this` to `self`, so that we can use the current context in the setTimeout (or any callback) functions
     // using `this` in the setTimeout functions will refer to those funtions, not the Radio class
     var self = this;
     var Embeddcode = {};
     
-    var version = "v2";
+    var version = config.version || "v3";
     //var hostname = "http://sofa01.zdf.de";
     var hostname = ""; //"http://wmaiz-v-sofa02.dbc.zdf.de";
 
 
     var dbcomplete = false;
-    var datastore = new ds.Datastore({couchserver:"http://localhost"});
+    var datastore = new ds.Datastore({couchserver:"http://localhost", config: version});
 
     var doc = {};
     var running = false;
@@ -149,12 +149,6 @@ function Applogic ( rasterrizer )
     datastore.on("datastore.saveRendersourceComplete", function(){
         console.log('applogic.datastore.saveRendersourceComplete');
         datastore.emit("datastore.renderImageRequest");
-        
-        // if (RenderRequest.bgimageurl){
-        //     datastore.emit("datastore.saveIframeRequest");
-        // } else {
-        //     datastore.emit("datastore.renderImageRequest");
-        // }
     });
 
 
@@ -284,14 +278,6 @@ function Applogic ( rasterrizer )
         self.emit("applogic.CodeComplete", Embeddcode.hash);
         running = false;
     });
-
-
-    
-
-    // this.on("applogic.ping", function () {
-    //     console.log("applogic.ping");
-    //     //sende ping an browser
-    // });
 
 
 }

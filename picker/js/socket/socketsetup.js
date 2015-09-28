@@ -18,7 +18,7 @@ angular.module( "socketsetup", [] ).factory('socket', function ($rootScope) {
 							callback.apply(socket, args);
 						}
 					});
-				})
+				});
 			}
 		};
 	});

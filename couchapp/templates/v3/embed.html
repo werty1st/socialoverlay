@@ -3,16 +3,11 @@
 document.createElement( "picture" );
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/picturefill/2.3.0/picturefill.min.js" async></script>
-<script src="http://www.zdf.de/ZDFxt/module/socialoptin/js/cross-storage/client.js" async></script>
-
 <div class="zdfembed" id="_{{hash}}"  >
-
-
 	<div class="socialbox" style="display:none">
 		<picture>
 		 {{{PictureElementContent}}}
 		</picture>
-
 		<span class="caption fade-caption">
 			<div class="relative_wrapper_social">
 	        	<h3>Ihr Klick f&uuml;r den Datenschutz</h3>  
@@ -26,14 +21,6 @@ document.createElement( "picture" );
 		</span>  					
 	</div>
 
-	<script type="text/javascript">
-		var socialbox = document.getElementsByClassName("socialbox");
-		for(i=0;i < socialbox.length;i++){ 
-			if (socialbox[i].hasAttribute('style')){
-				socialbox[i].removeAttribute('style');
-			}
-		}
-	</script>
 	<noscript>
 		<a href="#noscript" >
 			{{#each imagesSizesReceived}}
@@ -44,7 +31,5 @@ document.createElement( "picture" );
 			{{/each}}			
 		</a>
 	</noscript>
-
-
 </div>
 <script src="{{clienthostname}}/c/twr/{{hash}}/script.js"></script>
