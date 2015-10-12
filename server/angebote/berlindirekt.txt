@@ -4,9 +4,6 @@ http://www.zdf.de/berlin-direkt/twittern-sie-berlin-direkt-die-meinung-21765160.
 
 
 berlindirekt
-<iframe src="http://zdf.massrel.io/berlin-direkt" width="364px" height="410px" frameborder="0" scrolling="auto" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
-
-
-<div class="mr-space" id="mr-space_berlin-direkt" data-space-id="zdf/berlin-direkt" style="min-height: 350px;"></div>
+<div class="mr-space" id="mr-space_berlin-direkt" data-space-id="zdf/berlin-direkt" style="height: 410px;"></div>
 <script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_berlin-direkt");</script>
 
