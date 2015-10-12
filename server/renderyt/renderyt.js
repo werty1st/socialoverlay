@@ -25,7 +25,7 @@ function(err, childProcess, servernum){
 	//xvfb ready
 	if(!err){
 		//servernum = 10;
-		console.log("display at:",servernum);
+		console.log("Display at:",servernum);
 		process.env.DISPLAY = ":" + servernum;
 		process.env.PATH = process.env.PATH+":"+__dirname;
 		driver = new chrome.Driver();

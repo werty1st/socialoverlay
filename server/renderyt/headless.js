@@ -13,8 +13,9 @@ module.exports = function runHeadless(options, callback){
 
 		if (!err){
 			// childProcess is a ChildProcess, as returned from child_process.spawn()
-			console.log('Xvfb:', true);
-			console.log('Xvfb: Dimensions', options.display);
+			console.log('Xvfb:', true, childProcess.pid);
+			console.log('Xvfb: Dimensions', options.display);			
+			
 			if (typeof callback === "function") callback(err, childProcess, servernum);
 		} else {
 			console.log('Xvfb:',err);
@@ -55,3 +56,4 @@ function test_selenium(){
 	  servicestate = null;
 	});	
 }
+
