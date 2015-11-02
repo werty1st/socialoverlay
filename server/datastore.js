@@ -5,9 +5,9 @@ var util = require("util");
 var EventEmitter = require('events').EventEmitter;
 
 var Handlebars = require('handlebars');
-	
 
-
+var UglifyJS = require("uglify-js");
+var uglifycss = require('uglifycss');
 
 function createPictureElement(Embeddcode){
 
@@ -91,7 +91,8 @@ function Datastore(config)
 	if (typeof config !== "object") config = {};
 
 	config.couchserver = config.couchserver || "http://localhost";
-	config.version = config.version || "v2";
+	config.version = config.version || "v3";
+
 
 	var self = this;
 	this.doc = {};
@@ -246,7 +247,7 @@ function Datastore(config)
 
 				db.saveAttachment( self.doc , 	//doc.id
 				{ name : 'rendersource.html',
-				  'Content-Type' : 'text/html;charset=utf-8',
+				  'Content-Type' : 'text/html',
 				  body : target_html
 				},
 				uploadComplete("datastore.saveRendersourceComplete"));
@@ -309,7 +310,7 @@ function Datastore(config)
 
 				db.saveAttachment( self.doc , 	//doc.id
 				{ name : 'embed.html',
-				  'Content-Type' : 'text/html;charset=utf-8',
+				  'Content-Type' : 'text/html',
 				  body : target_html
 				},
 				function(err,doc){
@@ -334,10 +335,11 @@ function Datastore(config)
 			if (!err){
 				var template_script = repl.body.toString('utf8');
 				var targetscript = renderTemplate(template_script, { Embeddcode: Embeddcode, style: "style.css"} );
+					targetscript = UglifyJS.minify(targetscript, {fromString: true}).code;
 
 				db.saveAttachment( self.doc , 	//doc.id
 					{ name : 'script.js',
-					  'Content-Type' : 'text/javascript;charset=utf-8',
+					  'Content-Type' : 'text/javascript',
 					  body : targetscript
 					},
 					function(err,doc){
@@ -374,12 +376,15 @@ function Datastore(config)
 		db.getAttachment("_design/tweetrenderdb", css_source , function(err, repl){
 			if (!err){
 				var template_script = repl.body.toString('utf8');
-				var targetscript = renderTemplate(template_script, { 	hash: self.doc.id,
+				var targetcss = renderTemplate(template_script, { 	hash: self.doc.id,
 																  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  		bgimageurl: RenderRequest.bgimageurl,
 																  		css: dyncss });
+
+				var targetcss = uglifycss.processString(targetcss,  { uglyComments: true } );
+
 				db.saveAttachment( self.doc , 	//doc.id
-					{ name : 'style.css', 'Content-Type' : 'text/css;charset=utf-8', body : targetscript },
+					{ name : 'style.css', 'Content-Type' : 'text/css', body : targetcss },
 					function(err,doc){
 						if (!err){
 							deferred.resolve(doc);
@@ -424,7 +429,7 @@ function Datastore(config)
 	function saveHTMLm(){
 		var deferred = Q.defer();
 
-		var template_name = "embedm.html";
+		var template_name = "embed.html";
 
 		db.getAttachment("_design/tweetrenderdb", "templates/"+config.version+"/"+template_name, function(err, repl){
 			if (!err){
@@ -450,7 +455,7 @@ function Datastore(config)
 
 				db.saveAttachment( self.doc , 	//doc.id
 					{ name : 'embedm.html',
-					  'Content-Type' : 'text/html;charset=utf-8',
+					  'Content-Type' : 'text/html',
 					  body : target_html
 					},
 					function(err,doc){
@@ -477,9 +482,11 @@ function Datastore(config)
 				var template_script = repl.body.toString('utf8');
 				var targetscript = renderTemplate(template_script, { Embeddcode: Embeddcode, style: "stylem.css"} );
 
+					targetscript = UglifyJS.minify(targetscript, {fromString: true}).code;
+
 				db.saveAttachment( self.doc , 	//doc.id
 					{ name : 'scriptm.js',
-					  'Content-Type' : 'text/javascript;charset=utf-8',
+					  'Content-Type' : 'text/javascript',
 					  body : targetscript
 					},
 					function(err,doc){
@@ -501,7 +508,7 @@ function Datastore(config)
 
 		var deferred = Q.defer();
 		
-		var css_source = "templates/"+config.version+"/stylem.css";
+		var css_source = "templates/"+config.version+"/style.css";
 		var dyncss = { elHeight : "100%", margin:"0px" };
 
 		if (RenderRequest.targetlocation == "zdfsportstart") {
@@ -518,12 +525,14 @@ function Datastore(config)
 		db.getAttachment("_design/tweetrenderdb", css_source , function(err, repl){
 			if (!err){
 				var template_script = repl.body.toString('utf8');
-				var targetscript = renderTemplate(template_script, { 	hash: self.doc.id,
+				var targetcss = renderTemplate(template_script, { 	hash: self.doc.id,
 																  		imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  		bgimageurl: RenderRequest.bgimageurl,
 																  		css: dyncss });
+				var targetcss = uglifycss.processString(targetcss,  { uglyComments: true } );
+
 				db.saveAttachment( self.doc , 	//doc.id
-					{ name : 'stylem.css', 'Content-Type' : 'text/css;charset=utf-8', body : targetscript },
+					{ name : 'stylem.css', 'Content-Type' : 'text/css', body : targetcss },
 					function(err,doc){
 						if (!err){
 							deferred.resolve(doc);

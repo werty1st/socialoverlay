@@ -37,7 +37,7 @@ var rasterrizer = require('./renderyt/renderyt');
 
 function socketfunction (socket) {
 
-    var applogic = new Applogic(rasterrizer);
+    var applogic = new Applogic({ version: "v3" }, rasterrizer);
 
     //von applogic aufgerufen
     applogic.on("applogic.CodeComplete", function(id){
