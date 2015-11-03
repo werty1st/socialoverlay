@@ -11,6 +11,6 @@ bower_components/
 tmp
 .DS_Store
 .idea
-**/.kansorc*
-.kansorc*
+**/.kansorc
+.kansorc
 packages/
