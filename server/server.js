@@ -5,8 +5,8 @@ var express = require('express');
 var app = express();
     app.enable('trust proxy');
     
-    app.use('/testt/',express.static(__dirname+'/couchapp/templates/'));
-    app.use('/',express.static(__dirname+'/picker'));
+    //app.use('/testt/',express.static(__dirname+'/couchapp/templates/'));
+    app.use('/',express.static(__dirname+'/../picker'));
 
 var server = app.listen(process.env.PORT || 3003, function() {
     console.log('Listening on port %d', server.address().port);
@@ -37,7 +37,7 @@ var rasterrizer = require('./renderyt/renderyt');
 
 function socketfunction (socket) {
 
-    var applogic = new Applogic({ version: "v3" }, rasterrizer);
+    var applogic = new Applogic({ version: "v3" /*template version*/ }, rasterrizer);
 
     //von applogic aufgerufen
     applogic.on("applogic.CodeComplete", function(id){

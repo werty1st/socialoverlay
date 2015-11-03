@@ -1,0 +1,340 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose node symlink /usr/bin/node
+5 verbose readDependencies loading dependencies from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/package.json
+6 warn package.json @ No description
+7 warn package.json @ No repository field.
+8 warn package.json @ No README data
+9 warn package.json @ No license field.
+10 verbose install where, deps [ '/home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt',
+10 verbose install   [ 'child-killer', 'gm', 'headless', 'selenium-webdriver' ] ]
+11 verbose install where, peers [ '/home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt',
+11 verbose install   [] ]
+12 verbose installManyTop reading for lifecycle /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/package.json
+13 info preinstall @
+14 verbose installManyTop reading scoped package data from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/gm/package.json
+15 verbose installManyTop reading scoped package data from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/headless/package.json
+16 verbose installManyTop reading scoped package data from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/selenium-webdriver/package.json
+17 verbose readDependencies loading dependencies from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/package.json
+18 verbose targetResolver reading package data from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/gm/package.json
+19 verbose targetResolver reading package data from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/headless/package.json
+20 verbose targetResolver reading package data from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/selenium-webdriver/package.json
+21 silly cache add args [ 'child-killer@^1.0.0', null ]
+22 verbose cache add spec child-killer@^1.0.0
+23 silly cache add parsed spec { raw: 'child-killer@^1.0.0',
+23 silly cache add   scope: null,
+23 silly cache add   name: 'child-killer',
+23 silly cache add   rawSpec: '^1.0.0',
+23 silly cache add   spec: '>=1.0.0 <2.0.0',
+23 silly cache add   type: 'range' }
+24 silly addNamed child-killer@>=1.0.0 <2.0.0
+25 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for child-killer
+26 silly addNameRange { name: 'child-killer', range: '>=1.0.0 <2.0.0', hasData: false }
+27 silly mapToRegistry name child-killer
+28 silly mapToRegistry using default registry
+29 silly mapToRegistry registry https://registry.npmjs.org/
+30 silly mapToRegistry uri https://registry.npmjs.org/child-killer
+31 verbose addNameRange registry:https://registry.npmjs.org/child-killer not in flight; fetching
+32 verbose already installed skipping gm@^1.17.0 /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+33 verbose request uri https://registry.npmjs.org/child-killer
+34 verbose request no auth needed
+35 info attempt registry request try #1 at 17:35:40
+36 verbose request id 406617d8123a7322
+37 verbose etag "6LKZDPHIK6TY705REH44P0CAV"
+38 http request GET https://registry.npmjs.org/child-killer
+39 verbose already installed skipping headless@^1.0.0 /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+40 verbose already installed skipping selenium-webdriver@^2.44.0 /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+41 http 304 https://registry.npmjs.org/child-killer
+42 silly get cb [ 304,
+42 silly get   { date: 'Mon, 02 Nov 2015 16:35:44 GMT',
+42 silly get     via: '1.1 varnish',
+42 silly get     'cache-control': 'max-age=60',
+42 silly get     etag: '"6LKZDPHIK6TY705REH44P0CAV"',
+42 silly get     age: '19',
+42 silly get     connection: 'keep-alive',
+42 silly get     'x-served-by': 'cache-fra1222-FRA',
+42 silly get     'x-cache': 'HIT',
+42 silly get     'x-cache-hits': '1',
+42 silly get     'x-timer': 'S1446482144.256881,VS0,VE0',
+42 silly get     vary: 'Accept' } ]
+43 verbose etag https://registry.npmjs.org/child-killer from cache
+44 verbose get saving child-killer to /home/ronny/.npm/registry.npmjs.org/child-killer/.cache.json
+45 silly addNameRange number 2 { name: 'child-killer', range: '>=1.0.0 <2.0.0', hasData: true }
+46 silly addNameRange versions [ 'child-killer', [ '0.0.1', '1.0.0' ] ]
+47 silly addNamed child-killer@1.0.0
+48 verbose addNamed "1.0.0" is a plain semver version for child-killer
+49 silly cache afterAdd child-killer@1.0.0
+50 verbose afterAdd /home/ronny/.npm/child-killer/1.0.0/package/package.json not in flight; writing
+51 verbose afterAdd /home/ronny/.npm/child-killer/1.0.0/package/package.json written
+52 silly install resolved [ { name: 'child-killer',
+52 silly install resolved     version: '1.0.0',
+52 silly install resolved     description: 'Wrap node\'s child_process library, making sure that the spawned processes dies as the master dies',
+52 silly install resolved     main: 'index.js',
+52 silly install resolved     directories: { test: 'test' },
+52 silly install resolved     dependencies: { posix: '~1.0.0' },
+52 silly install resolved     devDependencies: {},
+52 silly install resolved     scripts: { test: 'node test/runner.js' },
+52 silly install resolved     repository:
+52 silly install resolved      { type: 'git',
+52 silly install resolved        url: 'git://github.com/kesla/node-child-killer.git' },
+52 silly install resolved     author: { name: 'David Björklund' },
+52 silly install resolved     license: 'MIT',
+52 silly install resolved     gitHead: '99fff039ef3d8b84b51609050ab4972c2f11528f',
+52 silly install resolved     bugs: { url: 'https://github.com/kesla/node-child-killer/issues' },
+52 silly install resolved     homepage: 'https://github.com/kesla/node-child-killer',
+52 silly install resolved     _id: 'child-killer@1.0.0',
+52 silly install resolved     _shasum: 'b1b98b2d7c6a68c8f980391562df9e26e44d05c1',
+52 silly install resolved     _from: 'child-killer@>=1.0.0 <2.0.0',
+52 silly install resolved     _npmVersion: '2.1.6',
+52 silly install resolved     _nodeVersion: '0.10.33',
+52 silly install resolved     _npmUser: { name: 'kesla', email: 'david.bjorklund@gmail.com' },
+52 silly install resolved     maintainers: [ [Object] ],
+52 silly install resolved     dist:
+52 silly install resolved      { shasum: 'b1b98b2d7c6a68c8f980391562df9e26e44d05c1',
+52 silly install resolved        tarball: 'http://registry.npmjs.org/child-killer/-/child-killer-1.0.0.tgz' },
+52 silly install resolved     _resolved: 'https://registry.npmjs.org/child-killer/-/child-killer-1.0.0.tgz',
+52 silly install resolved     readme: 'ERROR: No README data found!' } ]
+53 info install child-killer@1.0.0 into /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+54 info installOne child-killer@1.0.0
+55 verbose installOne of child-killer to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt not in flight; installing
+56 verbose lock using /home/ronny/.npm/_locks/child-killer-8b82218adc737432.lock for /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+57 silly install write writing child-killer 1.0.0 to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+58 verbose unbuild node_modules/child-killer
+59 silly gentlyRm /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer is being purged from base /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+60 verbose gentlyRm don't care about contents; nuking /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+61 verbose tar unpack /home/ronny/.npm/child-killer/1.0.0/package.tgz
+62 verbose tar unpacking to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+63 silly gentlyRm /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer is being purged
+64 verbose gentlyRm don't care about contents; nuking /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+65 silly gunzTarPerm modes [ '755', '644' ]
+66 silly gunzTarPerm extractEntry package.json
+67 silly gunzTarPerm extractEntry .npmignore
+68 silly gunzTarPerm extractEntry README.md
+69 silly gunzTarPerm extractEntry daemon.js
+70 silly gunzTarPerm extractEntry index.js
+71 silly gunzTarPerm extractEntry .travis.yml
+72 silly gunzTarPerm extractEntry test/child.js
+73 silly gunzTarPerm extractEntry test/runner.js
+74 silly gunzTarPerm extractEntry test/test.js
+75 silly gunzTarPerm extractEntry test/test2.js
+76 verbose write writing to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/package.json
+77 info preinstall child-killer@1.0.0
+78 verbose readDependencies loading dependencies from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/package.json
+79 silly prepareForInstallMany adding posix@~1.0.0 from child-killer dependencies
+80 verbose readDependencies loading dependencies from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/package.json
+81 silly cache add args [ 'posix@~1.0.0', null ]
+82 verbose cache add spec posix@~1.0.0
+83 silly cache add parsed spec { raw: 'posix@~1.0.0',
+83 silly cache add   scope: null,
+83 silly cache add   name: 'posix',
+83 silly cache add   rawSpec: '~1.0.0',
+83 silly cache add   spec: '>=1.0.0 <1.1.0',
+83 silly cache add   type: 'range' }
+84 silly addNamed posix@>=1.0.0 <1.1.0
+85 verbose addNamed ">=1.0.0 <1.1.0" is a valid semver range for posix
+86 silly addNameRange { name: 'posix', range: '>=1.0.0 <1.1.0', hasData: false }
+87 silly mapToRegistry name posix
+88 silly mapToRegistry using default registry
+89 silly mapToRegistry registry https://registry.npmjs.org/
+90 silly mapToRegistry uri https://registry.npmjs.org/posix
+91 verbose addNameRange registry:https://registry.npmjs.org/posix not in flight; fetching
+92 verbose request uri https://registry.npmjs.org/posix
+93 verbose request no auth needed
+94 info attempt registry request try #1 at 17:35:40
+95 verbose etag "APJ5O7TSM3DXMDYZKUN5R1HTV"
+96 http request GET https://registry.npmjs.org/posix
+97 http 304 https://registry.npmjs.org/posix
+98 silly get cb [ 304,
+98 silly get   { date: 'Mon, 02 Nov 2015 16:35:44 GMT',
+98 silly get     via: '1.1 varnish',
+98 silly get     'cache-control': 'max-age=60',
+98 silly get     etag: '"APJ5O7TSM3DXMDYZKUN5R1HTV"',
+98 silly get     age: '18',
+98 silly get     connection: 'keep-alive',
+98 silly get     'x-served-by': 'cache-fra1241-FRA',
+98 silly get     'x-cache': 'HIT',
+98 silly get     'x-cache-hits': '1',
+98 silly get     'x-timer': 'S1446482144.435470,VS0,VE0',
+98 silly get     vary: 'Accept' } ]
+99 verbose etag https://registry.npmjs.org/posix from cache
+100 verbose get saving posix to /home/ronny/.npm/registry.npmjs.org/posix/.cache.json
+101 silly addNameRange number 2 { name: 'posix', range: '>=1.0.0 <1.1.0', hasData: true }
+102 silly addNameRange versions [ 'posix',
+102 silly addNameRange   [ '0.0.1',
+102 silly addNameRange     '0.0.2',
+102 silly addNameRange     '0.0.3',
+102 silly addNameRange     '0.0.4',
+102 silly addNameRange     '0.0.5',
+102 silly addNameRange     '0.0.6',
+102 silly addNameRange     '0.0.7',
+102 silly addNameRange     '0.0.8',
+102 silly addNameRange     '0.0.10',
+102 silly addNameRange     '0.0.11',
+102 silly addNameRange     '0.0.12',
+102 silly addNameRange     '0.0.13',
+102 silly addNameRange     '1.0.0',
+102 silly addNameRange     '1.0.1',
+102 silly addNameRange     '1.0.2',
+102 silly addNameRange     '1.0.3',
+102 silly addNameRange     '1.0.4',
+102 silly addNameRange     '2.0.0',
+102 silly addNameRange     '2.0.1',
+102 silly addNameRange     '4.0.0' ] ]
+103 silly addNamed posix@1.0.4
+104 verbose addNamed "1.0.4" is a plain semver version for posix
+105 silly cache afterAdd posix@1.0.4
+106 verbose afterAdd /home/ronny/.npm/posix/1.0.4/package/package.json not in flight; writing
+107 verbose afterAdd /home/ronny/.npm/posix/1.0.4/package/package.json written
+108 silly install resolved [ { name: 'posix',
+108 silly install resolved     version: '1.0.4',
+108 silly install resolved     description: 'The missing POSIX system calls',
+108 silly install resolved     keywords:
+108 silly install resolved      [ 'posix',
+108 silly install resolved        'rlimit',
+108 silly install resolved        'getrlimit',
+108 silly install resolved        'setrlimit',
+108 silly install resolved        'ulimit',
+108 silly install resolved        'setuid',
+108 silly install resolved        'setgid',
+108 silly install resolved        'seteuid',
+108 silly install resolved        'setegid',
+108 silly install resolved        'chroot',
+108 silly install resolved        'setreuid',
+108 silly install resolved        'setregid',
+108 silly install resolved        'getpgrp',
+108 silly install resolved        'setsid',
+108 silly install resolved        'setpgid',
+108 silly install resolved        'getpwnam',
+108 silly install resolved        'getgrnam',
+108 silly install resolved        'uid',
+108 silly install resolved        'gid',
+108 silly install resolved        'initgroups',
+108 silly install resolved        'syslog',
+108 silly install resolved        'setlogmask',
+108 silly install resolved        'gethostname',
+108 silly install resolved        'sethostname' ],
+108 silly install resolved     homepage: 'http://github.com/melor/node-posix',
+108 silly install resolved     repository: { type: 'git', url: 'git://github.com/melor/node-posix.git' },
+108 silly install resolved     author: { name: 'Mika Eloranta', email: 'mel@ohmu.fi' },
+108 silly install resolved     main: './lib/posix',
+108 silly install resolved     dependencies: {},
+108 silly install resolved     scripts: { test: 'make test', install: 'node-gyp rebuild' },
+108 silly install resolved     engines: { node: '>= 0.6.0' },
+108 silly install resolved     gypfile: true,
+108 silly install resolved     gitHead: '7fd5ddac27eaeaa66d2182fe66c67f8a3e267f98',
+108 silly install resolved     bugs: { url: 'https://github.com/melor/node-posix/issues' },
+108 silly install resolved     _id: 'posix@1.0.4',
+108 silly install resolved     _shasum: '628eb17c9c3299a296cf2f9fdc7cbad4fd554a56',
+108 silly install resolved     _from: 'posix@>=1.0.0 <1.1.0',
+108 silly install resolved     _npmVersion: '2.1.6',
+108 silly install resolved     _nodeVersion: '0.10.33',
+108 silly install resolved     _npmUser: { name: 'mel', email: 'mel@ohmu.fi' },
+108 silly install resolved     maintainers: [ [Object] ],
+108 silly install resolved     dist:
+108 silly install resolved      { shasum: '628eb17c9c3299a296cf2f9fdc7cbad4fd554a56',
+108 silly install resolved        tarball: 'http://registry.npmjs.org/posix/-/posix-1.0.4.tgz' },
+108 silly install resolved     directories: {},
+108 silly install resolved     _resolved: 'https://registry.npmjs.org/posix/-/posix-1.0.4.tgz',
+108 silly install resolved     readme: 'ERROR: No README data found!' } ]
+109 info install posix@1.0.4 into /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+110 info installOne posix@1.0.4
+111 verbose installOne of posix to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer not in flight; installing
+112 verbose lock using /home/ronny/.npm/_locks/posix-8883947c174b298f.lock for /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+113 silly install write writing posix 1.0.4 to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+114 verbose unbuild node_modules/child-killer/node_modules/posix
+115 silly gentlyRm /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix is being purged from base /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+116 verbose gentlyRm don't care about contents; nuking /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+117 verbose tar unpack /home/ronny/.npm/posix/1.0.4/package.tgz
+118 verbose tar unpacking to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+119 silly gentlyRm /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix is being purged
+120 verbose gentlyRm don't care about contents; nuking /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+121 silly gunzTarPerm modes [ '755', '644' ]
+122 silly gunzTarPerm extractEntry package.json
+123 silly gunzTarPerm extractEntry README.md
+124 silly gunzTarPerm extractEntry LICENSE
+125 silly gunzTarPerm extractEntry binding.gyp
+126 silly gunzTarPerm extractEntry lib/posix/index.js
+127 silly gunzTarPerm extractEntry test/unit/test-chroot.js
+128 silly gunzTarPerm extractEntry test/unit/test-gethostname.js
+129 silly gunzTarPerm extractEntry test/unit/test-getppid.js
+130 silly gunzTarPerm extractEntry test/unit/test-getpwnam.js
+131 silly gunzTarPerm extractEntry test/unit/test-getrlimit.js
+132 silly gunzTarPerm extractEntry test/unit/test-getgrnam.js
+133 silly gunzTarPerm extractEntry test/unit/test-setegid.js
+134 silly gunzTarPerm extractEntry test/unit/test-seteuid.js
+135 silly gunzTarPerm extractEntry test/unit/test-setregid.js
+136 silly gunzTarPerm extractEntry test/unit/test-setreuid.js
+137 silly gunzTarPerm extractEntry test/unit/test-setrlimit.js
+138 silly gunzTarPerm extractEntry test/unit/test-geteuid.js
+139 silly gunzTarPerm extractEntry test/unit/test-setsid.js
+140 silly gunzTarPerm extractEntry test/unit/test-getegid.js
+141 silly gunzTarPerm extractEntry test/unit/test-syslog.js
+142 silly gunzTarPerm extractEntry test/unit/test-initgroups.js
+143 silly gunzTarPerm extractEntry src/posix.cc
+144 silly gunzTarPerm extractEntry wscript
+145 verbose write writing to /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix/package.json
+146 info preinstall posix@1.0.4
+147 verbose readDependencies loading dependencies from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix/package.json
+148 verbose readDependencies loading dependencies from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix/package.json
+149 silly install resolved []
+150 verbose about to build /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+151 info build /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+152 info linkStuff posix@1.0.4
+153 silly linkStuff posix@1.0.4 has /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules as its parent node_modules
+154 verbose linkBins posix@1.0.4
+155 verbose linkMans posix@1.0.4
+156 verbose rebuildBundles posix@1.0.4
+157 info install posix@1.0.4
+158 verbose unsafe-perm in lifecycle false
+159 info posix@1.0.4 Failed to exec install script
+160 verbose unlock done using /home/ronny/.npm/_locks/posix-8883947c174b298f.lock for /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+161 verbose about to build /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+162 verbose unlock done using /home/ronny/.npm/_locks/child-killer-8b82218adc737432.lock for /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+163 verbose stack Error: posix@1.0.4 install: `node-gyp rebuild`
+163 verbose stack Exit status 1
+163 verbose stack     at EventEmitter.<anonymous> (/usr/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
+163 verbose stack     at EventEmitter.emit (events.js:110:17)
+163 verbose stack     at ChildProcess.<anonymous> (/usr/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+163 verbose stack     at ChildProcess.emit (events.js:110:17)
+163 verbose stack     at maybeClose (child_process.js:1015:16)
+163 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1087:5)
+164 verbose pkgid posix@1.0.4
+165 verbose cwd /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+166 error Linux 3.13.0-35-generic
+167 error argv "/usr/bin/node" "/usr/bin/npm" "install"
+168 error node v0.12.7
+169 error npm  v2.11.3
+170 error code ELIFECYCLE
+171 error posix@1.0.4 install: `node-gyp rebuild`
+171 error Exit status 1
+172 error Failed at the posix@1.0.4 install script 'node-gyp rebuild'.
+172 error This is most likely a problem with the posix package,
+172 error not with npm itself.
+172 error Tell the author that this fails on your system:
+172 error     node-gyp rebuild
+172 error You can get their info via:
+172 error     npm owner ls posix
+172 error There is likely additional logging output above.
+173 verbose exit [ 1, true ]
+174 verbose unbuild node_modules/child-killer/node_modules/posix
+175 info preuninstall posix@1.0.4
+176 info uninstall posix@1.0.4
+177 verbose unbuild rmStuff posix@1.0.4 from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules
+178 verbose unbuild rmStuff in /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules
+179 info postuninstall posix@1.0.4
+180 silly gentlyRm /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix is being purged from base /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+181 verbose gentlyRm don't care about contents; nuking /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+182 silly vacuum-fs purging /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules/posix
+183 silly vacuum-fs removing /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer/node_modules
+184 silly vacuum-fs quitting because other entries in /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+185 verbose unbuild node_modules/child-killer
+186 info preuninstall child-killer@1.0.0
+187 info uninstall child-killer@1.0.0
+188 verbose unbuild rmStuff child-killer@1.0.0 from /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules
+189 info postuninstall child-killer@1.0.0
+190 silly gentlyRm /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer is being purged from base /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt
+191 verbose gentlyRm don't care about contents; nuking /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+192 silly vacuum-fs purging /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules/child-killer
+193 silly vacuum-fs quitting because other entries in /home/ronny/git_managed_projects/zdf/socialoverlay/server/renderyt/node_modules

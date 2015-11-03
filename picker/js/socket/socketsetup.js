@@ -1,6 +1,6 @@
 angular.module( "socketsetup", [] ).factory('socket', function ($rootScope) {
 		//http://www.html5rocks.com/en/tutorials/frameworks/angular-websockets/?redirect_from_locale=de
-		var socket = io.connect(location.href, {path: "/tr/socket.io"});
+		var socket = io.connect();
 		return {
 			on: function (eventName, callback) {
 				socket.on(eventName, function () {  

@@ -1,0 +1,7 @@
+exports.env = {
+    // the default env will be used when you just do "kanso push"
+    'default': {
+        db: 'http://admin:s00fa2@localhost:5984/twr'
+    }
+};
+
