@@ -10,32 +10,43 @@ https://github.com/werty1st/selenium-grid-startup
 var gm = require('gm');
 //setup environment
 var webdriver = require('selenium-webdriver'),
-	By = webdriver.By,
-    until = webdriver.until,
-    chrome = require('selenium-webdriver/chrome');
-var runHeadless = require('./headless');
+	By = require('selenium-webdriver').By,
+    until = require('selenium-webdriver').until
+    //,chrome = require('selenium-webdriver/chrome');
+//var runHeadless = require('./headless');
+
+var driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .build();
 
 var options = {};
 var headless;
 var driver;
 var rw;
 
-headless = runHeadless({ display: {width: 1920, height: 1080, depth: 24}},
-function(err, childProcess, servernum){
-	//xvfb ready
-	if(!err){
-		//servernum = 10;
-		console.log("Display at:",servernum);
-		process.env.DISPLAY = ":" + servernum;
-		process.env.PATH = process.env.PATH+":"+__dirname;
-		driver = new chrome.Driver();
-		rw = new RenderWorker();
-		rw.init();
-	} else {
-		//error
-		throw new Error("X or Selenium not running.");
-	}
-});
+
+//DOcker
+//SELENIUM_REMOTE_URL="http://localhost:4444/wd/hub" nodejs script.js
+//driver = new chrome.Driver();
+rw = new RenderWorker();
+rw.init();
+
+// headless = runHeadless({ display: {width: 1920, height: 1080, depth: 24}},
+// function(err, childProcess, servernum){
+// 	//xvfb ready
+// 	if(!err){
+// 		//servernum = 10;
+// 		console.log("Display at:",servernum);
+// 		process.env.DISPLAY = ":" + servernum;
+// 		process.env.PATH = process.env.PATH+":"+__dirname;
+// 		driver = new chrome.Driver();
+// 		rw = new RenderWorker();
+// 		rw.init();
+// 	} else {
+// 		//error
+// 		throw new Error("X or Selenium not running.");
+// 	}
+// });
 
 module.exports.renderUrl = function renderUrl(url, posttarget, screensize){
 
