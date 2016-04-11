@@ -1,0 +1,2 @@
+ronny@merlin:~/git_managed_projects/zdf/socialoverlay/server$ SELENIUM_REMOTE_URL="http://localhost:4444/wd/hub" nodejs server.js 
+
