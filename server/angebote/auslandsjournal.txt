@@ -1,0 +1,22 @@
+Auslandsjournal
+
+425bc50c336b8e61b5138365b3f267102bed9667
+http://www.zdf.de/auslandsjournal/aussendienst-6639592.html
+
+
+HeutePLus
+<div class="mr-space" id="mr-space_auslandsjournal" data-space-id="zdf/auslandsjournal" style="min-height: 600px;"></div>
+<script>!function(a,b,c,d,e,f,g,h,i,j,k){h=a[d]=a[d]||{},h.ui=h.ui||[],i=a[e]=a[e]||{},i[f]||(j=b.getElementsByTagName(c)[0],k=b.createElement(c),k.src="//platform.massrelevance.com/js/massrel.js",j.parentNode.insertBefore(k,j),i[f]=function(){h.ui.push([].slice.call(arguments))}),i[f]("load",{el:b.getElementById(g)})}(window,document,"script","massrel","spredfast","exp","mr-space_auslandsjournal");</script>
+
+MR CSS geändert auf .x-y-z{
+	overflow-x: hidden
+}
+
+
+
+http://cm2-prod-pre.zdf.de/ZDFpreview/zdfportal/preview/43375250?noVisibilityCheck=true&modified=true
+
+http://test12.sevenval-fit.com/zdfp/xml/object/43375250
+
+#int
+http://test12.sevenval-fit.com/zdfp/INT/xml/object/36922968
