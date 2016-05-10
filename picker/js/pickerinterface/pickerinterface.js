@@ -1,17 +1,13 @@
 angular.module( "pickerinterface", [] )
 	.service('$picker', ["db_hosts", '$http', function (db_hosts, $http) {
 
-		var targetOrigin = "";
 
-		if (location.search.match(/targetOrigin=([^&]+)/) != null){
-			targetOrigin = location.search.match(/targetOrigin=([^&]+)/)!= null && unescape(location.search.match(/targetOrigin=([^&]+)/)[1]);
-	
-		    var scriptEl = document.createElement('script');
-			    scriptEl.type = 'text/javascript';
-			    scriptEl.async = true;
-			    scriptEl.src = targetOrigin + '/studio/pickerResultInterface.js';
-		    (document.head || document.body).appendChild(scriptEl);
-		}
+	    var scriptEl = document.createElement('script');
+		    scriptEl.type = 'text/javascript';
+		    scriptEl.async = true;
+		    scriptEl.src = 'http://static.zdf.de/libs/js/pickerResultInterface/pickerResultInterface.min.js';
+		(document.head || document.body).appendChild(scriptEl);
+
 
 
 
@@ -102,13 +98,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 	    }	    
 
 	    function submitPicker ( docId ) {
-			if(!targetOrigin || (location.search == "")) return; //kein submit ohne hostsystem
-
-			if ("http://cm2-int-pre.zdf.de/studio/"  != document.referrer && 
-				"http://cm2-prod-pre.zdf.de/studio/" != document.referrer){
-				//todo button ohne p12 oder imp ausblenden
-				//alert("Nur aus P12 heraus aufrufbar.");
-			}
 
 			//raus oder imperia mit aufnehmen
 			//if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
@@ -148,7 +137,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 				]
 			};
 
-			PickerResultInterface.sendResult(res, targetOrigin);	    	
+			PickerResultInterface.sendResult(res);	    	
 	    }
 
 		var save = function save ( docId ) {
