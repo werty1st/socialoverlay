@@ -34,14 +34,14 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 			$http({
 					method: 'GET',
 					withCredentials: true,
-					url: 'http://'+db_hosts.int+':5984/twr/'+id
+					url: 'http://'+db_hosts.int2+'c/twr/'+id
 					}).success(function ( doc ) {
 						//var rev = headers("ETag").replace(/^"(.*)"$/, '$1');
 						doc.status = "live";
 						$http({
 								method: 'PUT',
 								withCredentials: true,
-								url: 'http://'+db_hosts.int+'/twr/'+id,
+								url: 'http://'+db_hosts.int2+'c/twr/'+id,
 								data: doc
 								}).success(function (response) {
 									//{ok: true, id: "f4a7e6e2567107a950d86d74af9eea8b41904090", rev: "19-867cf34fbae4ccdc671eb551e3f0873a"}
@@ -51,8 +51,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 									$http({
 											method: 'POST',
 											withCredentials: true,
-											url: 'http://'+db_hosts.int+':5984/_replicate',
-											data: 	{ 	source: 'http://'+db_hosts.int+'/twr',
+											url: 'http://'+db_hosts.int2+'c/twr/_replicate',
+											data: 	{ 	source: 'http://'+db_hosts.int2+'/c/twr',
 														target: 'http://'+db_hosts.prod+'/twr',
 														doc_ids: [id],
 														filter: "tweetrenderdb/livefilter",

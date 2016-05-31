@@ -11,7 +11,7 @@ angular.module("tapp",[ 'ngRoute',
 
 		//immer auf die 2 ausser die referrer ist livep12 das wird aber im pickerinterface entschieden
 		$provide.value('db_hosts',  { int:  'wmaiz-v-sofa02.dbc.zdf.de',
-									  prod: 'wmaiz-v-sofa01.dbc.zdf.de',
+									  int2: 'dev-2016.zdf.de/sofa02',
 									  pub:  'sofa01.zdf.de'} );
 
 
