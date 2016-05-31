@@ -16,7 +16,7 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
             $http({
                 method: 'GET',
                 withCredentials: true,
-                url: 'http://' + db_hosts.int2 + 'c/twr/_design/tweetrenderdb/_view/posts_active?descending=true',
+                url: 'http://' + db_hosts.int2 + '/c/twr/_design/tweetrenderdb/_view/posts_active?descending=true',
                 }).success(function (data) {
                     //$scope.couchdb.all = data;
                     //console.log("data",data);
