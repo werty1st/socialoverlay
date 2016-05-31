@@ -98,7 +98,7 @@ angular.module("tapp")
 		//absenden
 		socket.emit('socket.renderImageRequest', {
 			code: $scope.code,
-			hostname_int:  db_hosts.int, //location.origin,
+			hostname_int:  db_hosts.int2, //location.origin,
 			hostname_prod: db_hosts.pub, //location.origin,
 			overwrite: $scope.overwrite,
 			screensize: $scope.screensize,
