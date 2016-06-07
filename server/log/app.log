@@ -1,10 +1,12 @@
 applogic init
-Listening on port 3001
+Listening on port 3003
 Selenium: true
-Selenium: true
-Xvfb: true
-Xvfb: Dimensions { width: 350, height: 350, depth: 24 }
-display at: 154
-Xvfb: true
-Xvfb: Dimensions { width: 1600, height: 1200, depth: 24 }
-display at: 155
+Xvfb: true 31729
+Xvfb: Dimensions { width: 1920, height: 1080, depth: 24 }
+Display at: 99
+socket.publishDoc { docId: '425bc50c336b8e61b5138365b3f267102bed9667' }
+applogic.publishDoc: sync data { docId: '425bc50c336b8e61b5138365b3f267102bed9667' }
+Server has disconnected
+Todo handle running rendering
+Server has disconnected
+Todo handle running rendering

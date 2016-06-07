@@ -10,7 +10,7 @@
 
 
 
-		<a ng-href="http://{{ $parent.db_host }}/twr/{{item._id}}/rendersource.html" target="_blank">
+		<a ng-href="./c/twr/{{item._id}}/rendersource.html" target="_blank">
 			<button type="button" class="btn btn-default pull-right">
 				<span class="glyphicon glyphicon glyphicon-new-window" aria-hidden="true"></span> Original anzeigen
 			</button>
@@ -44,7 +44,7 @@
 		<div class="row" id="imagelistitem">
 		  <div class="col-xs-2 col-md-2" ng-repeat="att in imageFilter(item._attachments)">
 		    <a href="" class="thumbnail">
-		      <img ng-src="http://{{ $parent.db_host }}/twr/{{item._id}}/{{att.name}}" alt="Bild">
+		      <img ng-src="./c/twr/{{item._id}}/{{att.name}}" alt="Bild">
 				<div class="caption">
 				<h5>{{att.name}} - {{att.length | bytes}}</h5>
 				</div>				      

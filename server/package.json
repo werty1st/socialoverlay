@@ -34,6 +34,8 @@
     "open": "*"
   },
   "scripts": {
-    "debug": "node-debug --web-host 0.0.0.0 --debug-port 5888 app.js"
+    "debugX": "node-debug --web-host 0.0.0.0 --debug-port 5888 app.js",
+    "debug": "node server.js",
+    "watch": "watch 'npm run debug' . ../picker/"
   }
 }

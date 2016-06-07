@@ -1,15 +1,15 @@
 angular.module( "socketsetup", [] ).factory('socket', function ($rootScope) {
 		//http://www.html5rocks.com/en/tutorials/frameworks/angular-websockets/?redirect_from_locale=de
-		var socket = io.connect(location.href, {path: "/sofa02/tr/socket.io"});
+		var socket = io.connect(location.origin, {path: location.pathname+"tr/socket.io"});
 		return {
 			on: function (eventName, callback) {
 				socket.on(eventName, function () {  
 					var args = arguments;
 					$rootScope.$apply(function () {
-					callback.apply(socket, args);
+						callback.apply(socket, args);
+					});
 				});
-			});
-		},
+			},
 			emit: function (eventName, data, callback) {
 				socket.emit(eventName, data, function () {
 					var args = arguments;
@@ -19,6 +19,14 @@ angular.module( "socketsetup", [] ).factory('socket', function ($rootScope) {
 						}
 					});
 				});
+			},
+			once: function(eventName, callback){
+				socket.once(eventName, function () {  
+					var args = arguments;
+					$rootScope.$apply(function () {
+						callback.apply(socket, args);
+					});
+				});				
 			}
 		};
 	});

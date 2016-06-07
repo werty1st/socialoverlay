@@ -1,6 +1,6 @@
 //main
 angular.module("tapp")
-.controller("MainController", function($http, socket, $rootScope, $scope, $compile, default_code, wrtyuitabService, db_hosts){
+.controller("MainController", function($http, socket, $rootScope, $scope, $compile, default_code, wrtyuitabService){
 	$scope.code = window.unescape(atob(default_code));
 	$scope.$parent.location = "#/maint";
 
@@ -98,8 +98,8 @@ angular.module("tapp")
 		//absenden
 		socket.emit('socket.renderImageRequest', {
 			code: $scope.code,
-			hostname_int:  db_hosts.int2, //location.origin,
-			hostname_prod: db_hosts.pub, //location.origin,
+			hostname_int:  "set on server", //location.origin,
+			hostname_prod: "set on server", //location.origin,
 			overwrite: $scope.overwrite,
 			screensize: $scope.screensize,
 			version: "v2",				 //$scope.version.value", //hidden

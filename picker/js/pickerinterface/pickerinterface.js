@@ -1,5 +1,5 @@
 angular.module( "pickerinterface", [] )
-	.service('$picker', ["db_hosts", '$http', function (db_hosts, $http) {
+	.service('$picker', ["db_live", '$http', 'socket', function (db_live, $http, socket) {
 
 
 	    var scriptEl = document.createElement('script');
@@ -30,57 +30,20 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 	    function publishDoc (id, callback) {
 	    	//status = live
 	    	//rev holen; todo rev gleich mitgeben lassen von applogic oder histroy
-
+				
+			//wellcome to callback hell
 			$http({
-					method: 'GET',
+					method: 'POST',
 					withCredentials: true,
-					url: 'http://'+db_hosts.int2+'c/twr/'+id
-					}).success(function ( doc ) {
-						//var rev = headers("ETag").replace(/^"(.*)"$/, '$1');
-						doc.status = "live";
-						$http({
-								method: 'PUT',
-								withCredentials: true,
-								url: 'http://'+db_hosts.int2+'c/twr/'+id,
-								data: doc
-								}).success(function (response) {
-									//{ok: true, id: "f4a7e6e2567107a950d86d74af9eea8b41904090", rev: "19-867cf34fbae4ccdc671eb551e3f0873a"}
-									
-									//sync									
-									//wellcome to callback hell
-									$http({
-											method: 'POST',
-											withCredentials: true,
-											url: 'http://'+db_hosts.int2+'c/twr/_replicate',
-											data: 	{ 	source: 'http://'+db_hosts.int2+'/c/twr',
-														target: 'http://'+db_hosts.prod+'/twr',
-														doc_ids: [id],
-														filter: "tweetrenderdb/livefilter",
-														query_params: {"status":"live"}
+					url: 'http://'+db_hosts+'c/twr/_replicate',
+					data: 	{ 	source: 'http://'+db_hosts+'/c/twr',
+								target: 'http://'+db_hosts.prod+'/twr',
+								doc_ids: [id],
+								filter: "tweetrenderdb/livefilter",
+								query_params: {"status":"live"}
 
-													}
-											}).success(function (data) {
-												//{ok: true, id: "f4a7e6e2567107a950d86d74af9eea8b41904090", rev: "19-867cf34fbae4ccdc671eb551e3f0873a"}
-												console.log("data",data)
-												//sync
-												if (data.ok){
-													callback(null,data)
-												} else {
-													callback("Error","Das Dokument wurde auf dem Zielserver nicht akzeptiert.");
-												}
-
-											}).error(function() {
-												callback("Error","Das Dokument konnte nicht auf den Zielserver übertragen werden.");
-											});
-
-								}).error(function() {
-									callback("Error","Das Dokument konnte nicht zum Veröffentlichen markiert werden.");						
-								});
-
-					}).error(function() {
-						callback("Error","Das Dokument mit der id "+id+" wurde nicht gefunden.");
-					});	    	
-
+							}
+			});
 	    }
 
 	    //curl -X DELETE http://s2:5984/twr/f4a7e6e2567107a950d86d74af9eea8b41904090?rev=9-c02092f2442ebdff4d7cd7e0973ce8ac
@@ -102,8 +65,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 			//raus oder imperia mit aufnehmen
 			//if ("http://cm2-prod-pre.zdf.de/studio/" == document.referrer) {
 			var pickerData = { 
-                    playoutUrl:     "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embed.html",
-                    playoutXmlUrl:  "http://"+ db_hosts.pub + "/c/twr/" + docId + "/embedm.html"
+                    playoutUrl:     "http://"+ db_live + "/c/twr/" + docId + "/embed.html",
+                    playoutXmlUrl:  "http://"+ db_live + "/c/twr/" + docId + "/embedm.html"
                 };			
 
 			var query = window.location.search.substring(1);
@@ -141,30 +104,26 @@ curl -X POST -H "Content-Type: application/json" -d '{"source":"http://wmaiz-v-s
 	    }
 
 		var save = function save ( docId ) {
+			
+			//register result event with docid
+			socket.once(docId, function(result){
+				console.log("once saved", result);
+				submitPicker( result.docId );
+				// 	if (!err){
+				// 	} else {
+				// 		//leider fehlgeschalgen
+				// 		alert(err);
+				// 	}				
+			});
 
-			publishDoc(docId, function(err, result){
-				if (!err){
-					submitPicker( docId );
-				} else {
-					//leider fehlgeschalgen
-					alert(err);
-				}
-			}); 
-
-
+			//send id to server
+			socket.emit('socket.publishDoc', {
+				docId: docId
+			});
 		}
-
-
-
-
 		return {save: save};
 	}])
 	.directive('pickerResultInterface', [ '$picker', function ($picker) {
-
-
-		console.log("1",$picker);
-	    
-
         return {
             restrict: 'A',
             scope: {

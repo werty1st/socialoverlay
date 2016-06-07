@@ -1,9 +1,9 @@
 angular.module("tapp")
-	.controller("MaintController", ['$http', '$scope', '$cookies', '$cookieStore', 'couchLoginService',
-		function($http, $scope, $cookies, $cookieStore, $cls){
+	.controller("MaintController", ['$http', '$scope', '$cookies', '$cookieStore', 'couchLoginService', 'db_host',
+		function($http, $scope, $cookies, $cookieStore, $cls, db_host){
 			console.log("maint init");
 			$scope.$parent.location = "#/";
-			$scope.$parent.activeTab = ""; //rest to start
+			$scope.$parent.activeTab = ""; //reset to start
 			
 			$scope.user = true;
 			$scope.couchdb = {};
@@ -45,7 +45,7 @@ angular.module("tapp")
 				$http({
 					method: 'DELETE',
 					withCredentials: true,
-					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/'+id+'?rev='+rev
+					url: 'http://'+ db_host+'/'+id+'?rev='+rev
 					}).success(function (data) {
 						$scope.couchdb.all.splice(index,1);
 						console.log("data",data)
@@ -78,8 +78,7 @@ angular.module("tapp")
 				$http({
 					method: 'GET',
 					withCredentials: true,
-					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_view/all',
-					//url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/_design/tweetrenderdb/_list/list_all/all',
+					url: 'http://'+ db_host +'/_design/tweetrenderdb/_view/all',
 					}).success(function (data) {
 						$scope.couchdb.all = [];
 							angular.forEach(data.rows, function(obj, key) {
@@ -99,7 +98,7 @@ angular.module("tapp")
 				$http({
 					method: 'PUT',
 					withCredentials: true,
-					url: 'http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr/' + id,
+					url: 'http://'+ db_host +'/' + id,
 					data: $doc
 					}).success(function (data) {
 						$doc._rev = data.rev;

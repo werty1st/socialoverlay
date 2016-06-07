@@ -280,6 +280,13 @@ function Applogic ( config, rasterrizer )
     });
 
 
+    this.on("applogic.publishDoc", function (data) {
+        
+        console.log("applogic.publishDoc: sync data", data)
+        //sync data from temp db to live
+        self.emit(data.docId, data);
+    });
+
 }
 
 

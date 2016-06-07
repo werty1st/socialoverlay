@@ -1,22 +1,18 @@
 angular.module( "wrtyuihistory", ["pickerinterface"] )
-.directive('history', ['$http', '$picker', 'db_hosts', function($http, $picker, db_hosts) {
+.directive('history', ['$http', '$picker', function($http, $picker) {
 
         //ziel: pickerinterface abschicken können ohne neu zu rendern,        
         //starte abfrage an couchdb und hänge ergebnis an result
         // ansicht: name, datum, vorschaubild(analog admin), auswahlbutton
         // speichern button aktivieren ...
-
-        /*
-            $scope.pickerData.playoutUrl = location.protocol + "//" + db_host + previewO.htmlcode;
-            $scope.pickerData.playoutXmlUrl = location.protocol + "//" + db_host + previewO.xmlcode;
-        */        
+       
 
         function getAvailable($scope){
 
             $http({
                 method: 'GET',
                 withCredentials: true,
-                url: 'http://' + db_hosts.int2 + '/c/twr/_design/tweetrenderdb/_view/posts_active?descending=true',
+                url: './c/twr/_design/tweetrenderdb/_view/posts_active?descending=true',
                 }).success(function (data) {
                     //$scope.couchdb.all = data;
                     //console.log("data",data);
@@ -50,7 +46,6 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
 
         function controller ($scope){
             $scope.imageFilter = imageFilter;
-            $scope.db_host = db_hosts.int2;
             getAvailable($scope);
 
             $scope.insert = function insert(item){

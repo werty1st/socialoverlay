@@ -69,6 +69,19 @@ function socketfunction (socket) {
         applogic.emit('applogic.renderImageRequest',RenderRequest);
     });
 
+    // client wants to publish doc to live server
+    socket.on('socket.publishDoc', function(data){
+        
+        // register docID = publish completed and forward to client
+        applogic.once(data.docId,function(result){
+            socket.emit(data.docId, result);
+        })
+
+        console.log("socket.publishDoc",data);
+        applogic.emit('applogic.publishDoc',data);
+
+    })
+
     // Success!  Now listen to messages to be received
     socket.on('message',function(event){
         console.log('Received message from client!',event);
@@ -80,11 +93,10 @@ function socketfunction (socket) {
 
 }
 
-var ws1 = io.of('/t/');
-    ws1.on('connection', socketfunction);
+// var ws1 = io.of('/t/');
+//     ws1.on('connection', socketfunction);
 
-var ws2 = io.of('/');
-    ws2.on('connection', socketfunction);
+io.of('/').on('connection', socketfunction);
 
 
 
