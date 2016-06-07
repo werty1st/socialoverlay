@@ -5,6 +5,8 @@ core
 !core/
 
 logs/*
+log/*
+
 !.gitkeep
 node_modules/
 bower_components/
