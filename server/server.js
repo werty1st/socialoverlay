@@ -13,6 +13,10 @@ var server = app.listen(process.env.PORT || 3003, function() {
 });
 var io = require('socket.io').listen(server); // this tells socket.io to use our express server
 
+const db_int = "http://wmaiz-v-sofa02.dbc.zdf.de:5984/twr";
+const db_prod = "http://wmaiz-v-sofa01.dbc.zdf.de:5984/twr";
+const db_prod_live_url = "http://sofa01.zdf.de/c/twr/"; //render this url into template
+
 // console.log("applogic: ",applogic);
 // applogic.on("loaded",function(){
 //     console.log("loaded event triggered",new Date());
@@ -65,6 +69,9 @@ function socketfunction (socket) {
         //     console.log("pings:", ping);
         //     ping = 0;
         // })
+        RenderRequest.db_int = db_int;
+        RenderRequest.db_prod_live_url = db_prod_live_url;
+        RenderRequest.db_prod = db_prod;
 
         applogic.emit('applogic.renderImageRequest',RenderRequest);
     });

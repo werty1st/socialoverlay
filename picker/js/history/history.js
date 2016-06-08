@@ -12,7 +12,7 @@ angular.module( "wrtyuihistory", ["pickerinterface"] )
             $http({
                 method: 'GET',
                 withCredentials: true,
-                url: './c/twr/_design/tweetrenderdb/_view/posts_active?descending=true',
+                url: './c/twr/_design/tweetrenderdb/_view/posts_active?descending=true&limit=5',
                 }).success(function (data) {
                     //$scope.couchdb.all = data;
                     //console.log("data",data);

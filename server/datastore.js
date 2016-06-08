@@ -294,7 +294,7 @@ function Datastore(config)
 				//template 2 mal rendern wegen {{{PictureElementContent}}}
 
 				var target_html1 = renderTemplate(template_html, { hash : self.doc.id,
-																  clienthostname : Embeddcode.hostname.prod,
+																  clienthostname : Embeddcode.db_prod_live_url,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  PictureElementContent: createPictureElement(Embeddcode),
 																  bgimageurl: RenderRequest.bgimageurl
@@ -302,7 +302,7 @@ function Datastore(config)
 
 
 				var target_html = renderTemplate(target_html1, { hash : self.doc.id,
-																  clienthostname : Embeddcode.hostname.prod,
+																  clienthostname : Embeddcode.db_prod_live_url,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  PictureElementContent: createPictureElement(Embeddcode),
 																  bgimageurl: RenderRequest.bgimageurl
@@ -439,7 +439,7 @@ function Datastore(config)
 				//todo erst picturehtml rendern dann in den rest einfügem
 
 				var target_html = renderTemplate(template_html, { hash : self.doc.id,
-																  clienthostname : Embeddcode.hostname.prod,
+																  clienthostname : Embeddcode.db_prod_live_url,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  PictureElementContent: createPictureElement(Embeddcode),
 																  bgimageurl: RenderRequest.bgimageurl
@@ -447,7 +447,7 @@ function Datastore(config)
 
 
 					target_html = renderTemplate(target_html, { hash : self.doc.id,
-																  clienthostname : Embeddcode.hostname.prod,
+																  clienthostname : Embeddcode.db_prod_live_url,
 																  imagesSizesReceived : Embeddcode.imagesSizesReceived,
 																  PictureElementContent: createPictureElement(Embeddcode),
 																  bgimageurl: RenderRequest.bgimageurl

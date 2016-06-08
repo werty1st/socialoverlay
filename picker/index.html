@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=640">
   <title>Tweetrenderer</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="//console.re/connector.js" data-channel="twrpicker_adams" id="consolerescript"></script>
+  <script type="text/javascript">
+	!function takeOverConsole(){
+	    var re = window.console.re;
+	    var original = window.console;
+	    window.console = {
+	        log: function(){
+	            // do sneaky stuff
+	            re.log(arguments);
+	            original.log.apply(original, arguments)
+	        }
+	        , warn: function(){
+	            // do sneaky stuff
+	            re.log("warn:",arguments);
+	            original.warn.apply(original, arguments)
+	        }
+	        , error: function(){
+	            // do sneaky stuff
+	            re.log("error:",arguments);
+	            original.error.apply(original, arguments)
+	        }, re: function(){
+	            // do sneaky stuff
+	            re.log.apply(original, arguments)
+	        }
+	    }
+	}();  	
+  </script>
 </head>
 <body class="app1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -38,6 +65,10 @@
 
 
 	<div ng-view></div>
+
+	<script type="text/javascript">
+		console.log(location);
+	</script>
 
 
 </body>
