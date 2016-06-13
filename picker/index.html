@@ -19,7 +19,8 @@
 			console[method] = function(){
 				var message = Array.prototype.slice.apply(arguments).join(' ')
 				// do sneaky stuff
-				re.apply(console, arguments);
+				re.log(arguments);
+
 				original.call(console, message)
 			}
 		}
