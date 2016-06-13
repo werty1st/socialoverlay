@@ -6,32 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Tweetrende	er</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
-  <script src="//console.re/connector.js" data-channel="twrpicker_adams" id="consolerescript"></script>
-  <script type="text/javascript">
-	(function takeOverConsole(){
-
-	    var re = window.console.re;
-		var original = window.console
-		function handle(method, args){
-			var message = Array.prototype.slice.apply(args).join(' ')
-			// do sneaky stuff
-			re.log(message);
-			if (original) original[method](message)
-		}
-		window.console = {
-			log: function(){
-				handle('log', arguments)
-			}
-			, warn: function(){
-				handle('warn', arguments)
-			}
-			, error: function(){
-				handle('error', arguments)
-			}
-		}
-
-	}());  	
-  </script>
 </head>
 <body class="app1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
