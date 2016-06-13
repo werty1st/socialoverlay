@@ -11,28 +11,24 @@
 	(function takeOverConsole(){
 
 	    var re = window.console.re;
-		var console = window.console;
-
-		if (!console) return
-		function intercept(method){
-			var original = console[method]
-			console[method] = function(){
-				// do sneaky stuff
-				re.log(arguments);
-
-				if (original.apply){
-					// Do this for normal browsers
-					original.apply(console, arguments)
-				}else{
-					// Do this for IE
-					var message = Array.prototype.slice.apply(arguments).join(' ')
-					original(message)
-				}
+		var original = window.console
+		function handle(method, args){
+			var message = Array.prototype.slice.apply(args).join(' ')
+			// do sneaky stuff
+			re.log(message);
+			if (original) original[method](message)
+		}
+		window.console = {
+			log: function(){
+				handle('log', arguments)
+			}
+			, warn: function(){
+				handle('warn', arguments)
+			}
+			, error: function(){
+				handle('error', arguments)
 			}
 		}
-		var methods = ['log', 'warn', 'error']
-		for (var i = 0; i < methods.length; i++)
-			intercept(methods[i])
 
 	}());  	
   </script>
