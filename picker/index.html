@@ -10,27 +10,23 @@
   <script type="text/javascript">
 	!function takeOverConsole(){
 	    var re = window.console.re;
-	    var original = window.console;
-	    window.console = {
-	        log: function(){
-	            // do sneaky stuff
-	            re.log(arguments);
-	            original.log.apply(original, arguments)
-	        }
-	        , warn: function(){
-	            // do sneaky stuff
-	            re.log("warn:",arguments);
-	            original.warn.apply(original, arguments)
-	        }
-	        , error: function(){
-	            // do sneaky stuff
-	            re.log("error:",arguments);
-	            original.error.apply(original, arguments)
-	        }, re: function(){
-	            // do sneaky stuff
-	            re.log.apply(original, arguments)
-	        }
-	    }
+
+		var console = window.console
+		if (!console) return
+
+		function intercept(method){
+			var original = console[method]
+			console[method] = function(){
+				var message = Array.prototype.slice.apply(arguments).join(' ')
+				// do sneaky stuff
+				re.apply(console, arguments);
+				original.call(console, message)
+			}
+		}
+		var methods = ['log', 'warn', 'error']
+		for (var i = 0; i < methods.length; i++)
+			intercept(methods[i])
+
 	}();  	
   </script>
 </head>
